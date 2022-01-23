@@ -4,8 +4,8 @@ import Home from '../views/Home.vue'
 import Player from '../views/Player.vue'
 import PlayerDefaultView from '../views/player-views/PlayerDefaultView.vue'
 import PlayerAttackingtView from '../views/player-views/PlayerAttackingView.vue'
-import HelloWorld from '../components/HelloWorld.vue'
-import PageNotFound from '../components/HelloWorld.vue'
+import PlayerPossessionView from '../views/player-views/PlayerPossessionView.vue'
+import PageNotFound from '../views/PageNotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -31,13 +31,13 @@ const routes = [
             },
             {
                 name: 'PlayerPossessionView',
-                path: 'test',
-                component: HelloWorld,
+                path: 'possession',
+                component: PlayerPossessionView,
             },
             {
                 name: 'PlayerDefendingView',
-                path: 'test',
-                component: HelloWorld,
+                path: 'defending',
+                component: PlayerPossessionView,
             },
         ],
     },

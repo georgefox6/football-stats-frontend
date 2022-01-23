@@ -159,8 +159,8 @@ npm run lint
 
 <p>Here are some examples of the API calls to retrieve specific players. </p>
 
-<img src="images/screenshot1.PNG" alt="Example Screenshot" width="400" height="800">
-<img src="images/screenshot2.PNG" alt="Example Screenshot" width="400" height="800">
+<img src="images/screenshot1.PNG" alt="Example Screenshot" width="436" height="408">
+<img src="images/screenshot2.PNG" alt="Example Screenshot" width="433" height="584">
 
 <p>TODO include some code examples and demos</p>
 
