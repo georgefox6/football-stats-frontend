@@ -5,6 +5,7 @@ import Player from '../views/Player.vue'
 import PlayerDefaultView from '../views/player-views/PlayerDefaultView.vue'
 import PlayerAttackingtView from '../views/player-views/PlayerAttackingView.vue'
 import PlayerPossessionView from '../views/player-views/PlayerPossessionView.vue'
+import PlayerDefendingView from '../views/player-views/PlayerDefendingView.vue'
 import PageNotFound from '../views/PageNotFound.vue'
 
 Vue.use(VueRouter)
@@ -37,7 +38,7 @@ const routes = [
             {
                 name: 'PlayerDefendingView',
                 path: 'defending',
-                component: PlayerPossessionView,
+                component: PlayerDefendingView,
             },
         ],
     },
