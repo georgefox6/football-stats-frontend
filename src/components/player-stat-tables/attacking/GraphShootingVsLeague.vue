@@ -1,6 +1,6 @@
 <template>
     <div class="shooting-stats">
-        <div>
+        <div id="option">
             <p>Per 90</p>
             <label class="switch">
                 <input v-model="total" type="checkbox" />
@@ -148,6 +148,20 @@ export default {
     border-radius: 10px;
     box-shadow: 5px 10px #c9c9c9;
     padding: 40px;
+}
+
+#option {
+    white-space: nowrap;
+}
+
+#option > p {
+    display: inline-block;
+    padding: 20px;
+    vertical-align: -8px;
+}
+
+#option > label {
+    display: inline-block;
 }
 
 /********* Toggle Switch Styling **********/

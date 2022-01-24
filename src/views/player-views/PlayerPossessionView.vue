@@ -2,6 +2,8 @@
   <div class="stats">
     <PassingStats id="passing-stats" v-bind:player="player"></PassingStats>
     <PassingStatsPer90 id="passing-stats" v-bind:player="player"></PassingStatsPer90>
+    <DribblingStats id="passing-stats" v-bind:player="player"></DribblingStats>
+    <DribblingStatsPer90 id="passing-stats" v-bind:player="player"></DribblingStatsPer90>
   </div>
 </template>
 
@@ -9,11 +11,15 @@
 import { mapGetters, mapActions } from "vuex";
 import PassingStats from "@/components/player-stat-tables/possession/PassingStats.vue";
 import PassingStatsPer90 from "@/components/player-stat-tables/possession/PassingStatsPer90.vue";
+import DribblingStats from "@/components/player-stat-tables/possession/DribblingStats.vue";
+import DribblingStatsPer90 from "@/components/player-stat-tables/possession/DribblingStatsPer90.vue";
 export default {
   name: "PlayerPossessionView",
   components: {
     PassingStats,
-    PassingStatsPer90
+    PassingStatsPer90,
+    DribblingStats,
+    DribblingStatsPer90
   },
   methods: {
     ...mapActions(["fetchPlayer"]),
