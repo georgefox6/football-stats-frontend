@@ -4,10 +4,11 @@
         <table class="table">
             <tr>
                 <td class="label">Tackles</td>
-                <td class="data">{{ player.tacklesWon }} / {{ player.tacklesAttempted }}</td>
+                <td class="data">
+                    {{ player.tacklesWon }} / {{ player.tacklesAttempted }}
+                </td>
             </tr>
             <tr>
-                <!-- TODO hover over informational pop explaing what progressive passing distance is -->
                 <td class="label">Fouls</td>
                 <td class="data">{{ player.fouls }}</td>
             </tr>
@@ -41,7 +42,10 @@
             </tr>
             <tr>
                 <td class="label">Headers won</td>
-                <td class="data">{{ player.headersWon }} / {{player.headersWon + player.headersLost}}</td>
+                <td class="data">
+                    {{ player.headersWon }} /
+                    {{ player.headersWon + player.headersLost }}
+                </td>
             </tr>
         </table>
     </div>

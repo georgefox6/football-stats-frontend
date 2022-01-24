@@ -1,6 +1,5 @@
 <template>
     <div class="success-stats">
-
         <VueApexCharts
             ref="graph"
             :options="options"
@@ -21,68 +20,89 @@ export default {
     },
     data: function () {
         return {
-            series: [0,0,0,0,0,0,0,0],
+            series: [0, 0, 0, 0, 0, 0, 0, 0],
             options: {
                 chart: {
                     width: 380,
                     type: 'polarArea',
                 },
-                labels: ['Shot Conversion', 'Shot accuracy', 'Penalty Conversion', 'Pass Accuracy', 'Passes Controlled', 'Dribble Success', 'Tackle Win Rate', 'Headers won'],
+                labels: [
+                    'Shot Conversion',
+                    'Shot accuracy',
+                    'Penalty Conversion',
+                    'Pass Accuracy',
+                    'Passes Controlled',
+                    'Dribble Success',
+                    'Tackle Win Rate',
+                    'Headers won',
+                ],
                 legend: {
-                    position: 'bottom'
+                    position: 'right',
                 },
-                // title: {
-                //     text: this.player.playerName + ' Shooting stats',
-                // },
+                title: {
+                    text: 'Success Rates',
+                },
                 plotOptions: {
                     polarArea: {
                         rings: {
-                            strokeWidth: 2
+                            strokeWidth: 2,
                         },
                         spokes: {
-                            strokeWidth: 2
+                            strokeWidth: 2,
                         },
-                    }
+                    },
                 },
                 yaxis: {
                     labels: {
-                        formatter: function(val) {
-                            return (Math.round(val * 100)/100) + '%'
-                        }
-                    }
+                        formatter: function (val) {
+                            return Math.round(val * 100) / 100 + '%'
+                        },
+                    },
                 },
                 theme: {
                     monochrome: {
                         enabled: true,
                         shadeTo: 'light',
-                        shadeIntensity: 0.6
-                    }
-                }
-            }
+                        shadeIntensity: 10,
+                    },
+                },
+                stroke: {
+                    colors: ['#fff']
+                },
+                fill: {
+                    opacity: 0.8
+                },
+            },
         }
     },
     props: ['player'],
     methods: {
         updateGraphData() {
             this.series = [
-                this.player.goals/this.player.shots * 100,
-                this.player.shotsOnTarget/this.player.shots * 100,
+                (this.player.goals / this.player.shots) * 100,
+                (this.player.shotsOnTarget / this.player.shots) * 100,
                 0,
-                this.player.totalPassesCompleted/this.player.totalPassesAttempted * 100,
-                this.player.passesControlled/this.player.passesReceived * 100,
-                this.player.dribblesCompleted/this.player.dribblesAttempted * 100,
-                this.player.tacklesWon/this.player.tacklesAttempted * 100,
-                this.player.headersWon/(this.player.headersWon + this.player.headersLost)  * 100
+                (this.player.totalPassesCompleted /
+                    this.player.totalPassesAttempted) *
+                    100,
+                (this.player.passesControlled / this.player.passesReceived) *
+                    100,
+                (this.player.dribblesCompleted /
+                    this.player.dribblesAttempted) *
+                    100,
+                (this.player.tacklesWon / this.player.tacklesAttempted) * 100,
+                (this.player.headersWon /
+                    (this.player.headersWon + this.player.headersLost)) *
+                    100,
             ]
-        }
+        },
     },
     created() {
         setTimeout(() => {
             this.updateGraphData()
         }, 500)
     },
-    updated() {
-    },
+    updated() {},
 }
 </script>
 

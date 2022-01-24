@@ -4,7 +4,10 @@
         <table class="table">
             <tr>
                 <td class="label">Passes</td>
-                <td class="data">{{ player.totalPassesCompleted }} / {{ player.totalPassesAttempted }}</td>
+                <td class="data">
+                    {{ player.totalPassesCompleted }} /
+                    {{ player.totalPassesAttempted }}
+                </td>
             </tr>
             <tr>
                 <!-- TODO hover over informational pop explaing what progressive passing distance is -->
@@ -17,15 +20,24 @@
             </tr>
             <tr>
                 <td class="label">Short Passing</td>
-                <td class="data">{{ player.shortPassesCompleted }} / {{ player.shortPassesAttempted }}</td>
+                <td class="data">
+                    {{ player.shortPassesCompleted }} /
+                    {{ player.shortPassesAttempted }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Medium Passing</td>
-                <td class="data">{{ player.mediumPassesCompleted }} / {{ player.mediumPassesAttempted }}</td>
+                <td class="data">
+                    {{ player.mediumPassesCompleted }} /
+                    {{ player.mediumPassesAttempted }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Long Passing</td>
-                <td class="data">{{ player.longPassesCompleted }} / {{ player.longPassesAttempted }}</td>
+                <td class="data">
+                    {{ player.longPassesCompleted }} /
+                    {{ player.longPassesAttempted }}
+                </td>
             </tr>
         </table>
     </div>

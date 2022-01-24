@@ -4,44 +4,137 @@
         <table class="table">
             <tr>
                 <td class="label">Tackles</td>
-                <td class="data">{{ Math.round(player.tacklesWon / player.minutesPlayed * 90 * 100) / 100 }} / {{ Math.round(player.tacklesAttempted / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.tacklesWon / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                    /
+                    {{
+                        Math.round(
+                            (player.tacklesAttempted / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
-                <!-- TODO hover over informational pop explaing what progressive passing distance is -->
                 <td class="label">Fouls</td>
-                <td class="data">{{ Math.round(player.fouls / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.fouls / player.minutesPlayed) * 90 * 100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Blocks</td>
-                <td class="data">{{ Math.round(player.blocks / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.blocks / player.minutesPlayed) * 90 * 100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Interceptions</td>
-                <td class="data">{{ Math.round(player.interceptions / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.interceptions / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Pressures in defensive third</td>
-                <td class="data">{{ Math.round(player.pressuresDefensiveThird / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.pressuresDefensiveThird /
+                                player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Pressures in middle third</td>
-                <td class="data">{{ Math.round(player.pressuresMiddleThird / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.pressuresMiddleThird /
+                                player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Pressures in attacking third</td>
-                <td class="data">{{ Math.round(player.pressuresAttackingThird / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.pressuresAttackingThird /
+                                player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Yellow cards</td>
-                <td class="data">{{ Math.round(player.yellowCards / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.yellowCards / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Red cards</td>
-                <td class="data">{{ Math.round(player.redCards / player.minutesPlayed * 90  * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.redCards / player.minutesPlayed) * 90 * 100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Headers won</td>
-                <td class="data">{{ Math.round(player.headersWon / player.minutesPlayed * 90  * 100) / 100 }} / {{ Math.round((player.headersWon + player.headersLost) / player.minutesPlayed  * 90 * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.headersWon / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                    /
+                    {{
+                        Math.round(
+                            ((player.headersWon + player.headersLost) /
+                                player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
         </table>
     </div>

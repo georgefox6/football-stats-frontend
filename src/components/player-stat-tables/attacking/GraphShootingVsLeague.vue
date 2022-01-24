@@ -46,7 +46,7 @@ export default {
                     shotsOnTarget: 1,
                     penaltyScored: 0.1,
                     freeKickShots: 0.2,
-                }
+                },
             },
             options: {
                 title: {
@@ -79,10 +79,6 @@ export default {
                     name: this.player.playerName,
                     data: [0, 0, 0, 0, 0, 0],
                 },
-                // {
-                //     name: 'Series 2',
-                //     data: [4, 4 , 5 , 2 , 1 , 0,5 ],
-                // },
             ],
         }
     },
@@ -114,18 +110,36 @@ export default {
                 [
                     {
                         data: [
-                            this.player.goals / this.maxStats.per90.goals/this.player.minutesPlayed * 90,
-                            this.player.expectedGoals / this.maxStats.per90.expectedGoals/this.player.minutesPlayed * 90,
-                            this.player.shots / this.maxStats.per90.shots/this.player.minutesPlayed * 90,
-                            this.player.shotsOnTarget / this.maxStats.per90.shotsOnTarget/this.player.minutesPlayed * 90,
-                            this.player.penaltyScored / this.maxStats.per90.penaltyScored/this.player.minutesPlayed * 90,
-                            this.player.freeKickShots / this.maxStats.per90.freeKickShots/this.player.minutesPlayed * 90,
+                            (this.player.goals /
+                                this.maxStats.per90.goals /
+                                this.player.minutesPlayed) *
+                                90,
+                            (this.player.expectedGoals /
+                                this.maxStats.per90.expectedGoals /
+                                this.player.minutesPlayed) *
+                                90,
+                            (this.player.shots /
+                                this.maxStats.per90.shots /
+                                this.player.minutesPlayed) *
+                                90,
+                            (this.player.shotsOnTarget /
+                                this.maxStats.per90.shotsOnTarget /
+                                this.player.minutesPlayed) *
+                                90,
+                            (this.player.penaltyScored /
+                                this.maxStats.per90.penaltyScored /
+                                this.player.minutesPlayed) *
+                                90,
+                            (this.player.freeKickShots /
+                                this.maxStats.per90.freeKickShots /
+                                this.player.minutesPlayed) *
+                                90,
                         ],
                     },
                 ],
                 true
             )
-        }
+        },
     },
     created() {
         setTimeout(() => {

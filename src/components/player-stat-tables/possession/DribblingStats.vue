@@ -4,7 +4,10 @@
         <table class="table">
             <tr>
                 <td class="label">Dribbles (Attempted/Completed)</td>
-                <td class="data">{{ player.dribblesCompleted }} / {{ player.dribblesAttempted }}</td>
+                <td class="data">
+                    {{ player.dribblesCompleted }} /
+                    {{ player.dribblesAttempted }}
+                </td>
             </tr>
             <tr>
                 <!-- TODO hover over informational pop explaing what progressive dribble distance is -->
@@ -17,7 +20,9 @@
             </tr>
             <tr>
                 <td class="label">Passes Controlled</td>
-                <td class="data">{{ player.passesControlled }} / {{ player.passesReceived }}</td>
+                <td class="data">
+                    {{ player.passesControlled }} / {{ player.passesReceived }}
+                </td>
             </tr>
         </table>
     </div>

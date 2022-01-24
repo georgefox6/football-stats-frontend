@@ -4,20 +4,70 @@
         <table class="table">
             <tr>
                 <td class="label">Dribbles (Attempted/Completed)</td>
-                <td class="data">{{ Math.round(player.dribblesCompleted / player.minutesPlayed * 90 * 100) / 100  }} / {{ Math.round(player.dribblesAttempted / player.minutesPlayed * 90 * 100) / 100  }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.dribblesCompleted / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                    /
+                    {{
+                        Math.round(
+                            (player.dribblesAttempted / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <!-- TODO hover over informational pop explaing what progressive dribble distance is -->
                 <td class="label">Progressive Dribble Distance</td>
-                <td class="data">{{ Math.round(player.dribblesProgressiveDistance / player.minutesPlayed * 90 * 100) / 100  }}m</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.dribblesProgressiveDistance /
+                                player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}m
+                </td>
             </tr>
             <tr>
                 <td class="label">Progressive Dribbles</td>
-                <td class="data">{{ Math.round(player.progressiveDribbles / player.minutesPlayed * 90 * 100) / 100  }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.progressiveDribbles /
+                                player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
             <tr>
                 <td class="label">Passes Controlled</td>
-                <td class="data">{{ Math.round(player.passesControlled / player.minutesPlayed * 90 * 100) / 100  }} / {{ Math.round(player.passesReceived / player.minutesPlayed * 90 * 100) / 100 }}</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.passesControlled / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                    /
+                    {{
+                        Math.round(
+                            (player.passesReceived / player.minutesPlayed) *
+                                90 *
+                                100
+                        ) / 100
+                    }}
+                </td>
             </tr>
         </table>
     </div>
