@@ -1,6 +1,5 @@
 <template>
     <div class="pressure-locations">
-
         <VueApexCharts
             ref="chart"
             width="800"
@@ -26,19 +25,33 @@ export default {
                 },
                 labels: ['Defensive Third', 'Middle Third', 'Attacking Third'],
                 dataLabels: {
-                    enabled: false
+                    enabled: false,
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            labels: {
+                                show: true,
+                                total: {
+                                    showAlways: true,
+                                    show: true,
+                                },
+                            },
+                        },
+                    },
                 },
             },
-            series: [this.player.pressuresDefensiveThird, this.player.pressuresMiddleThird, this.player.pressuresAttackingThird],
+            series: [
+                this.player.pressuresDefensiveThird,
+                this.player.pressuresMiddleThird,
+                this.player.pressuresAttackingThird,
+            ],
         }
     },
     props: ['player'],
-    methods: {
-    },
-    created() {
-    },
-    updated() {
-    },
+    methods: {},
+    created() {},
+    updated() {},
 }
 </script>
 
@@ -49,5 +62,4 @@ export default {
     box-shadow: 5px 10px #c9c9c9;
     padding: 40px;
 }
-
 </style>

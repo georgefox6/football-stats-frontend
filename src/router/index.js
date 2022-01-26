@@ -7,6 +7,7 @@ import PlayerAttackingtView from '../views/player-views/PlayerAttackingView.vue'
 import PlayerPossessionView from '../views/player-views/PlayerPossessionView.vue'
 import PlayerDefendingView from '../views/player-views/PlayerDefendingView.vue'
 import PageNotFound from '../views/PageNotFound.vue'
+import Players from '../views/Players.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
         path: '/',
         name: 'Home',
         component: Home,
+    },
+    {
+        path: '/players',
+        name: 'Players',
+        component: Players,
     },
     {
         path: '/player/:playerId',

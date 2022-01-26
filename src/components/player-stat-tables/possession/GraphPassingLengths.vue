@@ -1,6 +1,5 @@
 <template>
     <div class="passing-lengths">
-
         <VueApexCharts
             ref="chart"
             width="800"
@@ -26,19 +25,33 @@ export default {
                 },
                 labels: ['Short Passes', 'Medium Passes', 'Long Passes'],
                 dataLabels: {
-                    enabled: false
+                    enabled: false,
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            labels: {
+                                show: true,
+                                total: {
+                                    showAlways: true,
+                                    show: true,
+                                },
+                            },
+                        },
+                    },
                 },
             },
-            series: [this.player.shortPassesCompleted, this.player.mediumPassesCompleted, this.player.longPassesCompleted],
+            series: [
+                this.player.shortPassesCompleted,
+                this.player.mediumPassesCompleted,
+                this.player.longPassesCompleted,
+            ],
         }
     },
     props: ['player'],
-    methods: {
-    },
-    created() {
-    },
-    updated() {
-    },
+    methods: {},
+    created() {},
+    updated() {},
 }
 </script>
 
@@ -49,5 +62,4 @@ export default {
     box-shadow: 5px 10px #c9c9c9;
     padding: 40px;
 }
-
 </style>

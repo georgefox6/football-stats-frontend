@@ -51,10 +51,6 @@ export default {
         PlayerBanner,
     },
     data() {
-        return {
-            someText: 'Some text',
-            someOtherText: '',
-        }
     },
     methods: {
         ...mapActions(['fetchPlayer']),

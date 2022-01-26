@@ -17,7 +17,6 @@ const actions = {
             .catch((errors) => {
                 console.log(errors)
             })
-
         commit('setPlayers', response.data)
     },
 
