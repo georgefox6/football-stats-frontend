@@ -8,6 +8,14 @@
             id="defending-stats-per-90"
             v-bind:player="player"
         ></DefendingStatsPer90>
+        <GraphDefendingVsLeague
+            id="graph-defending-vs-league"
+            v-bind:player="player"
+        ></GraphDefendingVsLeague>
+        <GraphPressureLocations
+            id="graph-defending-vs-league"
+            v-bind:player="player"
+        ></GraphPressureLocations>
     </div>
 </template>
 
@@ -15,14 +23,16 @@
 import { mapGetters, mapActions } from 'vuex'
 import DefendingStats from '@/components/player-stat-tables/defending/DefendingStats.vue'
 import DefendingStatsPer90 from '@/components/player-stat-tables/defending/DefendingStatsPer90.vue'
-// import GraphShootingVsLeague from "@/components/player-stat-tables/attacking/GraphShootingVsLeague.vue";
+import GraphDefendingVsLeague from "@/components/player-stat-tables/defending/GraphDefendingVsLeague.vue";
+import GraphPressureLocations from "@/components/player-stat-tables/defending/GraphPressureLocations.vue";
 
 export default {
     name: 'PlayerDefendingView',
     components: {
         DefendingStats,
         DefendingStatsPer90,
-        // GraphShootingVsLeague
+        GraphDefendingVsLeague,
+        GraphPressureLocations
     },
     methods: {
         ...mapActions(['fetchPlayer']),
@@ -45,6 +55,13 @@ export default {
 
 #defending-stats-per-90 {
     width: 35%;
+    margin-top: 5%;
+    margin-left: 10%;
+    float: left;
+}
+
+#graph-defending-vs-league {
+    width: 80%;
     margin-top: 5%;
     margin-left: 10%;
     float: left;

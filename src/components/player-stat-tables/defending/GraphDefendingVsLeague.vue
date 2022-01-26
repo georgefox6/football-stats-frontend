@@ -1,5 +1,5 @@
 <template>
-    <div class="shooting-stats">
+    <div class="possession-stats">
         <div id="option">
             <p>Per 90</p>
             <label class="switch">
@@ -25,7 +25,7 @@
 <script>
 import VueApexCharts from 'vue-apexcharts'
 export default {
-    name: 'GraphShootingVsLeague',
+    name: 'GraphPossessionVsLeague',
     components: {
         VueApexCharts,
     },
@@ -33,33 +33,30 @@ export default {
         return {
             total: true,
             maxStats: {
-                goals: 8,
-                expectedGoals: 5,
-                shots: 80,
-                shotsOnTarget: 35,
-                penaltyScored: 3,
-                freeKickShots: 3,
+                tacklesWon: 40,
+                blocks: 50,
+                interceptions: 40,
+                pressuresWon: 150,
+                headersWon: 80,
                 per90: {
-                    goals: 0.2,
-                    expectedGoals: 0.3,
-                    shots: 4,
-                    shotsOnTarget: 1,
-                    penaltyScored: 0.1,
-                    freeKickShots: 0.2,
+                    tacklesWon: 10,
+                    blocks: 10,
+                    interceptions: 10,
+                    pressuresWon: 10,
+                    headersWon: 10,
                 },
             },
             options: {
                 title: {
-                    text: this.player.playerName + ' Shooting stats',
+                    text: this.player.playerName + ' Defending stats',
                 },
                 xaxis: {
                     categories: [
-                        'Goals',
-                        'Expected Goals',
-                        'Shots',
-                        'Shots on Target',
-                        'Penalty Goals',
-                        'FK Shots',
+                        'Tackles Won',
+                        'Blocks',
+                        'Interceptions',
+                        'Pressures',
+                        'Headers Won',
                     ],
                 },
                 yaxis: {
@@ -85,38 +82,42 @@ export default {
     props: ['player'],
     methods: {
         setTotal() {
+            var tacklesWon = this.player.tacklesWon / this.maxStats.tacklesWon
+            var blocks = this.player.blocks / this.maxStats.blocks
+            var interceptions = this.player.interceptions / this.maxStats.interceptions
+            var pressuresWon = this.player.pressuresWon / this.maxStats.pressuresWon
+            var headersWon = this.player.headersWon / this.maxStats.headersWon
             this.$refs.chart.updateSeries(
                 [
                     {
-                        data: [
-                            this.player.goals / this.maxStats.goals,
-                            this.player.expectedGoals /
-                                this.maxStats.expectedGoals,
-                            this.player.shots / this.maxStats.shots,
-                            this.player.shotsOnTarget /
-                                this.maxStats.shotsOnTarget,
-                            this.player.penaltyScored /
-                                this.maxStats.penaltyScored,
-                            this.player.freeKickShots /
-                                this.maxStats.freeKickShots,
-                        ],
+                        data: [ tacklesWon, blocks, interceptions, pressuresWon, headersWon ],
+                            // this.player.totalPassesCompleted / this.maxStats.totalPassesCompleted,
+                            // this.player.progressivePassingDistance /
+                            //     this.maxStats.progressivePassingDistance,
+                            // this.player.crosses / this.maxStats.crosses,
+                            // this.player.dribblesCompleted /
+                            //     this.maxStats.dribblesCompleted,
+                            // this.player.dribblesProgressiveDistance /
+                            //     this.maxStats.dribblesProgressiveDistance,
+                            // this.player.passesControlled /
+                            //     this.maxStats.passesControlled,
+                        // ],
                     },
                 ],
                 true
             )
         },
         setPer90() {
-            var goalsPer90 = this.player.goals / this.maxStats.per90.goals / this.player.minutesPlayed * 90
-            var expectedGoalsPer90 = this.player.expectedGoals / this.maxStats.per90.expectedGoals / this.player.minutesPlayed * 90
-            var shotsPer90 = this.player.shots / this.maxStats.per90.shots / this.player.minutesPlayed * 90
-            var shotsOnTargetPer90 = this.player.shotsOnTarget / this.maxStats.per90.shotsOnTarget / this.player.minutesPlayed * 90
-            var penaltyScoredPer90 = this.player.penaltyScored / this.maxStats.per90.penaltyScored / this.player.minutesPlayed * 90
-            var freeKickShotsPer90 = this.player.freeKickShots / this.maxStats.per90.freeKickShots / this.player.minutesPlayed * 90
-
+            var tacklesWonPer90 = this.player.tacklesWon / this.maxStats.per90.tacklesWon / this.player.minutesPlayed * 90
+            var blocksPer90 = this.player.blocks / this.maxStats.per90.blocks / this.player.minutesPlayed * 90
+            var interceptionsPer90 = this.player.interceptions / this.maxStats.per90.interceptions / this.player.minutesPlayed * 90
+            var pressuresWonPer90 = this.player.pressuresWon / this.maxStats.per90.pressuresWon / this.player.minutesPlayed * 90
+            var headersWonPer90 = this.player.headersWon / this.maxStats.per90.headersWon / this.player.minutesPlayed * 90
+            
             this.$refs.chart.updateSeries(
                 [
                     {
-                        data: [ goalsPer90, expectedGoalsPer90, shotsPer90, shotsOnTargetPer90, penaltyScoredPer90, freeKickShotsPer90 ]
+                        data: [ tacklesWonPer90, blocksPer90, interceptionsPer90, pressuresWonPer90, headersWonPer90 ]
                     },
                 ],
                 true
@@ -139,7 +140,7 @@ export default {
 </script>
 
 <style scoped>
-.shooting-stats {
+.possession-stats {
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: 5px 10px #c9c9c9;

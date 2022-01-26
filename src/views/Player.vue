@@ -80,7 +80,7 @@ export default {
 #player-stats {
     border: 2px solid black;
     padding: 28px;
-    min-height: 150vh;
+    min-height: 300vh;
     width: 80%;
     margin-left: 10%;
 }

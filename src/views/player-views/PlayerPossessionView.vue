@@ -13,6 +13,14 @@
             id="passing-stats"
             v-bind:player="player"
         ></DribblingStatsPer90>
+        <GraphPossessionVsLeague
+            id="graph-possession-vs-league"
+            v-bind:player="player"
+        ></GraphPossessionVsLeague>
+        <GraphPassingLengths
+            id="graph-passing-positions"
+            v-bind:player="player"
+        ></GraphPassingLengths>
     </div>
 </template>
 
@@ -22,6 +30,9 @@ import PassingStats from '@/components/player-stat-tables/possession/PassingStat
 import PassingStatsPer90 from '@/components/player-stat-tables/possession/PassingStatsPer90.vue'
 import DribblingStats from '@/components/player-stat-tables/possession/DribblingStats.vue'
 import DribblingStatsPer90 from '@/components/player-stat-tables/possession/DribblingStatsPer90.vue'
+import GraphPossessionVsLeague from '@/components/player-stat-tables/possession/GraphPossessionVsLeague.vue'
+import GraphPassingLengths from '@/components/player-stat-tables/possession/GraphPassingLengths.vue'
+
 export default {
     name: 'PlayerPossessionView',
     components: {
@@ -29,6 +40,8 @@ export default {
         PassingStatsPer90,
         DribblingStats,
         DribblingStatsPer90,
+        GraphPossessionVsLeague,
+        GraphPassingLengths
     },
     methods: {
         ...mapActions(['fetchPlayer']),
@@ -44,6 +57,20 @@ export default {
 <style scoped>
 #passing-stats {
     width: 35%;
+    margin-top: 5%;
+    margin-left: 10%;
+    float: left;
+}
+
+#graph-possession-vs-league {
+    width: 80%;
+    margin-top: 5%;
+    margin-left: 10%;
+    float: left;
+}
+
+#graph-passing-positions {
+    width: 80%;
     margin-top: 5%;
     margin-left: 10%;
     float: left;

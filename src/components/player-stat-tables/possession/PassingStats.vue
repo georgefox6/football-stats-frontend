@@ -10,6 +10,18 @@
                 </td>
             </tr>
             <tr>
+                <td class="label">Assists</td>
+                <td class="data">
+                    {{ player.assists }}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Expected Assists</td>
+                <td class="data">
+                    {{ player.expectedAssists }}
+                </td>
+            </tr>
+            <tr>
                 <!-- TODO hover over informational pop explaing what progressive passing distance is -->
                 <td class="label">Progressive Passing Distance</td>
                 <td class="data">{{ player.progressivePassingDistance }}m</td>

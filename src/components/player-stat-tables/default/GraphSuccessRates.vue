@@ -34,7 +34,7 @@ export default {
                     'Passes Controlled',
                     'Dribble Success',
                     'Tackle Win Rate',
-                    'Headers won',
+                    'Header Win Rate',
                 ],
                 legend: {
                     position: 'right',
@@ -78,23 +78,39 @@ export default {
     props: ['player'],
     methods: {
         updateGraphData() {
-            this.series = [
-                (this.player.goals / this.player.shots) * 100,
-                (this.player.shotsOnTarget / this.player.shots) * 100,
-                0,
-                (this.player.totalPassesCompleted /
-                    this.player.totalPassesAttempted) *
-                    100,
-                (this.player.passesControlled / this.player.passesReceived) *
-                    100,
-                (this.player.dribblesCompleted /
-                    this.player.dribblesAttempted) *
-                    100,
-                (this.player.tacklesWon / this.player.tacklesAttempted) * 100,
-                (this.player.headersWon /
-                    (this.player.headersWon + this.player.headersLost)) *
-                    100,
-            ]
+            var shotConversion = (this.player.goals / this.player.shots) * 100
+            if(isNaN(shotConversion)){
+                shotConversion = 0
+            }
+            var shotAccuracy = (this.player.shotsOnTarget / this.player.shots) * 100
+            if(isNaN(shotAccuracy)){
+                shotAccuracy = 0
+            }
+            var penaltyConversion = (this.player.penaltyScored / this.player.penaltyScored) * 100
+            if(isNaN(penaltyConversion)){
+                penaltyConversion = 0
+            }
+            var passAccuracy = (this.player.totalPassesCompleted / this.player.totalPassesAttempted) * 100
+            if(isNaN(passAccuracy)){
+                passAccuracy = 0
+            }
+            var passesControlled = (this.player.passesControlled / this.player.passesReceived) * 100
+            if(isNaN(passesControlled)){
+                passesControlled = 0
+            }
+            var dribbleSuccess = (this.player.dribblesCompleted / this.player.dribblesAttempted) * 100
+            if(isNaN(dribbleSuccess)){
+                dribbleSuccess = 0
+            }
+            var tackleWinRate = (this.player.tacklesWon / this.player.tacklesAttempted) * 100
+            if(isNaN(tackleWinRate)){
+                tackleWinRate = 0
+            }
+            var headerWinRate = (this.player.headersWon / (this.player.headersLost + this.player.headersWon)) * 100
+            if(isNaN(headerWinRate)){
+                headerWinRate = 0
+            }
+            this.series = [shotConversion, shotAccuracy, penaltyConversion, passAccuracy, passesControlled, dribbleSuccess, tackleWinRate, headerWinRate]
         },
     },
     created() {

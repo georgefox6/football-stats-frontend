@@ -23,6 +23,24 @@
                 </td>
             </tr>
             <tr>
+                <td class="label">Assists</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.assists / player.minutesPlayed) * 90 * 100) / 100 
+                    }}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Expected Assists</td>
+                <td class="data">
+                    {{
+                        Math.round(
+                            (player.expectedAssists / player.minutesPlayed) * 90 * 100) / 100 
+                    }}
+                </td>
+            </tr>
+            <tr>
                 <!-- TODO hover over informational pop explaing what progressive passing distance is -->
                 <td class="label">Progressive Passing Distance</td>
                 <td class="data">
@@ -39,7 +57,7 @@
                 <td class="label">Crosses</td>
                 <td class="data">
                     {{
-                        Math.round((player.crosses / player.minutesPlayed) * 90)
+                        Math.round((player.crosses / player.minutesPlayed) * 90 * 100) / 100
                     }}
                 </td>
             </tr>
