@@ -50,8 +50,6 @@ export default {
     components: {
         PlayerBanner,
     },
-    data() {
-    },
     methods: {
         ...mapActions(['fetchPlayer']),
     },

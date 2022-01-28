@@ -1,29 +1,29 @@
 <template>
     <div class="player">
-        <table>
+        <table id="player-table">
             <thead>
                 <tr>
-                    
                     <th>Player Name</th>
                     <th>Club</th>
+                    <th>Position</th>
                     <th>Nationality</th>
                     <th>Age</th>
                     <th>Value</th>
                 </tr>
             </thead>
-            
+
             <tbody>
                 <tr v-for="player in allPlayers" :key="player.id">
-                    <!-- <td><a :href="'http://localhost:8080/#/player/' + player.id"> {{ player.playerName }} </a></td> -->
-                    <!-- <td><router-link :to="{ name: 'PlayerDefaultView', params: { playerId: this.player.id },}"> {{ player.playerName }} </router-link></td> -->
-                    <td>{{ player.playerName }}</td>
+                    <td class="player-link" @click="playerLink(player.id)">
+                        {{ player.playerName }}
+                    </td>
                     <td>{{ player.playerTeam }}</td>
+                    <td>{{ player.playerPosition }}</td>
                     <td>{{ player.playerNation }}</td>
                     <td>{{ player.playerAge }}</td>
                     <td>£{{ player.marketValue.toLocaleString('en-GB') }}</td>
                 </tr>
             </tbody>
-            
         </table>
     </div>
 </template>
@@ -35,11 +35,16 @@ export default {
     name: 'Players',
     components: {},
     data() {
-        return {
-        }
+        return {}
     },
     methods: {
         ...mapActions(['fetchPlayers']),
+        playerLink(id) {
+            this.$router.push({
+                name: 'PlayerDefaultView',
+                params: { playerId: id },
+            })
+        },
     },
     computed: mapGetters(['allPlayers']),
     created() {
@@ -48,72 +53,73 @@ export default {
 }
 </script>
 
-<style lang="less">
-html,
-body {
-	height: 100%;
+<style scoped>
+.player-link {
+    cursor: pointer;
 }
 
-body {
-	margin: 0;
-	// background: linear-gradient(45deg, #49a09d, #5f2c82);
-	background: #363636;
-	font-family: sans-serif;
-	font-weight: 100;
+.player {
+    background: #363636;
+    font-family: sans-serif;
+    font-weight: 100;
 }
 
-.container {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-table {
-    margin-left: 12%;
-	width: 1200px;
-	border-collapse: collapse;
-	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-
-th,
 td {
-	padding: 15px;
-	background-color: rgba(255,255,255,0.2);
-	color: #fff;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+#player-table {
+    margin-left: 13%;
+    width: 1200px;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 th {
-	text-align: left;
+    padding: 15px;
+    color: #fff;
+    /* background-color: green; */
+    background-color:  #54a1a0;
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-thead {
-	th {
-		background-color: #55608f;
-	}
+
+
+#player-table tbody tr {
+    background: #2c3845;
 }
 
-tbody {
-	tr {
-		&:hover {
-			background-color: rgba(255,255,255,0.3);
-		}
-	}
-	td {
-		position: relative;
-		&:hover {
-			&:before {
-				content: "";
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: -9999px;
-				bottom: -9999px;
-				background-color: rgba(255,255,255,0.2);
-				z-index: -1;
-			}
-		}
-	}
+#player-table tbody tr:nth-child(odd) {
+    background: #202932;
+}
+
+#player-table tbody tr:hover {
+    background: #FFFFFF80;
+    /* background: #54a1a0; */
+}
+
+/* #player-table tbody tr td:hover {
+    color: black;
+} */
+
+/* #player-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+#player-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+} */
+
+tr:hover {
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    background-color: white;
 }
 </style>
