@@ -1,5 +1,8 @@
 <template>
     <div class="player">
+        <router-link class="back-button" :to="{ name: 'Players' }"
+            >&#129044;</router-link
+        >
         <PlayerBanner id="player-banner" v-bind:player="player"></PlayerBanner>
 
         <div id="nav">
@@ -102,5 +105,18 @@ export default {
 
 #nav a.router-link-exact-active {
     background-color: white;
+}
+
+.back-button {
+    float: left;
+    color: black;
+    background-color: #a8a8a8;
+    padding: 12px;
+    /* height: 40px; */
+    width: 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 40px;
 }
 </style>

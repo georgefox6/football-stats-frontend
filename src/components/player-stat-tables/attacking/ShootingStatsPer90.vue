@@ -5,45 +5,25 @@
             <tr>
                 <td class="label">Goals</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.goals / player.minutesPlayed) * 90 * 100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.goals) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Expected Goals</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.expectedGoals / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.expectedGoals) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Shots</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.shots / player.minutesPlayed) * 90 * 100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.shots) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Shots on Target</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.shotsOnTarget / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.shotsOnTarget) }}
                 </td>
             </tr>
             <tr>
@@ -53,37 +33,19 @@
             <tr>
                 <td class="label">Penalties Taken</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.penaltyShots / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.penaltyShots) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Penalties Scored</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.penaltyScored / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.penaltyScored) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Free Kick Shots</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.freeKickShots / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.freeKickShots) }}
                 </td>
             </tr>
         </table>
@@ -94,10 +56,20 @@
 export default {
     name: 'ShootingStatsPer90',
     data() {
-        return {}
+        return {
+        }
     },
     props: ['player'],
-    methods: {},
+    methods: {
+        getPer90(stat) {
+            return isFinite(
+                Math.round((stat / this.player.minutesPlayed) * 90 * 100) / 100
+            )
+                ? Math.round((stat / this.player.minutesPlayed) * 90 * 100) /
+                      100
+                : 0
+        },
+    },
     created() {},
 }
 </script>

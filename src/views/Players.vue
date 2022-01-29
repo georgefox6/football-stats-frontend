@@ -72,12 +72,11 @@ export default {
             })
         },
     },
-    // computed: mapGetters(['allPlayers']),
     computed: {
         ...mapGetters(['allPlayers']),
         filteredPlayers() {
             return this.allPlayers.filter(player => {
-                return player.playerName.toLowerCase().includes(this.search.toLowerCase()) || player.playerTeam.toLowerCase().includes(this.search.toLowerCase())
+                return player.playerName.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(this.search.toLowerCase()) || player.playerTeam.toLowerCase().includes(this.search.toLowerCase())
         })
     }
   },

@@ -6,19 +6,13 @@
                 <td class="label">Tackles</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.tacklesWon / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.tacklesWon)
+                        
                     }}
                     /
                     {{
-                        Math.round(
-                            (player.tacklesAttempted / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.tacklesAttempted)
+                        
                     }}
                 </td>
             </tr>
@@ -26,9 +20,8 @@
                 <td class="label">Fouls</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.fouls / player.minutesPlayed) * 90 * 100
-                        ) / 100
+                        getPer90(player.fouls)
+                        
                     }}
                 </td>
             </tr>
@@ -36,9 +29,8 @@
                 <td class="label">Blocks</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.blocks / player.minutesPlayed) * 90 * 100
-                        ) / 100
+                        getPer90(player.blocks)
+                        
                     }}
                 </td>
             </tr>
@@ -46,11 +38,8 @@
                 <td class="label">Interceptions</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.interceptions / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.interceptions)
+                        
                     }}
                 </td>
             </tr>
@@ -58,12 +47,7 @@
                 <td class="label">Pressures in defensive third</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.pressuresDefensiveThird /
-                                player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.pressuresDefensiveThird)
                     }}
                 </td>
             </tr>
@@ -71,12 +55,7 @@
                 <td class="label">Pressures in middle third</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.pressuresMiddleThird /
-                                player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.pressuresMiddleThird)
                     }}
                 </td>
             </tr>
@@ -84,12 +63,7 @@
                 <td class="label">Pressures in attacking third</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.pressuresAttackingThird /
-                                player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.pressuresAttackingThird)
                     }}
                 </td>
             </tr>
@@ -97,11 +71,7 @@
                 <td class="label">Yellow cards</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.yellowCards / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.yellowCards)
                     }}
                 </td>
             </tr>
@@ -109,9 +79,7 @@
                 <td class="label">Red cards</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.redCards / player.minutesPlayed) * 90 * 100
-                        ) / 100
+                        getPer90(player.redCards)
                     }}
                 </td>
             </tr>
@@ -119,20 +87,11 @@
                 <td class="label">Headers won</td>
                 <td class="data">
                     {{
-                        Math.round(
-                            (player.headersWon / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.headersWon)
                     }}
                     /
                     {{
-                        Math.round(
-                            ((player.headersWon + player.headersLost) /
-                                player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
+                        getPer90(player.headersWon + player.headersLost)
                     }}
                 </td>
             </tr>
@@ -147,7 +106,16 @@ export default {
         return {}
     },
     props: ['player'],
-    methods: {},
+    methods: {
+        getPer90(stat) {
+            return isFinite(
+                Math.round((stat / this.player.minutesPlayed) * 90 * 100) / 100
+            )
+                ? Math.round((stat / this.player.minutesPlayed) * 90 * 100) /
+                      100
+                : 0
+        },
+    },
     created() {},
 }
 </script>

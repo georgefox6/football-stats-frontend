@@ -45,10 +45,12 @@ export default {
                 plotOptions: {
                     polarArea: {
                         rings: {
-                            strokeWidth: 2,
+                            strokeWidth: 0.5,
+                            strokeColor: '#000000'
                         },
                         spokes: {
-                            strokeWidth: 2,
+                            strokeWidth: 0.5,
+                            strokeColor: '#000000'
                         },
                     },
                 },
@@ -67,7 +69,7 @@ export default {
                     },
                 },
                 stroke: {
-                    colors: ['#fff']
+                    colors: ['#000']
                 },
                 fill: {
                     opacity: 0.8

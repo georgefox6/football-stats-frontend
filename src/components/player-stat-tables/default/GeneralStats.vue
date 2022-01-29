@@ -16,7 +16,6 @@
             </tr>
             <tr>
                 <td class="label">Nationality</td>
-                <!-- <td class="data">{{ player.playerNation }}</td> -->
                 <td class="data">{{ player.playerNation.split(' ')[1] }}
                         <country-flag
                             :country="player.playerNation.split(' ')[0]"
@@ -25,7 +24,9 @@
             </tr>
             <tr>
                 <td class="label">Height</td>
-                <td class="data">{{ player.height }}cm</td>
+                
+                <!-- <td class="data">{{ player.height }}cm</td> -->
+                <td class="data"><VueCustomTooltip :label="toFeet(player.height)">{{ player.height }}cm</VueCustomTooltip></td>
             </tr>
             <tr>
                 <td class="label">Foot</td>
@@ -47,7 +48,14 @@ export default {
         return {}
     },
     props: ['player'],
-    methods: {},
+    methods: {
+        toFeet(height) {
+            var realFeet = ((height*0.393700) / 12);
+            var feet = Math.floor(realFeet);
+            var inches = Math.round((realFeet - feet) * 12);
+            return feet + " Foot " + inches + ' Inches ';
+        }
+    },
     created() {},
 }
 </script>

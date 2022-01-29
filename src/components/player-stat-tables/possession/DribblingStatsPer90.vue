@@ -5,68 +5,30 @@
             <tr>
                 <td class="label">Dribbles (Attempted/Completed)</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.dribblesCompleted / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.dribblesCompleted) }}
                     /
-                    {{
-                        Math.round(
-                            (player.dribblesAttempted / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.dribblesAttempted) }}
                 </td>
             </tr>
             <tr>
                 <!-- TODO hover over informational pop explaing what progressive dribble distance is -->
                 <td class="label">Progressive Dribble Distance</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.dribblesProgressiveDistance /
-                                player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}m
+                    {{ getPer90(player.dribblesProgressiveDistance) }}m
                 </td>
             </tr>
             <tr>
                 <td class="label">Progressive Dribbles</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.progressiveDribbles /
-                                player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.progressiveDribbles) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Passes Controlled</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.passesControlled / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.passesControlled) }}
                     /
-                    {{
-                        Math.round(
-                            (player.passesReceived / player.minutesPlayed) *
-                                90 *
-                                100
-                        ) / 100
-                    }}
+                    {{ getPer90(player.passesReceived) }}
                 </td>
             </tr>
         </table>
@@ -80,7 +42,16 @@ export default {
         return {}
     },
     props: ['player'],
-    methods: {},
+    methods: {
+        getPer90(stat) {
+            return isFinite(
+                Math.round((stat / this.player.minutesPlayed) * 90 * 100) / 100
+            )
+                ? Math.round((stat / this.player.minutesPlayed) * 90 * 100) /
+                      100
+                : 0
+        },
+    },
     created() {},
 }
 </script>

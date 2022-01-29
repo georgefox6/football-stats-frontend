@@ -5,120 +5,58 @@
             <tr>
                 <td class="label">Passes</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.totalPassesCompleted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.totalPassesCompleted) }}
                     /
-                    {{
-                        Math.round(
-                            (player.totalPassesAttempted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.totalPassesAttempted) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Assists</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.assists / player.minutesPlayed) * 90 * 100) / 100 
-                    }}
+                    {{ getPer90(player.assists) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Expected Assists</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.expectedAssists / player.minutesPlayed) * 90 * 100) / 100 
-                    }}
+                    {{ getPer90(player.expectedAssists) }}
                 </td>
             </tr>
             <tr>
                 <!-- TODO hover over informational pop explaing what progressive passing distance is -->
                 <td class="label">Progressive Passing Distance</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.progressivePassingDistance /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}m
+                    {{ getPer90(player.progressivePassingDistance) }}m
                 </td>
             </tr>
             <tr>
                 <td class="label">Crosses</td>
                 <td class="data">
-                    {{
-                        Math.round((player.crosses / player.minutesPlayed) * 90 * 100) / 100
-                    }}
+                    {{ getPer90(player.crosses) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Short Passing</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.shortPassesCompleted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.shortPassesCompleted) }}
                     /
-                    {{
-                        Math.round(
-                            (player.shortPassesAttempted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.shortPassesAttempted) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Medium Passing</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.mediumPassesCompleted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.mediumPassesCompleted) }}
                     /
-                    {{
-                        Math.round(
-                            (player.mediumPassesAttempted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.mediumPassesAttempted) }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Long Passing</td>
                 <td class="data">
-                    {{
-                        Math.round(
-                            (player.longPassesCompleted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.longPassesCompleted) }}
                     /
-                    {{
-                        Math.round(
-                            (player.longPassesAttempted /
-                                player.minutesPlayed) *
-                                90
-                        )
-                    }}
+                    {{ getPer90(player.longPassesAttempted) }}
                 </td>
             </tr>
         </table>
@@ -132,7 +70,16 @@ export default {
         return {}
     },
     props: ['player'],
-    methods: {},
+    methods: {
+        getPer90(stat) {
+            return isFinite(
+                Math.round((stat / this.player.minutesPlayed) * 90 * 100) / 100
+            )
+                ? Math.round((stat / this.player.minutesPlayed) * 90 * 100) /
+                      100
+                : 0
+        },
+    },
     created() {},
 }
 </script>

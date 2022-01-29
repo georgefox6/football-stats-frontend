@@ -38,14 +38,14 @@ export default {
                 shots: 80,
                 shotsOnTarget: 35,
                 penaltyScored: 3,
-                freeKickShots: 3,
+                freeKickShots: 10,
                 per90: {
                     goals: 0.2,
                     expectedGoals: 0.3,
                     shots: 4,
                     shotsOnTarget: 1,
                     penaltyScored: 0.1,
-                    freeKickShots: 0.2,
+                    freeKickShots: 0.5,
                 },
             },
             options: {
@@ -85,20 +85,27 @@ export default {
     props: ['player'],
     methods: {
         setTotal() {
+            var goals = this.player.goals / this.maxStats.goals
+            var expectedGoals =
+                this.player.expectedGoals / this.maxStats.expectedGoals
+            var shots = this.player.shots / this.maxStats.shots
+            var shotsOnTarget =
+                this.player.shotsOnTarget / this.maxStats.shotsOnTarget
+            var penaltyScored =
+                this.player.penaltyScored / this.maxStats.penaltyScored
+            var freeKickShots =
+                this.player.freeKickShots / this.maxStats.freeKickShots
+
             this.$refs.chart.updateSeries(
                 [
                     {
                         data: [
-                            this.player.goals / this.maxStats.goals,
-                            this.player.expectedGoals /
-                                this.maxStats.expectedGoals,
-                            this.player.shots / this.maxStats.shots,
-                            this.player.shotsOnTarget /
-                                this.maxStats.shotsOnTarget,
-                            this.player.penaltyScored /
-                                this.maxStats.penaltyScored,
-                            this.player.freeKickShots /
-                                this.maxStats.freeKickShots,
+                            goals,
+                            expectedGoals,
+                            shots,
+                            shotsOnTarget,
+                            penaltyScored,
+                            freeKickShots,
                         ],
                     },
                 ],
@@ -106,17 +113,67 @@ export default {
             )
         },
         setPer90() {
-            var goalsPer90 = this.player.goals / this.maxStats.per90.goals / this.player.minutesPlayed * 90
-            var expectedGoalsPer90 = this.player.expectedGoals / this.maxStats.per90.expectedGoals / this.player.minutesPlayed * 90
-            var shotsPer90 = this.player.shots / this.maxStats.per90.shots / this.player.minutesPlayed * 90
-            var shotsOnTargetPer90 = this.player.shotsOnTarget / this.maxStats.per90.shotsOnTarget / this.player.minutesPlayed * 90
-            var penaltyScoredPer90 = this.player.penaltyScored / this.maxStats.per90.penaltyScored / this.player.minutesPlayed * 90
-            var freeKickShotsPer90 = this.player.freeKickShots / this.maxStats.per90.freeKickShots / this.player.minutesPlayed * 90
+            var goalsPer90 =
+                (this.player.goals /
+                    this.maxStats.per90.goals /
+                    this.player.minutesPlayed) *
+                90
+            var expectedGoalsPer90 =
+                (this.player.expectedGoals /
+                    this.maxStats.per90.expectedGoals /
+                    this.player.minutesPlayed) *
+                90
+            var shotsPer90 =
+                (this.player.shots /
+                    this.maxStats.per90.shots /
+                    this.player.minutesPlayed) *
+                90
+            var shotsOnTargetPer90 =
+                (this.player.shotsOnTarget /
+                    this.maxStats.per90.shotsOnTarget /
+                    this.player.minutesPlayed) *
+                90
+            var penaltyScoredPer90 =
+                (this.player.penaltyScored /
+                    this.maxStats.per90.penaltyScored /
+                    this.player.minutesPlayed) *
+                90
+            var freeKickShotsPer90 =
+                (this.player.freeKickShots /
+                    this.maxStats.per90.freeKickShots /
+                    this.player.minutesPlayed) *
+                90
+
+            if (isNaN(goalsPer90)) {
+                goalsPer90 = 0
+            }
+            if (isNaN(expectedGoalsPer90)) {
+                expectedGoalsPer90 = 0
+            }
+            if (isNaN(shotsPer90)) {
+                shotsPer90 = 0
+            }
+            if (isNaN(shotsOnTargetPer90)) {
+                shotsOnTargetPer90 = 0
+            }
+            if (isNaN(penaltyScoredPer90)) {
+                penaltyScoredPer90 = 0
+            }
+            if (isNaN(freeKickShotsPer90)) {
+                freeKickShotsPer90 = 0
+            }
 
             this.$refs.chart.updateSeries(
                 [
                     {
-                        data: [ goalsPer90, expectedGoalsPer90, shotsPer90, shotsOnTargetPer90, penaltyScoredPer90, freeKickShotsPer90 ]
+                        data: [
+                            goalsPer90,
+                            expectedGoalsPer90,
+                            shotsPer90,
+                            shotsOnTargetPer90,
+                            penaltyScoredPer90,
+                            freeKickShotsPer90,
+                        ],
                     },
                 ],
                 true
