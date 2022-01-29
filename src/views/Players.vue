@@ -1,6 +1,13 @@
 <template>
     <div class="player">
-        
+        <div class="search-wrapper">
+            <input
+                type="text"
+                v-model="search"
+                placeholder="Search player or team.."
+                class="input"
+            />
+        </div>
         <table id="player-table">
             <thead>
                 <tr>
@@ -9,16 +16,27 @@
                     <th>Club</th>
                     <th>Position</th>
                     <th>Age</th>
-                    <th><VueCustomTooltip label="This value is based on the ability of the player, the league he plays in and the contract length.">Value</VueCustomTooltip></th>
+                    <th>
+                        <VueCustomTooltip
+                            label="This value is based on the ability of the player, the league he plays in and the contract length."
+                            >Value</VueCustomTooltip
+                        >
+                    </th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr v-for="player in allPlayers" :key="player.id">
+                <tr v-for="player in filteredPlayers" :key="player.id">
                     <td class="player-link" @click="playerLink(player.id)">
                         {{ player.playerName }}
                     </td>
-                    <td>{{ player.playerNation.split(' ')[1] }} <country-flag :country="player.playerNation.split(' ')[0]" size='normal'/> </td>
+                    <td>
+                        {{ player.playerNation.split(' ')[1] }}
+                        <country-flag
+                            :country="player.playerNation.split(' ')[0]"
+                            size="normal"
+                        />
+                    </td>
                     <td>{{ player.playerTeam }}</td>
                     <td>{{ player.playerPosition }}</td>
                     <td>{{ player.playerAge }}</td>
@@ -38,10 +56,12 @@ export default {
     name: 'Players',
     components: {
         CountryFlag,
-        VueCustomTooltip
+        VueCustomTooltip,
     },
     data() {
-        return {}
+        return {
+            search: ''
+        }
     },
     methods: {
         ...mapActions(['fetchPlayers']),
@@ -52,7 +72,15 @@ export default {
             })
         },
     },
-    computed: mapGetters(['allPlayers']),
+    // computed: mapGetters(['allPlayers']),
+    computed: {
+        ...mapGetters(['allPlayers']),
+        filteredPlayers() {
+            return this.allPlayers.filter(player => {
+                return player.playerName.toLowerCase().includes(this.search.toLowerCase()) || player.playerTeam.toLowerCase().includes(this.search.toLowerCase())
+        })
+    }
+  },
     created() {
         this.fetchPlayers()
     },
@@ -68,6 +96,7 @@ export default {
     background: #363636;
     font-family: sans-serif;
     font-weight: 100;
+    padding: 10px;
 }
 
 td {
@@ -86,15 +115,12 @@ td {
 th {
     padding: 15px;
     color: #fff;
-    /* background-color: green; */
-    background-color:  #54a1a0;
+    background-color: #54a1a0;
 
     position: sticky;
     top: 0;
     z-index: 10;
 }
-
-
 
 #player-table tbody tr {
     background: #2c3845;
@@ -105,27 +131,38 @@ th {
 }
 
 #player-table tbody tr:hover {
-    background: #FFFFFF80;
-    /* background: #54a1a0; */
+    background: #ffffff80;
 }
-
-/* #player-table tbody tr td:hover {
-    color: black;
-} */
-
-/* #player-table thead th {
-    color: #ffffff;
-    background: #4FC3A1;
-}
-
-
-#player-table thead th:nth-child(odd) {
-    color: #ffffff;
-    background: #324960;
-} */
 
 tr:hover {
-    /* background-color: rgba(255, 255, 255, 0.3); */
     background-color: white;
+}
+
+
+/* Styling for search box */
+.search-wrapper{
+    margin: 20px;
+}
+.input {
+    /* position: relative;
+    left: -448px; */
+    position: static;
+    padding: 10px;
+    width: 350px;
+    height: 80px;
+    background: none;
+    border: 4px solid #54a1a0;
+    /* border-radius: 50px; */
+    box-sizing: border-box;
+    /* font-family: Comic Sans MS; */
+    font-size: 26px;
+    color: #54a1a0;
+    outline: none;
+    transition: 0.2s;
+}
+.input:hover {
+    width: 350px;
+    background: white;
+    border-radius: 10px;
 }
 </style>

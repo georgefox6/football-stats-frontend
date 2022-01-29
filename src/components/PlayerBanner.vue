@@ -32,7 +32,8 @@ export default {
 
 <style scoped>
 .player-banner {
-    background-color: #f6a800;
+    background-color: #54a1a0;
+    color: white;
     padding: 30px;
 }
 

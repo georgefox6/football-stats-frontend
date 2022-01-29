@@ -69,6 +69,7 @@ export default {
 .player {
     width: 80%;
     margin-left: 10%;
+    background: #363636;
 }
 
 #player-stats {
@@ -77,12 +78,14 @@ export default {
     min-height: 300vh;
     width: 80%;
     margin-left: 10%;
+    background: #e4e4e4;
 }
 
 .stat-link {
     padding: 20px;
     margin: 20px;
     border: 2px solid black;
+    background: #363636;
 }
 
 #nav {

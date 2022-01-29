@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Player from '../views/Player.vue'
 import PlayerDefaultView from '../views/player-views/PlayerDefaultView.vue'
 import PlayerAttackingtView from '../views/player-views/PlayerAttackingView.vue'
@@ -12,11 +11,6 @@ import Players from '../views/Players.vue'
 Vue.use(VueRouter)
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: Home,
-    },
     {
         path: '/players',
         name: 'Players',

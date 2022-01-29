@@ -16,7 +16,12 @@
             </tr>
             <tr>
                 <td class="label">Nationality</td>
-                <td class="data">{{ player.playerNation }}</td>
+                <!-- <td class="data">{{ player.playerNation }}</td> -->
+                <td class="data">{{ player.playerNation.split(' ')[1] }}
+                        <country-flag
+                            :country="player.playerNation.split(' ')[0]"
+                            size="small"
+                        /></td>
             </tr>
             <tr>
                 <td class="label">Height</td>
@@ -31,8 +36,13 @@
 </template>
 
 <script>
+import CountryFlag from 'vue-country-flag'
+
 export default {
     name: 'GeneralStats',
+    components: {
+        CountryFlag,
+    },
     data() {
         return {}
     },
