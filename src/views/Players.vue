@@ -1,12 +1,13 @@
 <template>
     <div class="player">
+        <country-flag country='it' size='big'/>
         <table id="player-table">
             <thead>
                 <tr>
                     <th>Player Name</th>
+                    <th>Nationality</th>
                     <th>Club</th>
                     <th>Position</th>
-                    <th>Nationality</th>
                     <th>Age</th>
                     <th>Value</th>
                 </tr>
@@ -17,9 +18,9 @@
                     <td class="player-link" @click="playerLink(player.id)">
                         {{ player.playerName }}
                     </td>
+                    <td>{{ player.playerNation.split(' ')[1] }} <country-flag :country="player.playerNation.split(' ')[0]" size='normal'/> </td>
                     <td>{{ player.playerTeam }}</td>
                     <td>{{ player.playerPosition }}</td>
-                    <td>{{ player.playerNation }}</td>
                     <td>{{ player.playerAge }}</td>
                     <td>£{{ player.marketValue.toLocaleString('en-GB') }}</td>
                 </tr>
@@ -30,10 +31,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import CountryFlag from 'vue-country-flag'
 
 export default {
     name: 'Players',
-    components: {},
+    components: {
+        CountryFlag
+    },
     data() {
         return {}
     },
