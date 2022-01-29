@@ -1,6 +1,6 @@
 <template>
     <div class="player">
-        <country-flag country='it' size='big'/>
+        
         <table id="player-table">
             <thead>
                 <tr>
@@ -9,7 +9,7 @@
                     <th>Club</th>
                     <th>Position</th>
                     <th>Age</th>
-                    <th>Value</th>
+                    <th><VueCustomTooltip label="This value is based on the ability of the player, the league he plays in and the contract length.">Value</VueCustomTooltip></th>
                 </tr>
             </thead>
 
@@ -32,11 +32,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import CountryFlag from 'vue-country-flag'
+import VueCustomTooltip from '@adamdehaven/vue-custom-tooltip'
 
 export default {
     name: 'Players',
     components: {
-        CountryFlag
+        CountryFlag,
+        VueCustomTooltip
     },
     data() {
         return {}
