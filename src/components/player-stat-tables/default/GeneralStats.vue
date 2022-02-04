@@ -24,9 +24,7 @@
             </tr>
             <tr>
                 <td class="label">Height</td>
-                
-                <!-- <td class="data">{{ player.height }}cm</td> -->
-                <td class="data"><VueCustomTooltip :label="toFeet(player.height)">{{ player.height }}cm</VueCustomTooltip></td>
+                <td class="data tooltip"><VueCustomTooltip :label="toFeet(player.height)">{{ player.height }}cm</VueCustomTooltip></td>
             </tr>
             <tr>
                 <td class="label">Foot</td>
@@ -78,6 +76,10 @@ export default {
 
 .label {
     text-align: left;
+}
+
+.tooltip {
+    color: blue;
 }
 
 .data {

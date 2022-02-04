@@ -9,7 +9,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">Expected Goals</td>
+                <td class="label tooltip"><VueCustomTooltip label="Very simply, xG (or expected goals) is the probability that a shot will result in a goal based on the characteristics of that shot and the events leading up to it.">Expected Goals</VueCustomTooltip></td>
                 <td class="data">
                     {{ getPer90(player.expectedGoals) }}
                 </td>
@@ -27,7 +27,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">Average Shot Distance</td>
+                <td class="label tooltip"><VueCustomTooltip label="Average shot distance in m of all shots taken by this player">Average Shot Distance</VueCustomTooltip></td>
                 <td class="data">{{ player.shotDistance }}m</td>
             </tr>
             <tr>
@@ -92,6 +92,10 @@ export default {
 
 .label {
     text-align: left;
+}
+
+.tooltip {
+    color: blue;
 }
 
 .data {

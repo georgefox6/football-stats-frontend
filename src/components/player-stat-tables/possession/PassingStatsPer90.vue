@@ -17,14 +17,13 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">Expected Assists</td>
+                <td class="label tooltip"><VueCustomTooltip label="Expected assists measure the danger created by a pass that ends up in a shot, assigning it a probability related to the chances of scoring a goal.">Expected Assists</VueCustomTooltip></td>
                 <td class="data">
                     {{ getPer90(player.expectedAssists) }}
                 </td>
             </tr>
             <tr>
-                <!-- TODO hover over informational pop explaing what progressive passing distance is -->
-                <td class="label">Progressive Passing Distance</td>
+                <td class="label tooltip"><VueCustomTooltip label="Total distance, in yards, that completed passes have traveled towards the opponent's goal. Note: Passes away from opponent's goal are counted as zero progressive yards.">Progressive Passing Distance</VueCustomTooltip></td>
                 <td class="data">
                     {{ getPer90(player.progressivePassingDistance) }}m
                 </td>
@@ -36,7 +35,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">Short Passing</td>
+                <td class="label tooltip"><VueCustomTooltip label="Passes less than 15 yards.">Short Passes</VueCustomTooltip></td>
                 <td class="data">
                     {{ getPer90(player.shortPassesCompleted) }}
                     /
@@ -44,7 +43,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">Medium Passing</td>
+                <td class="label tooltip"><VueCustomTooltip label="Passes between 15 and 30 yards.">Medium Passes</VueCustomTooltip></td>
                 <td class="data">
                     {{ getPer90(player.mediumPassesCompleted) }}
                     /
@@ -52,7 +51,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">Long Passing</td>
+                <td class="label tooltip"><VueCustomTooltip label="Passes longer than 30 yards.">Long Passes</VueCustomTooltip></td>
                 <td class="data">
                     {{ getPer90(player.longPassesCompleted) }}
                     /
@@ -102,6 +101,10 @@ export default {
 
 .label {
     text-align: left;
+}
+
+.tooltip {
+    color: blue;
 }
 
 .data {
