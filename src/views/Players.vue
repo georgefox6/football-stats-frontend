@@ -11,16 +11,106 @@
         <table id="player-table">
             <thead>
                 <tr>
-                    <th>Player Name</th>
-                    <th>Nationality</th>
-                    <th>Club</th>
-                    <th>Position</th>
-                    <th>Age</th>
-                    <th>
+                    <th @click="sortByPlayerName()">
+                        Player Name<i
+                            v-bind:class="
+                                this.nameSort == 'desc'
+                                    ? 'sort-by-desc'
+                                    : 'sort-by-desc-deselected'
+                            "
+                        ></i
+                        ><i
+                            v-bind:class="
+                                this.nameSort == 'asc'
+                                    ? 'sort-by-asc'
+                                    : 'sort-by-asc-deselected'
+                            "
+                        ></i>
+                    </th>
+                    <th @click="sortByPlayerNation()">
+                        Nationality<i
+                            v-bind:class="
+                                this.nationSort == 'desc'
+                                    ? 'sort-by-desc'
+                                    : 'sort-by-desc-deselected'
+                            "
+                        ></i
+                        ><i
+                            v-bind:class="
+                                this.nationSort == 'asc'
+                                    ? 'sort-by-asc'
+                                    : 'sort-by-asc-deselected'
+                            "
+                        ></i>
+                    </th>
+                    <th @click="sortByPlayerClub()">
+                        Club<i
+                            v-bind:class="
+                                this.clubSort == 'desc'
+                                    ? 'sort-by-desc'
+                                    : 'sort-by-desc-deselected'
+                            "
+                        ></i
+                        ><i
+                            v-bind:class="
+                                this.clubSort == 'asc'
+                                    ? 'sort-by-asc'
+                                    : 'sort-by-asc-deselected'
+                            "
+                        ></i>
+                    </th>
+                    <th @click="sortByPlayerPosition()">
+                        Position<i
+                            v-bind:class="
+                                this.positionSort == 'desc'
+                                    ? 'sort-by-desc'
+                                    : 'sort-by-desc-deselected'
+                            "
+                        ></i
+                        ><i
+                            v-bind:class="
+                                this.positionSort == 'asc'
+                                    ? 'sort-by-asc'
+                                    : 'sort-by-asc-deselected'
+                            "
+                        ></i>
+                    </th>
+                    <th @click="sortByPlayerAge()">
+                        Age<i
+                            v-bind:class="
+                                this.ageSort == 'desc'
+                                    ? 'sort-by-desc'
+                                    : 'sort-by-desc-deselected'
+                            "
+                        ></i
+                        ><i
+                            v-bind:class="
+                                this.ageSort == 'asc'
+                                    ? 'sort-by-asc'
+                                    : 'sort-by-asc-deselected'
+                            "
+                        ></i>
+                    </th>
+                    <th @click="sortByPlayerValue()">
+                        Value
                         <VueCustomTooltip
                             label="This value is based on the ability of the player, the league he plays in and the contract length."
-                            >Value</VueCustomTooltip
+                            >&#9432;</VueCustomTooltip
                         >
+                        <i
+                            v-bind:class="
+                                this.valueSort == 'desc'
+                                    ? 'sort-by-desc'
+                                    : 'sort-by-desc-deselected'
+                            "
+                        ></i
+                        ><i
+                            v-bind:class="
+                                this.valueSort == 'asc'
+                                    ? 'sort-by-asc'
+                                    : 'sort-by-asc-deselected'
+                            "
+                        ></i>
                     </th>
                 </tr>
             </thead>
@@ -60,7 +150,13 @@ export default {
     },
     data() {
         return {
-            search: ''
+            search: '',
+            nameSort: 'none',
+            nationSort: 'none',
+            clubSort: 'none',
+            positionSort: 'none',
+            ageSort: 'none',
+            valueSort: 'none',
         }
     },
     methods: {
@@ -71,15 +167,370 @@ export default {
                 params: { playerId: id },
             })
         },
+        sortByPlayerName() {
+            switch (this.nameSort) {
+                case 'none':
+                    this.nameSort = 'desc'
+                    break
+                case 'desc':
+                    this.nameSort = 'asc'
+                    break
+                case 'asc':
+                    this.nameSort = 'none'
+                    break
+            }
+            console.log('New name sort - ' + this.nameSort)
+            this.nationSort = 'none'
+            this.clubSort = 'none'
+            this.positionSort = 'none'
+            this.ageSort = 'none'
+            this.valueSort = 'none'
+        },
+        sortByPlayerNation() {
+            switch (this.nationSort) {
+                case 'none':
+                    this.nationSort = 'desc'
+                    break
+                case 'desc':
+                    this.nationSort = 'asc'
+                    break
+                case 'asc':
+                    this.nationSort = 'none'
+                    break
+            }
+
+            this.nameSort = 'none'
+            this.clubSort = 'none'
+            this.positionSort = 'none'
+            this.ageSort = 'none'
+            this.valueSort = 'none'
+        },
+        sortByPlayerClub() {
+            switch (this.clubSort) {
+                case 'none':
+                    this.clubSort = 'desc'
+                    break
+                case 'desc':
+                    this.clubSort = 'asc'
+                    break
+                case 'asc':
+                    this.clubSort = 'none'
+                    break
+            }
+
+            this.nationSort = 'none'
+            this.nameSort = 'none'
+            this.positionSort = 'none'
+            this.ageSort = 'none'
+            this.valueSort = 'none'
+        },
+        sortByPlayerPosition() {
+            switch (this.positionSort) {
+                case 'none':
+                    this.positionSort = 'desc'
+                    break
+                case 'desc':
+                    this.positionSort = 'asc'
+                    break
+                case 'asc':
+                    this.positionSort = 'none'
+                    break
+            }
+
+            this.nationSort = 'none'
+            this.nameSort = 'none'
+            this.clubSort = 'none'
+            this.ageSort = 'none'
+            this.valueSort = 'none'
+        },
+        sortByPlayerAge() {
+            switch (this.ageSort) {
+                case 'none':
+                    this.ageSort = 'desc'
+                    break
+                case 'desc':
+                    this.ageSort = 'asc'
+                    break
+                case 'asc':
+                    this.ageSort = 'none'
+                    break
+            }
+
+            this.positionSort = 'none'
+            this.nationSort = 'none'
+            this.nameSort = 'none'
+            this.clubSort = 'none'
+            this.valueSort = 'none'
+        },
+        sortByPlayerValue() {
+            switch (this.valueSort) {
+                case 'none':
+                    this.valueSort = 'desc'
+                    break
+                case 'desc':
+                    this.valueSort = 'asc'
+                    break
+                case 'asc':
+                    this.valueSort = 'none'
+                    break
+            }
+
+            this.nameSort = 'none'
+            this.nationSort = 'none'
+            this.clubSort = 'none'
+            this.positionSort = 'none'
+            this.ageSort = 'none'
+        },
+        returnSortedPlayersByNameAsc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => a.playerName.localeCompare(b.playerName))
+        },
+        returnSortedPlayersByNameDesc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => b.playerName.localeCompare(a.playerName))
+        },
+        returnSortedPlayersByValueDesc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => b.marketValue - a.marketValue)
+        },
+        returnSortedPlayersByValueAsc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => a.marketValue - b.marketValue)
+        },
+        returnSortedPlayersByNationDesc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => b.playerNation.localeCompare(a.playerNation))
+        },
+        returnSortedPlayersByNationAsc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => a.playerNation.localeCompare(b.playerNation))
+        },
+        returnSortedPlayersByClubDesc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => b.playerTeam.localeCompare(a.playerTeam))
+        },
+        returnSortedPlayersByClubAsc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => a.playerTeam.localeCompare(b.playerTeam))
+        },
+        returnSortedPlayersByPositionDesc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) =>
+                    b.playerPosition.localeCompare(a.playerPosition)
+                )
+        },
+        returnSortedPlayersByPositionAsc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) =>
+                    a.playerPosition.localeCompare(b.playerPosition)
+                )
+        },
+        returnSortedPlayersByAgeDesc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => b.playerAge.localeCompare(a.playerAge))
+        },
+        returnSortedPlayersByAgeAsc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
+                )
+                .slice()
+                .sort((a, b) => a.playerAge.localeCompare(b.playerAge))
+        },
     },
     computed: {
         ...mapGetters(['allPlayers']),
+
         filteredPlayers() {
-            return this.allPlayers.filter(player => {
-                return player.playerName.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(this.search.toLowerCase()) || player.playerTeam.toLowerCase().includes(this.search.toLowerCase())
-        })
-    }
-  },
+            if (this.nameSort == 'asc') {
+                return this.returnSortedPlayersByNameAsc()
+            } else if (this.nameSort == 'desc') {
+                return this.returnSortedPlayersByNameDesc()
+            }
+
+            if (this.valueSort == 'asc') {
+                return this.returnSortedPlayersByValueAsc()
+            } else if (this.valueSort == 'desc') {
+                return this.returnSortedPlayersByValueDesc()
+            }
+
+            if (this.nationSort == 'asc') {
+                return this.returnSortedPlayersByNationAsc()
+            } else if (this.nationSort == 'desc') {
+                return this.returnSortedPlayersByNationDesc()
+            }
+
+            if (this.clubSort == 'asc') {
+                return this.returnSortedPlayersByClubAsc()
+            } else if (this.clubSort == 'desc') {
+                return this.returnSortedPlayersByClubDesc()
+            }
+
+            if (this.positionSort == 'asc') {
+                return this.returnSortedPlayersByPositionAsc()
+            } else if (this.positionSort == 'desc') {
+                return this.returnSortedPlayersByPositionDesc()
+            }
+
+            if (this.ageSort == 'asc') {
+                return this.returnSortedPlayersByAgeAsc()
+            } else if (this.ageSort == 'desc') {
+                return this.returnSortedPlayersByAgeDesc()
+            }
+
+            return this.allPlayers.filter(
+                (player) =>
+                    player.playerName
+                        .normalize('NFD')
+                        .replace(/[\u0300-\u036f]/g, '')
+                        .toLowerCase()
+                        .includes(this.search.toLowerCase()) ||
+                    player.playerTeam
+                        .toLowerCase()
+                        .includes(this.search.toLowerCase())
+            )
+        },
+    },
     created() {
         this.fetchPlayers()
     },
@@ -137,23 +588,18 @@ tr:hover {
     background-color: white;
 }
 
-
 /* Styling for search box */
-.search-wrapper{
+.search-wrapper {
     margin: 20px;
 }
 .input {
-    /* position: relative;
-    left: -448px; */
     position: static;
     padding: 10px;
     width: 350px;
     height: 80px;
     background: none;
     border: 4px solid #54a1a0;
-    /* border-radius: 50px; */
     box-sizing: border-box;
-    /* font-family: Comic Sans MS; */
     font-size: 26px;
     color: #54a1a0;
     outline: none;
@@ -163,5 +609,53 @@ tr:hover {
     width: 350px;
     background: white;
     border-radius: 10px;
+}
+
+.sort-by-asc {
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 0 3px;
+    background: transparent;
+    border-bottom: solid 7px rgb(255, 255, 255);
+    border-top-width: 0;
+}
+
+.sort-by-desc {
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 0 3px;
+    background: transparent;
+    border-top: solid 7px rgb(255, 255, 255);
+    border-bottom-width: 0;
+}
+
+.sort-by-asc-deselected {
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 0 3px;
+    background: transparent;
+    border-bottom: solid 7px rgb(114, 114, 114);
+    border-top-width: 0;
+}
+
+.sort-by-desc-deselected {
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 0 3px;
+    background: transparent;
+    border-top: solid 7px rgb(114, 114, 114);
+    border-bottom-width: 0;
 }
 </style>
