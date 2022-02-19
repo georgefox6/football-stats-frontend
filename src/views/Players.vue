@@ -409,24 +409,6 @@ export default {
                 .slice()
                 .sort((a, b) => a.playerTeam.localeCompare(b.playerTeam))
         },
-        returnSortedPlayersByPositionDesc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) =>
-                    b.playerPosition.localeCompare(a.playerPosition)
-                )
-        },
         returnSortedPlayersByPositionAsc() {
             return this.allPlayers
                 .filter(
@@ -441,9 +423,96 @@ export default {
                             .includes(this.search.toLowerCase())
                 )
                 .slice()
-                .sort((a, b) =>
-                    a.playerPosition.localeCompare(b.playerPosition)
+                .sort((a, b) =>{
+                    var first = 0;
+                    var second = 0;
+                    switch(a.playerPosition){
+                        case "Goalkeeper": first = 0; break;
+                        case "Centre-Back": first = 1; break;
+                        case "Right-Back": first = 2; break;
+                        case "Left-Back": first = 3; break;
+                        case "Defensive Midfield": first = 4; break;
+                        case "Central Midfield": first = 5; break;
+                        case "Right Midfield": first = 6; break;
+                        case "Left Midfield": first = 7; break;
+                        case "Attacking Midfield": first = 8; break;
+                        case "Right Winger": first = 9; break;
+                        case "Left Winger": first = 10; break;
+                        case "Second Striker": first = 11; break;
+                        case "Centre-Forward": first = 12; break;
+                    }
+
+                    switch(b.playerPosition){
+                        case "Goalkeeper": second = 0; break;
+                        case "Centre-Back": second = 1; break;
+                        case "Right-Back": second = 2; break;
+                        case "Left-Back": second = 3; break;
+                        case "Defensive Midfield": second = 4; break;
+                        case "Central Midfield": second = 5; break;
+                        case "Right Midfield": second = 6; break;
+                        case "Left Midfield": second = 7; break;
+                        case "Attacking Midfield": second = 8; break;
+                        case "Right Winger": second = 9; break;
+                        case "Left Winger": second = 10; break;
+                        case "Second Striker": second = 11; break;
+                        case "Centre-Forward": second = 12; break;
+                    }
+
+                    return first - second;
+                }
+            )
+        },
+        returnSortedPlayersByPositionDesc() {
+            return this.allPlayers
+                .filter(
+                    (player) =>
+                        player.playerName
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase()) ||
+                        player.playerTeam
+                            .toLowerCase()
+                            .includes(this.search.toLowerCase())
                 )
+                .slice()
+                .sort((a, b) =>{
+                    var first = 0;
+                    var second = 0;
+                    switch(a.playerPosition){
+                        case "Goalkeeper": first = 0; break;
+                        case "Centre-Back": first = 1; break;
+                        case "Right-Back": first = 2; break;
+                        case "Left-Back": first = 3; break;
+                        case "Defensive Midfield": first = 4; break;
+                        case "Central Midfield": first = 5; break;
+                        case "Right Midfield": first = 6; break;
+                        case "Left Midfield": first = 7; break;
+                        case "Attacking Midfield": first = 8; break;
+                        case "Right Winger": first = 9; break;
+                        case "Left Winger": first = 10; break;
+                        case "Second Striker": first = 11; break;
+                        case "Centre-Forward": first = 12; break;
+                    }
+
+                    switch(b.playerPosition){
+                        case "Goalkeeper": second = 0; break;
+                        case "Centre-Back": second = 1; break;
+                        case "Right-Back": second = 2; break;
+                        case "Left-Back": second = 3; break;
+                        case "Defensive Midfield": second = 4; break;
+                        case "Central Midfield": second = 5; break;
+                        case "Right Midfield": second = 6; break;
+                        case "Left Midfield": second = 7; break;
+                        case "Attacking Midfield": second = 8; break;
+                        case "Right Winger": second = 9; break;
+                        case "Left Winger": second = 10; break;
+                        case "Second Striker": second = 11; break;
+                        case "Centre-Forward": second = 12; break;
+                    }
+                    return second - first;
+                }
+            )
         },
         returnSortedPlayersByAgeDesc() {
             return this.allPlayers
