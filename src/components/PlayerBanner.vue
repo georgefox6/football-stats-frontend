@@ -2,7 +2,8 @@
     <div class="player-banner">
         <img
             id="player-image"
-            src="https://resources.premierleague.com/premierleague/photos/players/250x250/p194634.png"
+            
+            :src="player.imageUrl"
             alt="Player image"
         />
         <h1 id="player-name">{{ player.playerName }}</h1>
