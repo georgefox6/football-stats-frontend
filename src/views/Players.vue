@@ -115,7 +115,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody v-show="this.loaded">
                 <tr v-for="player in filteredPlayers" :key="player.id">
                     <td class="player-link" @click="playerLink(player.id)">
                         {{ player.playerName }}
@@ -134,10 +134,18 @@
                 </tr>
             </tbody>
         </table>
+        <breeding-rhombus-spinner
+            id="loading-spinner"
+            v-if="!this.loaded"
+            :animation-duration="3000"
+            :size="65"
+            color="#54a1a0"
+        />
     </div>
 </template>
 
 <script>
+import { BreedingRhombusSpinner } from 'epic-spinners'
 import { mapGetters, mapActions } from 'vuex'
 import CountryFlag from 'vue-country-flag'
 import VueCustomTooltip from '@adamdehaven/vue-custom-tooltip'
@@ -147,9 +155,11 @@ export default {
     components: {
         CountryFlag,
         VueCustomTooltip,
+        BreedingRhombusSpinner
     },
     data() {
         return {
+            loaded: false,
             search: '',
             nameSort: 'none',
             nationSort: 'none',
@@ -603,10 +613,21 @@ export default {
     created() {
         this.fetchPlayers()
     },
+    updated(){
+        if(this.filteredPlayers != null){
+            this.loaded = true
+        }
+    }
 }
 </script>
 
 <style scoped>
+#loading-spinner {
+    position: fixed;
+    left: 45%;
+    top: 50%;
+}
+
 .player-link {
     cursor: pointer;
 }

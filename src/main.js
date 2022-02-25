@@ -6,6 +6,7 @@ import VueApexCharts from 'vue-apexcharts'
 import CountryFlag from 'vue-country-flag'
 import VueCustomTooltip from '@adamdehaven/vue-custom-tooltip'
 import VueMaterial from 'vue-material'
+import EpicSpinners from 'epic-spinners'
 
 Vue.config.productionTip = false
 
@@ -15,6 +16,7 @@ Vue.use(VueMaterial)
 
 Vue.component('apexchart', VueApexCharts)
 Vue.component('country-flag', CountryFlag)
+Vue.component('epic-spinners', EpicSpinners)
 
 new Vue({
     router,

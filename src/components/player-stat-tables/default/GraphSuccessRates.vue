@@ -114,11 +114,14 @@ export default {
     },
     created() {
         setTimeout(() => {
-            // this.updateGraphData()
+            this.updateGraphData()
         }, 500)
     },
     mounted() {
         this.updateGraphData()
+        setTimeout(() => {
+            this.updateGraphData()
+        }, 500)
     },
 }
 </script>
