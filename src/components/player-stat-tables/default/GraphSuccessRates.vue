@@ -18,6 +18,7 @@ export default {
     data: function () {
         return {
             series: [0, 0, 0, 0, 0, 0, 0, 0],
+            // series: this.values,
             options: {
                 chart: {
                     width: 380,
@@ -75,6 +76,24 @@ export default {
         }
     },
     props: ['player'],
+    computed: {
+        values(){
+            // if(!this.player){
+            //     return [0, 0, 0, 0, 0, 0, 0, 0]
+            // }
+
+            return [
+                (this.player.goals / this.player.shots) * 100,
+                (this.player.shotsOnTarget / this.player.shots) * 100,
+                (this.player.penaltyScored / this.player.penaltyScored) * 100,
+                (this.player.totalPassesCompleted / this.player.totalPassesAttempted) * 100,
+                (this.player.passesControlled / this.player.passesReceived) * 100,
+                (this.player.dribblesCompleted / this.player.dribblesAttempted) * 100,
+                (this.player.tacklesWon / this.player.tacklesAttempted) * 100,
+                (this.player.headersWon / (this.player.headersLost + this.player.headersWon)) * 100
+            ]
+        }
+    },
     methods: {
         updateGraphData() {
             var shotConversion = (this.player.goals / this.player.shots) * 100
@@ -123,6 +142,10 @@ export default {
             this.updateGraphData()
         }, 500)
     },
+    updated() {
+        // this.updateGraphData()
+        console.log("Updating")
+    }
 }
 </script>
 

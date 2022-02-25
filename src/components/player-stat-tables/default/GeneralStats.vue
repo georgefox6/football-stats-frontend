@@ -61,7 +61,7 @@ export default {
             return this.player.playerNation.split(' ')[0]
         },
         playerNationSecond() {
-            if(this.player.playerNation){
+            if(!this.player.playerNation){
                 return ''
             }
             return this.player.playerNation.split(' ')[1]
