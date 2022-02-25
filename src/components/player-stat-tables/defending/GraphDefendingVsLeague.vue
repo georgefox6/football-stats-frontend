@@ -9,6 +9,15 @@
             <p>Total</p>
         </div>
 
+        <div id="option">
+            <p>All positions</p>
+            <label class="switch">
+                <input v-model="position" type="checkbox" />
+                <span class="slider round"></span>
+            </label>
+            <p>Player position</p>
+        </div>
+
         <VueApexCharts
             ref="chart"
             width="800"
@@ -16,13 +25,11 @@
             :options="options"
             :series="series"
         ></VueApexCharts>
-        <!-- TODO add buttons to compare to league, similar positions, age groups etc -->
-        <!-- TODO Change to percentile rather than percentage of best -->
-        <!-- TODO Pull in real max stats data rather than hardcoded -->
     </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import VueApexCharts from 'vue-apexcharts'
 export default {
     name: 'GraphPossessionVsLeague',
@@ -32,20 +39,7 @@ export default {
     data: function () {
         return {
             total: true,
-            maxStats: {
-                tacklesWon: 40,
-                blocks: 50,
-                interceptions: 40,
-                pressuresWon: 150,
-                headersWon: 80,
-                per90: {
-                    tacklesWon: 10,
-                    blocks: 10,
-                    interceptions: 10,
-                    pressuresWon: 10,
-                    headersWon: 10,
-                },
-            },
+            position: false,
             options: {
                 title: {
                     text: this.player.playerName + ' Defending stats',
@@ -63,11 +57,11 @@ export default {
                     show: false,
                     labels: {
                         formatter: function (value) {
-                            return (Math.round(value * 100) / 100) * 100 + '%'
+                            return value + 'th percentile'
                         },
                     },
                     min: 0,
-                    max: 1,
+                    max: 100,
                     tickAmount: 5,
                 },
             },
@@ -81,43 +75,66 @@ export default {
     },
     props: ['player'],
     methods: {
+        ...mapActions(['fetchPlayerDefendingPercentile']),
         setTotal() {
-            var tacklesWon = this.player.tacklesWon / this.maxStats.tacklesWon
-            var blocks = this.player.blocks / this.maxStats.blocks
-            var interceptions = this.player.interceptions / this.maxStats.interceptions
-            var pressuresWon = this.player.pressuresWon / this.maxStats.pressuresWon
-            var headersWon = this.player.headersWon / this.maxStats.headersWon
             this.$refs.chart.updateSeries(
                 [
                     {
-                        data: [ tacklesWon, blocks, interceptions, pressuresWon, headersWon ],
-                            // this.player.totalPassesCompleted / this.maxStats.totalPassesCompleted,
-                            // this.player.progressivePassingDistance /
-                            //     this.maxStats.progressivePassingDistance,
-                            // this.player.crosses / this.maxStats.crosses,
-                            // this.player.dribblesCompleted /
-                            //     this.maxStats.dribblesCompleted,
-                            // this.player.dribblesProgressiveDistance /
-                            //     this.maxStats.dribblesProgressiveDistance,
-                            // this.player.passesControlled /
-                            //     this.maxStats.passesControlled,
-                        // ],
+                        data: [ 
+                            this.playerDefendingPercentile.tacklesWonPercentile,
+                            this.playerDefendingPercentile.blocksPercentile,
+                            this.playerDefendingPercentile.interceptionsPercentile,
+                            this.playerDefendingPercentile.pressuresPercentile,
+                            this.playerDefendingPercentile.headersWonPercentile,
+                        ],
+                    },
+                ],
+                true
+            )
+        },
+        setTotalPosition() {
+            this.$refs.chart.updateSeries(
+                [
+                    {
+                        data: [ 
+                            this.playerDefendingPercentile.tacklesWonPerPositionPercentile,
+                            this.playerDefendingPercentile.blocksPerPositionPercentile,
+                            this.playerDefendingPercentile.interceptionsPerPositionPercentile,
+                            this.playerDefendingPercentile.pressuresPerPositionPercentile,
+                            this.playerDefendingPercentile.headersWonPerPositionPercentile,
+                        ],
                     },
                 ],
                 true
             )
         },
         setPer90() {
-            var tacklesWonPer90 = this.player.tacklesWon / this.maxStats.per90.tacklesWon / this.player.minutesPlayed * 90
-            var blocksPer90 = this.player.blocks / this.maxStats.per90.blocks / this.player.minutesPlayed * 90
-            var interceptionsPer90 = this.player.interceptions / this.maxStats.per90.interceptions / this.player.minutesPlayed * 90
-            var pressuresWonPer90 = this.player.pressuresWon / this.maxStats.per90.pressuresWon / this.player.minutesPlayed * 90
-            var headersWonPer90 = this.player.headersWon / this.maxStats.per90.headersWon / this.player.minutesPlayed * 90
-            
             this.$refs.chart.updateSeries(
                 [
                     {
-                        data: [ tacklesWonPer90, blocksPer90, interceptionsPer90, pressuresWonPer90, headersWonPer90 ]
+                        data: [ 
+                            this.playerDefendingPercentile.tacklesWonPer90Percentile,
+                            this.playerDefendingPercentile.blocksPer90Percentile,
+                            this.playerDefendingPercentile.interceptionsPer90Percentile,
+                            this.playerDefendingPercentile.pressuresPer90Percentile,
+                            this.playerDefendingPercentile.headersWonPer90Percentile,
+                        ]
+                    },
+                ],
+                true
+            )
+        },
+        setPer90Position() {
+            this.$refs.chart.updateSeries(
+                [
+                    {
+                        data: [ 
+                            this.playerDefendingPercentile.tacklesWonPer90PerPositionPercentile,
+                            this.playerDefendingPercentile.blocksPer90PerPositionPercentile,
+                            this.playerDefendingPercentile.interceptionsPer90PerPositionPercentile,
+                            this.playerDefendingPercentile.pressuresPer90PerPositionPercentile,
+                            this.playerDefendingPercentile.headersWonPer90PerPositionPercentile,
+                        ]
                     },
                 ],
                 true
@@ -128,14 +145,30 @@ export default {
         setTimeout(() => {
             this.setTotal()
         }, 500)
+
+        this.fetchPlayerDefendingPercentile(this.player.id)
     },
     updated() {
         if (this.total) {
-            this.setTotal()
+            if(this.position){
+                this.setTotalPosition()
+            } else {
+                this.setTotal()
+            }
         } else {
-            this.setPer90()
+            if(this.position){
+                this.setPer90Position()
+            } else {
+                this.setPer90()
+            }
         }
     },
+    computed: mapGetters(['playerDefendingPercentile']),
+    mounted(){
+        if(this.playerDefendingPercentile){
+            this.setTotal()
+        }  
+    }
 }
 </script>
 

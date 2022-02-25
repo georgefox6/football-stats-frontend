@@ -9,6 +9,15 @@
             <p>Total</p>
         </div>
 
+        <div id="option">
+            <p>All positions</p>
+            <label class="switch">
+                <input v-model="position" type="checkbox" />
+                <span class="slider round"></span>
+            </label>
+            <p>Player position</p>
+        </div>
+
         <VueApexCharts
             ref="chart"
             width="800"
@@ -16,13 +25,11 @@
             :options="options"
             :series="series"
         ></VueApexCharts>
-        <!-- TODO add buttons to compare to league, similar positions, age groups etc -->
-        <!-- TODO Change to percentile rather than percentage of best -->
-        <!-- TODO Pull in real max stats data rather than hardcoded -->
     </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import VueApexCharts from 'vue-apexcharts'
 export default {
     name: 'GraphShootingVsLeague',
@@ -32,22 +39,7 @@ export default {
     data: function () {
         return {
             total: true,
-            maxStats: {
-                goals: 8,
-                expectedGoals: 5,
-                shots: 80,
-                shotsOnTarget: 35,
-                penaltyScored: 3,
-                freeKickShots: 10,
-                per90: {
-                    goals: 0.2,
-                    expectedGoals: 0.3,
-                    shots: 4,
-                    shotsOnTarget: 1,
-                    penaltyScored: 0.1,
-                    freeKickShots: 0.5,
-                },
-            },
+            position: false,
             options: {
                 title: {
                     text: this.player.playerName + ' Shooting stats',
@@ -66,11 +58,11 @@ export default {
                     show: false,
                     labels: {
                         formatter: function (value) {
-                            return (Math.round(value * 100) / 100) * 100 + '%'
+                            return value + 'th percentile'
                         },
                     },
                     min: 0,
-                    max: 1,
+                    max: 100,
                     tickAmount: 5,
                 },
             },
@@ -84,28 +76,35 @@ export default {
     },
     props: ['player'],
     methods: {
+        ...mapActions(['fetchPlayerAttackingPercentile']),
         setTotal() {
-            var goals = this.player.goals / this.maxStats.goals
-            var expectedGoals =
-                this.player.expectedGoals / this.maxStats.expectedGoals
-            var shots = this.player.shots / this.maxStats.shots
-            var shotsOnTarget =
-                this.player.shotsOnTarget / this.maxStats.shotsOnTarget
-            var penaltyScored =
-                this.player.penaltyScored / this.maxStats.penaltyScored
-            var freeKickShots =
-                this.player.freeKickShots / this.maxStats.freeKickShots
-
             this.$refs.chart.updateSeries(
                 [
                     {
                         data: [
-                            goals,
-                            expectedGoals,
-                            shots,
-                            shotsOnTarget,
-                            penaltyScored,
-                            freeKickShots,
+                            this.playerAttackingPercentile.goalsPercentile,
+                            this.playerAttackingPercentile.expectedGoalsPercentile,
+                            this.playerAttackingPercentile.shotsPercentile,
+                            this.playerAttackingPercentile.shotsOnTargetPercentile,
+                            this.playerAttackingPercentile.penaltyGoalsPercentile,
+                            this.playerAttackingPercentile.freeKickShotsPercentile,
+                        ],
+                    },
+                ],
+                true
+            )
+        },
+        setTotalPosition() {
+            this.$refs.chart.updateSeries(
+                [
+                    {
+                        data: [
+                            this.playerAttackingPercentile.goalsPerPositionPercentile,
+                            this.playerAttackingPercentile.expectedGoalsPerPositionPercentile,
+                            this.playerAttackingPercentile.shotsPerPositionPercentile,
+                            this.playerAttackingPercentile.shotsOnTargetPerPositionPercentile,
+                            this.playerAttackingPercentile.penaltyGoalsPerPositionPercentile,
+                            this.playerAttackingPercentile.freeKickShotsPerPositionPercentile,
                         ],
                     },
                 ],
@@ -113,66 +112,33 @@ export default {
             )
         },
         setPer90() {
-            var goalsPer90 =
-                (this.player.goals /
-                    this.maxStats.per90.goals /
-                    this.player.minutesPlayed) *
-                90
-            var expectedGoalsPer90 =
-                (this.player.expectedGoals /
-                    this.maxStats.per90.expectedGoals /
-                    this.player.minutesPlayed) *
-                90
-            var shotsPer90 =
-                (this.player.shots /
-                    this.maxStats.per90.shots /
-                    this.player.minutesPlayed) *
-                90
-            var shotsOnTargetPer90 =
-                (this.player.shotsOnTarget /
-                    this.maxStats.per90.shotsOnTarget /
-                    this.player.minutesPlayed) *
-                90
-            var penaltyScoredPer90 =
-                (this.player.penaltyScored /
-                    this.maxStats.per90.penaltyScored /
-                    this.player.minutesPlayed) *
-                90
-            var freeKickShotsPer90 =
-                (this.player.freeKickShots /
-                    this.maxStats.per90.freeKickShots /
-                    this.player.minutesPlayed) *
-                90
-
-            if (isNaN(goalsPer90)) {
-                goalsPer90 = 0
-            }
-            if (isNaN(expectedGoalsPer90)) {
-                expectedGoalsPer90 = 0
-            }
-            if (isNaN(shotsPer90)) {
-                shotsPer90 = 0
-            }
-            if (isNaN(shotsOnTargetPer90)) {
-                shotsOnTargetPer90 = 0
-            }
-            if (isNaN(penaltyScoredPer90)) {
-                penaltyScoredPer90 = 0
-            }
-            if (isNaN(freeKickShotsPer90)) {
-                freeKickShotsPer90 = 0
-            }
-
             this.$refs.chart.updateSeries(
                 [
                     {
                         data: [
-                            goalsPer90,
-                            expectedGoalsPer90,
-                            shotsPer90,
-                            shotsOnTargetPer90,
-                            penaltyScoredPer90,
-                            freeKickShotsPer90,
+                            this.playerAttackingPercentile.goalsPer90Percentile,
+                            this.playerAttackingPercentile.expectedGoalsPer90Percentile,
+                            this.playerAttackingPercentile.shotsPer90Percentile,
+                            this.playerAttackingPercentile.shotsOnTargetPer90Percentile,
+                            this.playerAttackingPercentile.penaltyGoalsPer90Percentile,
+                            this.playerAttackingPercentile.freeKickShotsPer90Percentile,
+                        ],
+                    },
+                ],
+                true
+            )
+        },
+        setPer90Position() {
+            this.$refs.chart.updateSeries(
+                [
+                    {
+                        data: [
+                            this.playerAttackingPercentile.goalsPer90PerPositionPercentile,
+                            this.playerAttackingPercentile.expectedGoalsPer90PerPositionPercentile,
+                            this.playerAttackingPercentile.shotsPer90PerPositionPercentile,
+                            this.playerAttackingPercentile.shotsOnTargetPer90PerPositionPercentile,
+                            this.playerAttackingPercentile.penaltyGoalsPer90PerPositionPercentile,
+                            this.playerAttackingPercentile.freeKickShotsPer90PerPositionPercentile,
                         ],
                     },
                 ],
@@ -180,18 +146,34 @@ export default {
             )
         },
     },
+    mounted() {
+        this.fetchPlayerAttackingPercentile(this.player.id)
+        if(this.playerAttackingPercentile){
+            this.setTotal()
+        }  
+    },
     created() {
         setTimeout(() => {
             this.setTotal()
         }, 500)
+        this.fetchPlayerAttackingPercentile(this.player.id)
     },
     updated() {
         if (this.total) {
-            this.setTotal()
+            if(this.position){
+                this.setTotalPosition()
+            } else {
+                this.setTotal()
+            }
         } else {
-            this.setPer90()
+            if(this.position){
+                this.setPer90Position()
+            } else {
+                this.setPer90()
+            }
         }
     },
+    computed: mapGetters(['playerAttackingPercentile']),
 }
 </script>
 

@@ -5,12 +5,12 @@
             <tr>
                 <td class="label">Value</td>
                 <td class="data">
-                    £{{ player.marketValue.toLocaleString('en-GB') }}
+                    {{ marketValue }}
                 </td>
             </tr>
             <tr>
                 <td class="label">Wage</td>
-                <td class="data">£{{ player.wage.toLocaleString('en-GB') }}</td>
+                <td class="data">{{ wage }}</td>
             </tr>
             <tr>
                 <td class="label">Contract End</td>
@@ -23,12 +23,28 @@
 <script>
 export default {
     name: 'TransferStats',
-    data() {
-        return {}
-    },
     props: ['player'],
     methods: {},
-    created() {},
+    created() {
+    },
+    computed: {
+        marketValue() {
+            if(!this.player.marketValue) {
+                return '£'
+            } else {
+                return '£' + this.player.marketValue.toLocaleString('en-GB')
+            }
+            
+        },
+        wage() {
+            if(!this.player.wage){
+                return '£'
+            } else {
+                return '£' + this.player.wage.toLocaleString('en-GB')
+            }
+            
+        },
+    }
 }
 </script>
 

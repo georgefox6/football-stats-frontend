@@ -16,9 +16,9 @@
             </tr>
             <tr>
                 <td class="label">Nationality</td>
-                <td class="data">{{ player.playerNation.split(' ')[1] }}
+                <td class="data">{{ playerNationSecond }}
                         <country-flag
-                            :country="player.playerNation.split(' ')[0]"
+                            :country="this.playerNationFirst"
                             size="small"
                         /></td>
             </tr>
@@ -42,9 +42,6 @@ export default {
     components: {
         CountryFlag,
     },
-    data() {
-        return {}
-    },
     props: ['player'],
     methods: {
         toFeet(height) {
@@ -54,7 +51,22 @@ export default {
             return feet + " Foot " + inches + ' Inches ';
         }
     },
-    created() {},
+    created() {
+    },
+    computed: {
+        playerNationFirst() {
+            if(!this.player.playerNation){
+                return ''
+            }
+            return this.player.playerNation.split(' ')[0]
+        },
+        playerNationSecond() {
+            if(this.player.playerNation){
+                return ''
+            }
+            return this.player.playerNation.split(' ')[1]
+        },
+    }
 }
 </script>
 

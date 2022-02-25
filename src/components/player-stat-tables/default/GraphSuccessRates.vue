@@ -5,9 +5,6 @@
             :options="options"
             :series="series"
         ></VueApexCharts>
-        <!-- TODO add buttons to compare to league, similar positions, age groups etc -->
-        <!-- TODO Change to percentile rather than percentage of best -->
-        <!-- TODO Pull in real max stats data rather than hardcoded -->
     </div>
 </template>
 
@@ -117,10 +114,12 @@ export default {
     },
     created() {
         setTimeout(() => {
-            this.updateGraphData()
+            // this.updateGraphData()
         }, 500)
     },
-    updated() {},
+    mounted() {
+        this.updateGraphData()
+    },
 }
 </script>
 
