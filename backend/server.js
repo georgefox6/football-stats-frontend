@@ -4,6 +4,7 @@ const history = require('connect-history-api-fallback');
 
 const app = express();
 const path = require('path');
+const port = process.env.PORT || 3000
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -26,4 +27,4 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
-app.listen(3000, () => console.log('server started on port 3000'));
+app.listen(port, () => console.log(`server started on port ${port}`));
