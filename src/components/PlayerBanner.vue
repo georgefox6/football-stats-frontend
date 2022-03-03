@@ -2,7 +2,6 @@
     <div class="player-banner">
         <img
             id="player-image"
-            
             :src="player.imageUrl"
             alt="Player image"
         />
