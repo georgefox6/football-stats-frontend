@@ -9,6 +9,7 @@
             />
         </div>
         <table id="player-table">
+            
             <thead>
                 <tr>
                     <th @click="sortByPlayerName()">
@@ -114,6 +115,7 @@
                     </th>
                 </tr>
             </thead>
+            
 
             <tbody v-show="this.loaded">
                 <tr v-for="player in filteredPlayers" :key="player.id">
@@ -139,7 +141,7 @@
             v-if="!this.loaded"
             :animation-duration="3000"
             :size="65"
-            color="#54a1a0"
+            color="var(--primary)"
         />
     </div>
 </template>
@@ -655,7 +657,7 @@ td {
 th {
     padding: 15px;
     color: #fff;
-    background-color: #54a1a0;
+    background-color: var(--primary);
 
     position: sticky;
     top: 0;
@@ -680,25 +682,25 @@ tr:hover {
 
 /* Styling for search box */
 .search-wrapper {
-    margin: 20px;
+    width: 1200px;
+    margin-left: 13%;
+    border: none;
+    margin-top: 40px;
+    margin-bottom: 10px;
 }
+
 .input {
-    position: static;
-    padding: 10px;
-    width: 350px;
-    height: 80px;
-    background: none;
-    border: 4px solid #54a1a0;
-    box-sizing: border-box;
-    font-size: 26px;
-    color: #54a1a0;
-    outline: none;
-    transition: 0.2s;
-}
-.input:hover {
-    width: 350px;
-    background: white;
-    border-radius: 10px;
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    /* border-bottom: 2px solid gray; */
+    border-bottom: 2px solid var(--primary);
+    outline: 0;
+    font-size: 1.3rem;
+    color: white;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
 }
 
 .sort-by-asc {

@@ -32,14 +32,16 @@ export default {
 
 <style scoped>
 .player-banner {
-    background-color: #54a1a0;
+    background-color: var(--primary);
     color: white;
     padding: 30px;
+    padding-bottom: 60px;
 }
 
 #player-image {
     width: 110px;
     float: left;
+    margin-bottom: 30px;
 }
 
 #player-name {
