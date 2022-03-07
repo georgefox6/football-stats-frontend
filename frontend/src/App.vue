@@ -1,10 +1,30 @@
 <template>
     <div id="app">
+        <Header></Header>
         <router-view id="view" />
     </div>
 </template>
 
+<script>
+import Header from '@/components/Header.vue'
+export default {
+    components: {
+        Header
+    }
+}
+</script>
+
 <style>
+:root {
+  /* --primary: #54a1a0; */
+  /* --primary: orange; */
+  --primary: #47b4a5;
+  /* --primary: #e63334; */
+  --secondary: #707070;
+  --tertiary: #ffffff;
+  --quaternary: #000000;
+}
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

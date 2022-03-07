@@ -122,10 +122,9 @@ export default {
 
 <style scoped>
 .defending-stats {
-    border: 2px solid black;
-    border-radius: 10px;
-    box-shadow: 5px 10px #c9c9c9;
+    box-shadow: 0 0 20px #9e9e9e;
     padding: 20px;
+    background-color: white;
 }
 
 .title {

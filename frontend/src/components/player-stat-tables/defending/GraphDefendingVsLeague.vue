@@ -1,5 +1,5 @@
 <template>
-    <div class="possession-stats">
+    <div class="defending-stats">
         <div id="option">
             <p>Per 90</p>
             <label class="switch">
@@ -173,11 +173,10 @@ export default {
 </script>
 
 <style scoped>
-.possession-stats {
-    border: 2px solid black;
-    border-radius: 10px;
-    box-shadow: 5px 10px #c9c9c9;
-    padding: 40px;
+.defending-stats {
+    box-shadow: 0 0 20px #9e9e9e;
+    padding: 20px;
+    background-color: white;
 }
 
 #option {
