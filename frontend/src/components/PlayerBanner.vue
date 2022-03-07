@@ -1,20 +1,23 @@
 <template>
     <div class="player-banner">
-        <img
-            id="player-image"
-            :src="player.imageUrl"
-            alt="Player image"
-        />
-        <h1 id="player-name">{{ player.playerName }}</h1>
-        <div id="club">
+        <div id="content">
             <img
-                id="club-image"
-                src="https://resources.premierleague.com/premierleague/badges/50/t14.png"
-                alt="club"
+                id="player-image"
+                :src="player.imageUrl"
+                alt="Player image"
             />
-            <h3 id="club-name">{{ player.playerTeam }}</h3>
-            <div class="clear-float"></div>
+            <h1 id="player-name">{{ player.playerName }}</h1>
+            <div id="club">
+                <img
+                    id="club-image"
+                    src="https://resources.premierleague.com/premierleague/badges/50/t14.png"
+                    alt="club"
+                />
+                <h3 id="club-name">{{ player.playerTeam }}</h3>
+                <div class="clear-float"></div>
+            </div>
         </div>
+        
     </div>
 </template>
 
@@ -31,17 +34,23 @@ export default {
 </script>
 
 <style scoped>
+/* #content {
+    margin-left: 40%;
+} */
+
 .player-banner {
     background-color: var(--primary);
     color: white;
     padding: 30px;
     padding-bottom: 60px;
+    width: 80%;
+    margin-left: 10%;
 }
 
 #player-image {
     width: 110px;
     float: left;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 #player-name {

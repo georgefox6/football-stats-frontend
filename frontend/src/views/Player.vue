@@ -70,23 +70,25 @@ export default {
 </script>
 
 <style scoped>
-#player-banner {
-    width: 80%;
-    margin-left: 10%;
-}
+/* #player-banner { */
+    /* width: 80%;
+    margin-left: 10%; */
+/* } */
 
 .player {
     /* width: 80%;
     margin-left: 10%; */
-    background: #363636;
+    /* background: #363636; */
+    background: #f5f5f5;
 }
 
 #player-stats {
-    border: 2px solid black;
-    padding: 28px;
+    /* border: 2px solid black; */
+    /* padding: 28px; */
     min-height: 300vh;
-    width: 80%;
-    margin-left: 10%;
+    /* width: 80%; */
+    width: 100%;
+    /* margin-left: 10%; */
     /* background: #e4e4e4; */
     background: #f5f5f5;
 }
