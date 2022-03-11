@@ -1,21 +1,17 @@
 <template>
-    <div class="stats">
-        <GeneralStats id="general-stats" v-bind:player="player"></GeneralStats>
-        <TransferStats
-            id="transfer-stats"
-            v-bind:player="player"
-        ></TransferStats>
-        <PlayingStats id="playing-stats" v-bind:player="player"></PlayingStats>
-        <StrikerGraph class="position-graph" v-bind:player="player" v-if="this.player.playerPosition == 'Centre-Forward' || this.player.playerPosition == 'Second Striker'"></StrikerGraph>
-        <MidfieldGraph class="position-graph" v-bind:player="player" v-if="this.player.playerPosition == 'Central Midfield' || this.player.playerPosition == 'Defensive Midfield'"></MidfieldGraph>
-        <FullBackGraph class="position-graph" v-bind:player="player" v-if="this.player.playerPosition == 'Left-Back' || this.player.playerPosition == 'Right-Back'"></FullBackGraph>
-        <CentreBackGraph class="position-graph" v-bind:player="player" v-if="this.player.playerPosition == 'Centre-Back'"></CentreBackGraph>
-        <WingerGraph class="position-graph" v-bind:player="player" v-if="this.player.playerPosition == 'Left Winger' || this.player.playerPosition == 'Right Winger' || this.player.playerPosition == 'Left Midfield' || this.player.playerPosition == 'Right Midfield'"></WingerGraph>
-        <AttackingMidfieldGraph class="position-graph" v-bind:player="player" v-if="this.player.playerPosition == 'Attacking Midfield'"></AttackingMidfieldGraph>
-        <GraphSuccessRates
-            id="graph-success-rates"
-            v-bind:player="player"
-        ></GraphSuccessRates>
+    <div class="flex-container">
+        <TransferStats class="stat-box" v-bind:player="player" ></TransferStats>
+        <PlayingStats class="stat-box" v-bind:player="player"></PlayingStats>
+        <GeneralStats class="stat-box" v-bind:player="player"></GeneralStats>
+
+        <StrikerGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Centre-Forward' || this.player.playerPosition == 'Second Striker'"></StrikerGraph>
+        <MidfieldGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Central Midfield' || this.player.playerPosition == 'Defensive Midfield'"></MidfieldGraph>
+        <FullBackGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Left-Back' || this.player.playerPosition == 'Right-Back'"></FullBackGraph>
+        <CentreBackGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Centre-Back'"></CentreBackGraph>
+        <WingerGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Left Winger' || this.player.playerPosition == 'Right Winger' || this.player.playerPosition == 'Left Midfield' || this.player.playerPosition == 'Right Midfield'"></WingerGraph>
+        <AttackingMidfieldGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Attacking Midfield'"></AttackingMidfieldGraph>
+        
+        <GraphSuccessRates class="graph" id="graph-success-rates" v-bind:player="player" ></GraphSuccessRates>
     </div>
 </template>
 
@@ -58,38 +54,24 @@ export default {
 </script>
 
 <style scoped>
-#general-stats {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+
+.stat-box {
+    margin: 30px;
+    flex: 30%;
 }
 
-#transfer-stats {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 7%;
-    float: left;
+.graph {
+    flex: 80%;
+    margin: 30px;
 }
 
-#playing-stats {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 7%;
-    float: left;
+@media screen and (min-width: 720px){
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 75rem;
+        margin: auto;
+    }    
 }
 
-#graph-success-rates {
-    width: 80%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
-}
-
-.position-graph {
-    width: 80%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
-}
 </style>

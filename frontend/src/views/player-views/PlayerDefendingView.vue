@@ -1,21 +1,10 @@
 <template>
-    <div class="stats">
-        <DefendingStats
-            id="defending-stats"
-            v-bind:player="player"
-        ></DefendingStats>
-        <DefendingStatsPer90
-            id="defending-stats-per-90"
-            v-bind:player="player"
-        ></DefendingStatsPer90>
-        <GraphDefendingVsLeague
-            id="graph-defending-vs-league"
-            v-bind:player="player"
-        ></GraphDefendingVsLeague>
-        <GraphPressureLocations
-            id="graph-defending-vs-league"
-            v-bind:player="player"
-        ></GraphPressureLocations>
+    <div class="flex-container">
+        <DefendingStats class="stat-box" v-bind:player="player" ></DefendingStats>
+        <DefendingStatsPer90 class="stat-box" v-bind:player="player"></DefendingStatsPer90>
+
+        <GraphDefendingVsLeague class="graph" v-bind:player="player"></GraphDefendingVsLeague>
+        <GraphPressureLocations class="graph" v-bind:player="player"></GraphPressureLocations>
     </div>
 </template>
 
@@ -46,24 +35,24 @@ export default {
 </script>
 
 <style scoped>
-#defending-stats {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+
+.stat-box {
+    margin: 30px;
+    flex: 30%;
 }
 
-#defending-stats-per-90 {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+.graph {
+    flex: 80%;
+    margin: 30px;
 }
 
-#graph-defending-vs-league {
-    width: 80%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+@media screen and (min-width: 720px){
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 75rem;
+        margin: auto;
+    }    
 }
+
 </style>

@@ -1,26 +1,12 @@
 <template>
-    <div class="stats">
-        <PassingStats id="passing-stats" v-bind:player="player"></PassingStats>
-        <PassingStatsPer90
-            id="passing-stats"
-            v-bind:player="player"
-        ></PassingStatsPer90>
-        <DribblingStats
-            id="passing-stats"
-            v-bind:player="player"
-        ></DribblingStats>
-        <DribblingStatsPer90
-            id="passing-stats"
-            v-bind:player="player"
-        ></DribblingStatsPer90>
-        <GraphPossessionVsLeague
-            id="graph-possession-vs-league"
-            v-bind:player="player"
-        ></GraphPossessionVsLeague>
-        <GraphPassingLengths
-            id="graph-passing-positions"
-            v-bind:player="player"
-        ></GraphPassingLengths>
+    <div class="flex-container">
+        <PassingStats class="stat-box" v-bind:player="player"></PassingStats>
+        <PassingStatsPer90 class="stat-box" v-bind:player="player" ></PassingStatsPer90>
+        <DribblingStats class="stat-box" v-bind:player="player" ></DribblingStats>
+        <DribblingStatsPer90 class="stat-box" v-bind:player="player" ></DribblingStatsPer90>
+
+        <GraphPossessionVsLeague class="graph" v-bind:player="player"></GraphPossessionVsLeague>
+        <GraphPassingLengths class="graph" v-bind:player="player" ></GraphPassingLengths>
     </div>
 </template>
 
@@ -55,24 +41,24 @@ export default {
 </script>
 
 <style scoped>
-#passing-stats {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+
+.stat-box {
+    margin: 30px;
+    flex: 30%;
 }
 
-#graph-possession-vs-league {
-    width: 80%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+.graph {
+    flex: 80%;
+    margin: 30px;
 }
 
-#graph-passing-positions {
-    width: 80%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+@media screen and (min-width: 720px){
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 75rem;
+        margin: auto;
+    }    
 }
+
 </style>

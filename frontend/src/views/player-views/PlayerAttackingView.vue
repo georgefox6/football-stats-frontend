@@ -1,17 +1,9 @@
 <template>
-    <div class="stats">
-        <ShootingStats
-            id="shooting-stats"
-            v-bind:player="player"
-        ></ShootingStats>
-        <ShootingStatsPer90
-            id="shooting-stats-per-90"
-            v-bind:player="player"
-        ></ShootingStatsPer90>
-        <GraphShootingVsLeague
-            id="graph-shooting-vs-league"
-            v-bind:player="player"
-        ></GraphShootingVsLeague>
+    <div class="flex-container">
+        <ShootingStats class="stat-box" v-bind:player="player"></ShootingStats>
+        <ShootingStatsPer90 class="stat-box" v-bind:player="player"></ShootingStatsPer90>
+        
+        <GraphShootingVsLeague class="graph" v-bind:player="player"></GraphShootingVsLeague>
     </div>
 </template>
 
@@ -40,24 +32,22 @@ export default {
 </script>
 
 <style scoped>
-#shooting-stats {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+.stat-box {
+    margin: 30px;
+    flex: 30%;
 }
 
-#shooting-stats-per-90 {
-    width: 35%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+.graph {
+    flex: 80%;
+    margin: 30px;
 }
 
-#graph-shooting-vs-league {
-    width: 80%;
-    margin-top: 5%;
-    margin-left: 10%;
-    float: left;
+@media screen and (min-width: 720px){
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 75rem;
+        margin: auto;
+    }    
 }
 </style>

@@ -1,31 +1,27 @@
 <template>
     <div class="possession-stats">
-        <div id="option">
-            <p>Per 90</p>
+        <div class="option">
             <label class="switch">
-                <input v-model="total" type="checkbox" />
+                <input v-model="per90" type="checkbox" />
                 <span class="slider round"></span>
             </label>
-            <p>Total</p>
+            <p>Stats per 90</p>
         </div>
 
-        <div id="option">
-            <p>All positions</p>
+        <div class="option">
             <label class="switch">
                 <input v-model="position" type="checkbox" />
                 <span class="slider round"></span>
             </label>
-            <p>Player position</p>
+            <p>Compared to other {{ player.playerPosition }}s</p>
         </div>
 
         <VueApexCharts
             ref="chart"
-            width="800"
             type="radar"
             :options="options"
             :series="series"
         ></VueApexCharts>
-        <!-- TODO add buttons to compare to league, similar positions, age groups etc -->
     </div>
 </template>
 
@@ -39,11 +35,22 @@ export default {
     },
     data: function () {
         return {
-            total: true,
-            position: false,
+            per90: true,
+            position: true,
             options: {
+                plotOptions: {
+                    radar: {
+                        polygons: {
+                            strokeColor: '#e8e8e8',
+                            fill: {
+                                colors: ['#f8f8f8', '#fff'],
+                            },
+                        },
+                        size: '240',
+                    },
+                },
                 title: {
-                    text: this.player.playerName + ' Possession stats',
+                    text: '',
                 },
                 xaxis: {
                     categories: [
@@ -155,35 +162,41 @@ export default {
                 ],
                 true
             )
+        },
+        updateGraph(){
+            this.playerPossessionPercentile = null
+
+            setTimeout(() => {
+                this.fetchPlayerPossessionPercentile(this.player.id)
+            }, 400)
+
+            setTimeout(() => {
+                if (this.per90) {
+                    if (this.position) {
+                        this.setPer90Position()
+                    } else {
+                        this.setPer90()
+                    }
+                } else {
+                    if (this.position) {
+                        this.setTotalPosition()
+                    } else {
+                        this.setTotal()
+                    }
+                }
+            }, 800)
         }
+    },
+    mounted() {
+        this.updateGraph()
     },
     created() {
-        setTimeout(() => {
-            this.setTotal()
-        }, 500)
-        this.fetchPlayerPossessionPercentile(this.player.id)
+        this.updateGraph()
     },
     updated() {
-        if (this.total) {
-            if(this.position){
-                this.setTotalPosition()
-            } else {
-                this.setTotal()
-            }
-        } else {
-            if(this.position){
-                this.setPer90Position()
-            } else {
-                this.setPer90()
-            }
-        }
+        this.updateGraph()
     },
     computed: mapGetters(['playerPossessionPercentile']),
-    mounted(){
-        if(this.playerPossessionPercentile){
-            this.setTotal()
-        }        
-    }
 }
 </script>
 
@@ -194,17 +207,20 @@ export default {
     background-color: white;
 }
 
-#option {
+.option {
     white-space: nowrap;
+    text-align: left;
+    margin-left: 10px;
 }
 
-#option > p {
+.option > p {
     display: inline-block;
-    padding: 20px;
-    vertical-align: -8px;
+    padding: 5px;
+    vertical-align: 2px;
+    font-size: 10px;
 }
 
-#option > label {
+.option > label {
     display: inline-block;
 }
 
@@ -214,8 +230,8 @@ export default {
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 30px;
+    height: 15px;
 }
 
 /* Hide default HTML checkbox */
@@ -241,10 +257,10 @@ export default {
 .slider:before {
     position: absolute;
     content: '';
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 15px;
+    width: 15px;
+    left: 0px;
+    bottom: 0px;
     background-color: white;
     -webkit-transition: 0.4s;
     transition: 0.4s;
@@ -259,14 +275,14 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(15px);
+    -ms-transform: translateX(15px);
+    transform: translateX(15px);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 34px;
+    border-radius: 15px;
 }
 
 .slider.round:before {

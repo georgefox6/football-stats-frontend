@@ -1,23 +1,14 @@
 <template>
-    <div class="player-banner">
-        <div id="content">
-            <img
-                id="player-image"
-                :src="player.imageUrl"
-                alt="Player image"
-            />
+    <div class="flex-container">
+        <div class="content">
+            <img id="player-image" :src="player.imageUrl" alt="Player image" />
             <h1 id="player-name">{{ player.playerName }}</h1>
+            <br>
             <div id="club">
-                <img
-                    id="club-image"
-                    src="https://resources.premierleague.com/premierleague/badges/50/t14.png"
-                    alt="club"
-                />
+                <img id="club-image" src="https://resources.premierleague.com/premierleague/badges/50/t14.png" alt="club" />
                 <h3 id="club-name">{{ player.playerTeam }}</h3>
-                <div class="clear-float"></div>
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -34,10 +25,7 @@ export default {
 </script>
 
 <style scoped>
-/* #content {
-    margin-left: 40%;
-} */
-
+/*
 .player-banner {
     background-color: var(--primary);
     color: white;
@@ -50,7 +38,6 @@ export default {
 #player-image {
     width: 110px;
     float: left;
-    /* margin-bottom: 30px; */
 }
 
 #player-name {
@@ -81,5 +68,85 @@ export default {
 
 .clear-float {
     clear: both;
+}
+*/
+.content > h1 {
+    margin: 0;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 550px){
+    .content > h1 {
+        margin-left: 50px;
+        float: left;
+    }  
+
+    .content > img {
+        float: left;
+        width: 20%;
+    }
+
+    .content > div {
+        margin-left: 50px;
+        float: left;
+    }
+}
+
+@media screen and (min-width: 650px){
+    .content > h1 {
+        margin-right: 8%;
+    }    
+}
+
+@media screen and (min-width: 920px){
+    .content > h1 {
+        /* margin-left: 100px; */
+        margin-top: 50px;
+        margin-right: 33%;
+    }    
+}
+
+/* @media screen and (min-width: 1100px){
+    .content > h1 {
+        margin-left: 150px;
+        margin-top: 80px;
+        margin-right: 40%;
+    }    
+} */
+
+
+
+
+
+.content > div > img {
+    display: inline-block;
+    width: 2rem;
+}
+
+.content > div > h3 {
+    display: inline-block;
+}
+
+
+.content {
+    background-color: var(--primary);
+    color: white;
+    margin: 30px;
+    width: 100%;
+    padding: 20px;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (min-width: 720px){
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 75rem;
+        margin: auto;
+    }    
 }
 </style>
