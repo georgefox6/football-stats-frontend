@@ -16,10 +16,7 @@ export default {
 
 <style>
 :root {
-  /* --primary: #54a1a0; */
-  /* --primary: orange; */
   --primary: #47b4a5;
-  /* --primary: #e63334; */
   --secondary: #707070;
   --tertiary: #ffffff;
   --quaternary: #000000;
@@ -31,11 +28,9 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    /* background: #363636; */
 }
 
 #view {
     min-height: 100vh;
-    /* background-color: #363636; */
 }
 </style>
