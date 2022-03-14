@@ -15,6 +15,26 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/',
+        name: 'Players',
+        component: Players,
+        meta: {
+            title: 'Football Stats - Players',
+            metaTags: [
+                {
+                    name: 'description',
+                    content:
+                        'A summary of all football players in the database. Transfer, goals, team data.',
+                },
+                {
+                    property: 'og:description',
+                    content:
+                        'A summary of all football players in the database. Transfer, goals, team data.',
+                },
+            ],
+        },
+    },
+    {
         path: '/players',
         name: 'Players',
         component: Players,
