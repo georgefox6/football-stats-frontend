@@ -11,9 +11,6 @@ const getters = {
 const actions = {
     
     async fetchPlayerAttackingPercentile({ commit }, player_id) {
-        console.log(
-            `https://football-stats-api.azurewebsites.net/api/Players/percentile/attacking/${player_id}`
-        )
         const response = await axios
             .get(
                 `https://football-stats-api.azurewebsites.net/api/Players/percentile/attacking/${player_id}`

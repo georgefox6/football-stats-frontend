@@ -18,7 +18,6 @@ export default {
     data: function () {
         return {
             series: [0, 0, 0, 0, 0, 0, 0, 0],
-            // series: this.values,
             options: {
                 chart: {
                     width: 380,
@@ -78,10 +77,6 @@ export default {
     props: ['player'],
     computed: {
         values(){
-            // if(!this.player){
-            //     return [0, 0, 0, 0, 0, 0, 0, 0]
-            // }
-
             return [
                 (this.player.goals / this.player.shots) * 100,
                 (this.player.shotsOnTarget / this.player.shots) * 100,
@@ -143,8 +138,6 @@ export default {
         }, 500)
     },
     updated() {
-        // this.updateGraphData()
-        console.log("Updating")
     }
 }
 </script>

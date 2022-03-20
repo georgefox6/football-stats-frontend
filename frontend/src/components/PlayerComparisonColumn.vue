@@ -79,9 +79,6 @@ export default {
         }
     },
     created() {
-        setTimeout(() => {
-            console.log(this.player)
-        }, 1000)
     },
     mounted() {},
 }

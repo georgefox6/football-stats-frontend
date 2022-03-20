@@ -21,9 +21,6 @@ const actions = {
     },
 
     async fetchPlayer({ commit }, player_id) {
-        console.log(
-            `https://football-stats-api.azurewebsites.net/api/players/${player_id}`
-        )
         const response = await axios
             .get(
                 `https://football-stats-api.azurewebsites.net/api/players/${player_id}`
@@ -56,43 +53,6 @@ const actions = {
 
         commit('setPlayers', response.data)
     },
-
-    //     async addPlayer({ commit }, player) {
-    //         commit;
-    //         axios.post(
-    //             `/api/players`,
-    //             {
-    //                 player
-    //             }
-    //         )
-    //         .catch(errors => {
-    //             console.log(errors);
-    //         })
-    //     },
-
-    //     async updatePlayer({ commit }, player) {
-    //         commit;
-    //         axios.put(
-    //             `/api/players/${player.player_id}`,
-    //             {
-    //                 player
-    //             }
-    //         )
-    //         .catch(errors => {
-    //             console.log(errors);
-    //         })
-    //     },
-
-    //     async deletePlayer({ commit }, player_id) {
-    //         commit;
-    //         const response = await axios.delete(
-    //             `/api/players/${player_id}`
-    //         )
-    //         .catch(errors => {
-    //             console.log(errors);
-    //         })
-    //         response;
-    //     }
 }
 
 const mutations = {

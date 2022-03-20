@@ -25,7 +25,6 @@ export default {
     },
     computed: mapGetters(['player']),
     created() {
-        console.log(this.$route.params.playerId)
         this.fetchPlayer(this.$route.params.playerId)
     },
 }

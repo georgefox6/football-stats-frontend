@@ -6,12 +6,8 @@ const history = require('connect-history-api-fallback')
 
 const port = process.env.PORT || 3000
 
-app.use(history())
-
 // parse requests of content-type: application/json
 app.use(bodyParser.json())
-
-app.use(history())
 
 // parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -29,20 +25,10 @@ app.use(function (req, res, next) {
     next()
 })
 
-app.use(history())
-
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
-
-app.use(
-    history({
-        index: '/index.html',
-    })
-)
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
 })
-
-app.use(history())
 
 app.listen(port, () => console.log(`server started on port ${port}`))

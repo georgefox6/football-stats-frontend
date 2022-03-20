@@ -116,7 +116,6 @@ export default {
                     this.nameSort = 'none'
                     break
             }
-            console.log('New name sort - ' + this.nameSort)
             this.nationSort = 'none'
             this.clubSort = 'none'
             this.positionSort = 'none'
