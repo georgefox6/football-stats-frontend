@@ -1,74 +1,78 @@
 <template>
-    <div class="player">
-        <div v-show="this.loaded" class="search-wrapper">
-            <input type="text" v-model="search" placeholder="Search player or team.." class="input"/>
-        </div>
+    <div class="wrapper">
+        <div class="player">
+            <h1 class="header">Players</h1>
+            <div v-show="this.loaded" class="search-wrapper">
+                <input type="text" v-model="search" placeholder="Search player or team.." class="input"/>
+            </div>
 
-        <div v-show="this.loaded" class="table-wrapper">
-            <table id="player-table">
-                <thead>
-                    <tr>
-                        <th @click="sortByPlayerName()">
-                            Player Name
-                            <i v-bind:class="this.nameSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                            <i v-bind:class="this.nameSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                        </th>
-                        <th @click="sortByPlayerNation()">
-                            Nationality
-                            <i v-bind:class="this.nationSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                            <i v-bind:class="this.nationSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                        </th>
-                        <th @click="sortByPlayerClub()">
-                            Club
-                            <i v-bind:class="this.clubSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                            <i v-bind:class="this.clubSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                        </th>
-                        <th @click="sortByPlayerPosition()">
-                            Position
-                            <i v-bind:class="this.positionSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                            <i v-bind:class="this.positionSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                        </th>
-                        <th @click="sortByPlayerAge()">
-                            Age
-                            <i v-bind:class="this.ageSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                            <i v-bind:class="this.ageSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                        </th>
-                        <th @click="sortByPlayerValue()">
-                            Value
-                            <VueCustomTooltip
-                                label="This value is based on the ability of the player, the league he plays in and the contract length.">&#9432;
-                            </VueCustomTooltip>
-                            <i v-bind:class="this.valueSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                            <i v-bind:class="this.valueSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                        </th>
-                    </tr>
-                </thead>
-                
-                <tbody v-show="this.loaded">
-                    <tr v-for="player in filteredPlayers" :key="player.id">
-                        <td class="player-link" @click="playerLink(player.id)">
-                            {{ player.playerName }}
-                        </td>
-                        <td>
-                            {{ player.playerNation.split(' ')[1] }}
-                            <country-flag :country="player.playerNation.split(' ')[0]" size="normal"/>
-                        </td>
-                        <td>{{ player.playerTeam }}</td>
-                        <td>{{ player.playerPosition }}</td>
-                        <td>{{ player.playerAge }}</td>
-                        <td>£{{ player.marketValue.toLocaleString('en-GB') }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div v-show="this.loaded" class="table-wrapper">
+                <table id="player-table">
+                    <thead>
+                        <tr>
+                            <th @click="sortByPlayerName()">
+                                Player Name
+                                <i v-bind:class="this.nameSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                                <i v-bind:class="this.nameSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                            </th>
+                            <th @click="sortByPlayerNation()">
+                                Nationality
+                                <i v-bind:class="this.nationSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                                <i v-bind:class="this.nationSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                            </th>
+                            <th @click="sortByPlayerClub()">
+                                Club
+                                <i v-bind:class="this.clubSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                                <i v-bind:class="this.clubSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                            </th>
+                            <th @click="sortByPlayerPosition()">
+                                Position
+                                <i v-bind:class="this.positionSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                                <i v-bind:class="this.positionSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                            </th>
+                            <th @click="sortByPlayerAge()">
+                                Age
+                                <i v-bind:class="this.ageSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                                <i v-bind:class="this.ageSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                            </th>
+                            <th @click="sortByPlayerValue()">
+                                Value
+                                <VueCustomTooltip
+                                    label="This value is based on the ability of the player, the league he plays in and the contract length.">&#9432;
+                                </VueCustomTooltip>
+                                <i v-bind:class="this.valueSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                                <i v-bind:class="this.valueSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody v-show="this.loaded">
+                        <tr v-for="player in filteredPlayers" :key="player.id">
+                            <td class="player-link" @click="playerLink(player.id)">
+                                {{ player.playerName }}
+                            </td>
+                            <td>
+                                {{ player.playerNation.split(' ')[1] }}
+                                <country-flag :country="player.playerNation.split(' ')[0]" size="normal"/>
+                            </td>
+                            <td>{{ player.playerTeam }}</td>
+                            <td>{{ player.playerPosition }}</td>
+                            <td>{{ player.playerAge }}</td>
+                            <td>£{{ player.marketValue.toLocaleString('en-GB') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <breeding-rhombus-spinner
+                id="loading-spinner"
+                v-if="!this.loaded"
+                :animation-duration="3000"
+                :size="65"
+                color="var(--primary)"
+            />
         </div>
-        <breeding-rhombus-spinner
-            id="loading-spinner"
-            v-if="!this.loaded"
-            :animation-duration="3000"
-            :size="65"
-            color="var(--primary)"
-        />
     </div>
+    
 </template>
 
 <script>
@@ -548,6 +552,17 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+    /* padding: 30px; */
+    max-width: 75rem;
+    margin-top: 0;
+    margin: auto;
+}
+
+.header {
+    color: var(--primary);
+}
+
 #loading-spinner {
     position: fixed;
     left: 45%;
@@ -563,9 +578,13 @@ export default {
 }
 
 .player {
-    background: #363636;
+    /* background: #363636; */
+    background: #f5f5f5;
     font-family: sans-serif;
     font-weight: 100;
+    margin-left: 30px;
+    margin-right: 30px;
+    /* padding: 30px; */
     padding: 10px;
     
 }
@@ -574,14 +593,14 @@ td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
-    min-width: 140px;
+    min-width: 10px;
 }
 
 #player-table {
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    max-width: 93rem;
+    max-width: 75rem;
     margin: auto;
 }
 
@@ -611,11 +630,15 @@ tr:hover {
     background-color: white;
 }
 
+tr:hover > td {
+    color: black;
+}
+
 /* Styling for search box */
 .search-wrapper {
     width: 100%;
     border: none;
-    max-width: 93rem;
+    max-width: 75rem;
     margin: auto;
     margin-top: 40px;
     margin-bottom: 10px;

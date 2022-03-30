@@ -20,6 +20,7 @@ const routes = [
         component: Players,
         meta: {
             title: 'Football Stats - Players',
+            
             metaTags: [
                 {
                     name: 'description',

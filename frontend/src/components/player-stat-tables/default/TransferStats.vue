@@ -41,7 +41,6 @@ export default {
             } else {
                 return '£' + this.player.wage.toLocaleString('en-GB')
             }
-            
         },
     }
 }
