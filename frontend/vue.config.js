@@ -18,6 +18,60 @@ const paths = [
         priority: 0.8,
         changefreq: 'hourly',
     },
+    {
+        path: '/player/11',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/12',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/13',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/14',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/15',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/16',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/17',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/comparison/44/45',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/comparison/40/45',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
 ]
 
 module.exports = {
