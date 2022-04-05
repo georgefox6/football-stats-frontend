@@ -8,8 +8,9 @@ import PlayerDefendingView from '../views/player-views/PlayerDefendingView.vue'
 import PageNotFound from '../views/PageNotFound.vue'
 import Players from '../views/Players.vue'
 import PlayerComparison from '../views/PlayerComparison.vue'
-// import { createRouter, createWebHistory } from 'vue-router'
-// import { createWebHistory } from 'vue-router'
+// import PlayerComparisonTest from '../views/PlayerComparisonTest.vue'
+// import PlayerComparisonSelector from '../views/PlayerComparisonSelector.vue'
+import 'vue-select/dist/vue-select.css';
 
 Vue.use(VueRouter)
 
@@ -56,7 +57,7 @@ const routes = [
         },
     },
     {
-        path: '/player/comparison/:player1/:player2',
+        path: '/player/comparison/:player1?/:player2?',
         name: 'PlayerComparison',
         component: PlayerComparison,
         meta: {
@@ -75,6 +76,26 @@ const routes = [
             ],
         },
     },
+    // {
+    //     path: '/test/player/comparison/:player1?/:player2?',
+    //     name: 'PlayerComparisonTest',
+    //     component: PlayerComparisonTest,
+    //     meta: {
+    //         title: 'Football Stats - Comparison',
+    //         metaTags: [
+    //             {
+    //                 name: 'description',
+    //                 content:
+    //                     'Compare the stats of 2 football players. Goals, assists, expected goals.',
+    //             },
+    //             {
+    //                 property: 'og:description',
+    //                 content:
+    //                     'Compare the stats of 2 football players. Goals, assists, expected goals.',
+    //             },
+    //         ],
+    //     },
+    // },
     {
         path: '/player/:playerId',
         component: Player,
