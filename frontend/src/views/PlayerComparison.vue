@@ -922,7 +922,8 @@ export default {
             per90: false,
             key: "hello",
             selectedPlayerName1: '',
-            selectedPlayerName2: ''
+            selectedPlayerName2: '',
+            firstLoad: true
         }
     },
     methods: {
@@ -980,6 +981,42 @@ export default {
             this.selectedPlayerName2 = this.player2.playerName
         }
 
+        if(this.player1 && this.player2){
+            this.firstLoad = false
+        }
+
+        //If player 2 has been removed then remove the player from params
+        if(!this.player2 && this.$route.params.player2){
+            this.key = this.key + "h"
+            this.$router.push({
+                name: 'PlayerComparison',
+                params: {
+                    player1: this.player1.id
+                }
+            })
+        }
+
+        //If player has been selected but no player in params - add player to params
+        if(this.player1 && !this.$route.params.player1){
+            this.key = this.key + "h"
+            this.$router.push({
+                name: 'PlayerComparison',
+                params: {
+                    player1: this.player1.id
+                }
+            })
+        }
+
+        //If player 1 has been removed and there is still a player in the params - remove params
+        if(!this.player1 && this.$route.params.player1 && !this.firstLoad) {
+            this.key = this.key + "h"
+            this.$router.push({
+                name: 'PlayerComparison',
+                params: {
+                }
+            })
+        }
+
         if(this.player1.id != this.$route.params.player1 || this.player2.id != this.$route.params.player2){
             this.key = this.key + "h"
             this.$router.push({
@@ -1003,11 +1040,17 @@ export default {
             return playerNamesArray
         },
         player1(){
+            //Drop down empty and nothing in params - no player
             if(this.selectedPlayerName1 == '' && !this.$route.params.player1){
                 return null
             }
-            if(!this.selectedPlayerName1 || this.selectedPlayerName1.length == 0){
+            //Drop down empty and player in param and first load - use param to fill player
+            if(!this.selectedPlayerName1 && this.$route.params.player1 && this.firstLoad){
                 return this.allPlayers.filter( player => player.id == this.$route.params.player1)[0]
+            }
+            //Drop down empty and player in param and subsequent load - no player
+            if(!this.selectedPlayerName1 && this.$route.params.player1 && !this.firstLoad){
+                return null
             }
             return this.allPlayers
                 .filter(
@@ -1016,11 +1059,17 @@ export default {
                 )[0]
         },
         player2(){
+            //Drop down empty and nothing in params - no player
             if(this.selectedPlayerName2 == '' && !this.$route.params.player2){
                 return null
             }
-            if(!this.selectedPlayerName2 || this.selectedPlayerName2.length == 0){
+            //Drop down empty and player in param and first load - use param to fill player
+            if(!this.selectedPlayerName2 && this.$route.params.player2 && this.firstLoad){
                 return this.allPlayers.filter( player => player.id == this.$route.params.player2)[0]
+            }
+            //Drop down empty and player in param and subsequent load - no player
+            if(!this.selectedPlayerName2 && this.$route.params.player2 && !this.firstLoad){
+                return null
             }
             return this.allPlayers
                 .filter(
