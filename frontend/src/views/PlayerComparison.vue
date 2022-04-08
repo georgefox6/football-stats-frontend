@@ -3,7 +3,7 @@
         <div class="wrapper">
             <div class="comparison">
                 
-                <h1 v-if="player1 && player2">Comparison between {{player1.playerName}} and {{player2.playerName}}</h1>
+                <h1 v-if="player1 && player2">Comparison between <span class="player-link" @click="playerLink(player1.id)">{{player1.playerName}}</span> and <span class="player-link" @click="playerLink(player2.id)">{{player2.playerName}}</span></h1>
                 
                 <PlayerGraph class="player-graph" v-if="player1 && player2" :player1="player1" :player2="player2" :per90="per90" :key="key"></PlayerGraph>
 
@@ -26,8 +26,8 @@
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><img :src="player1.imageUrl" alt="Player image" /></td>
-                            <td><img :src="player2.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player1.id)" :src="player1.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player2.id)" :src="player2.imageUrl" alt="Player image" /></td>
                         </tr>
                         <tr>
                             <th v-if="generalCollapse" class="table-header" @click="collapseGeneral()" colspan="3">
@@ -313,8 +313,8 @@
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><img :src="player1.imageUrl" alt="Player image" /></td>
-                            <td><img :src="player2.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player1.id)" :src="player1.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player2.id)" :src="player2.imageUrl" alt="Player image" /></td>
                         </tr>
                         <tr>
                             <th v-if="generalCollapse" class="table-header" @click="collapseGeneral()" colspan="3">
@@ -601,7 +601,7 @@
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><img :src="player1.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player1.id)" :src="player1.imageUrl" alt="Player image" /></td>
                             <td><img class="player-image" src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg" alt=""></td>
                         </tr>
                         <tr>
@@ -928,6 +928,12 @@ export default {
     },
     methods: {
         ...mapActions(['fetchPlayers']),
+        playerLink(id) {
+            this.$router.push({
+                name: 'PlayerDefaultView',
+                params: { playerId: id },
+            })
+        },
         collapseGeneral(){
             this.generalCollapse = !this.generalCollapse
         },
@@ -1095,6 +1101,17 @@ export default {
 </style>
 
 <style scoped>
+.player-link {
+    cursor: pointer;
+    transition: transform .2s; 
+    transition: color .2s; 
+}
+
+.player-link:hover {
+    transform: scale(1.2);
+    color: var(--primary);
+    transition: color 0.2s; 
+}
 
 .player-image {
     width: 100px;
