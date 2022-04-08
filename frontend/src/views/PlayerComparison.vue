@@ -19,8 +19,8 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -306,8 +306,8 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -594,8 +594,8 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -880,8 +880,8 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1081,6 +1081,19 @@ export default {
 }
 </script>
 
+<style>
+.player-selector .vs__search::placeholder,
+.player-selector .vs__dropdown-toggle,
+.player-selector .vs__dropdown-menu {
+    background: #f5f5f5;
+    border: none;
+    color: #394066;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    z-index: 11;
+}
+</style>
+
 <style scoped>
 
 .player-image {
@@ -1157,17 +1170,15 @@ th {
     padding: 15px;
     color: #fff;
     background-color: var(--secondary);
-
     position: sticky;
-    top: 50px;
-    z-index: 10;    
-    
+    top: 65px;
+    z-index: 10;
 }
 
 .name-header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 11;
 }
 
 .comparison tbody tr {
