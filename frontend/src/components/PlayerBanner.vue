@@ -10,8 +10,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <img id="club-image" src="https://resources.premierleague.com/premierleague/badges/50/t14.png" alt="player club" />
-                            
+                            <clubBadge id="club-image" :clubName="player.playerTeam" />
                         </td>
                         <td>
                             <h3 id="club-name">{{ player.playerTeam }}</h3>
@@ -37,10 +36,15 @@
 </template>
 
 <script>
+import ClubBadge from '@/components/ClubBadge.vue'
+
 export default {
     name: 'PlayerBanner',
     data() {
         return {}
+    },
+    components: {
+        ClubBadge,
     },
     props: ['player'],
     methods: {},

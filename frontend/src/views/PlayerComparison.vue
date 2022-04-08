@@ -50,8 +50,8 @@
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Team</th>
-                            <td>{{player1.playerTeam}}</td>
-                            <td>{{player2.playerTeam}}</td>
+                            <td>{{player1.playerTeam}} <clubBadge class="club-image" :clubName="player1.playerTeam" /></td>
+                            <td>{{player2.playerTeam}} <clubBadge class="club-image" :clubName="player2.playerTeam" /></td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Nationality</th>
@@ -337,8 +337,8 @@
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Team</th>
-                            <td>{{player1.playerTeam}}</td>
-                            <td>{{player2.playerTeam}}</td>
+                            <td>{{player1.playerTeam}} <clubBadge class="club-image" :clubName="player1.playerTeam" /></td>
+                            <td>{{player2.playerTeam}} <clubBadge class="club-image" :clubName="player2.playerTeam" /></td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Nationality</th>
@@ -625,7 +625,7 @@
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Team</th>
-                            <td>{{player1.playerTeam}}</td>
+                            <td>{{player1.playerTeam}} <clubBadge class="club-image" :clubName="player1.playerTeam" /></td>
                             <td></td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
@@ -901,6 +901,7 @@
 
 <script>
 import PlayerGraph from '@/components/position-graphs/PlayerGraph.vue'
+import ClubBadge from '@/components/ClubBadge.vue'
 import vSelect from 'vue-select'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -908,7 +909,8 @@ export default {
     name: 'PlayerComparisonTest',
     components: {
         PlayerGraph,
-        vSelect
+        vSelect,
+        ClubBadge
     },
     data() {
         return {
@@ -1021,18 +1023,7 @@ export default {
                 params: {
                 }
             })
-        } 
-
-        // else if((this.player1 && this.player1.id != this.$route.params.player1) || (this.player2 && this.player2.id != this.$route.params.player2)){
-        //     this.key = this.key + "h"
-        //     this.$router.push({
-        //         name: 'PlayerComparison',
-        //         params: {
-        //             player1: this.player1.id,
-        //             player2: this.player2.id
-        //         }
-        //     })
-        // }
+        }
 
         //If the params and player1 are not in sync - update the params
         else if(this.player1 && !this.player2 && this.player1.id != this.$route.params.player1){
@@ -1123,6 +1114,12 @@ export default {
 </style>
 
 <style scoped>
+
+.club-image {
+    width: 30px;
+    display: inline-block;
+}
+
 .player-link {
     cursor: pointer;
     transition: transform .2s; 

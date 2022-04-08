@@ -55,7 +55,7 @@
                                 {{ player.playerNation.split(' ')[1] }}
                                 <country-flag :country="player.playerNation.split(' ')[0]" size="normal"/>
                             </td>
-                            <td>{{ player.playerTeam }}</td>
+                            <td>{{ player.playerTeam }} <ClubBadge class="club-image" :clubName="player.playerTeam" /></td>
                             <td>{{ player.playerPosition }}</td>
                             <td>{{ player.playerAge }}</td>
                             <td>£{{ player.marketValue.toLocaleString('en-GB') }}</td>
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import ClubBadge from '@/components/ClubBadge.vue'
 import { BreedingRhombusSpinner } from 'epic-spinners'
 import { mapGetters, mapActions } from 'vuex'
 import CountryFlag from 'vue-country-flag'
@@ -86,7 +87,8 @@ export default {
     components: {
         CountryFlag,
         VueCustomTooltip,
-        BreedingRhombusSpinner
+        BreedingRhombusSpinner,
+        ClubBadge
     },
     data() {
         return {
@@ -552,8 +554,13 @@ export default {
 </script>
 
 <style scoped>
+
+.club-image {
+    display: inline-block;
+    width: 20px;
+}
+
 .wrapper {
-    /* padding: 30px; */
     max-width: 75rem;
     margin-top: 0;
     margin: auto;
