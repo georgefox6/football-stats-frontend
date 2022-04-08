@@ -85,72 +85,78 @@ export default {
     methods: {
         ...mapActions(['fetchPlayerDefendingPercentile']),
         setTotal() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerDefendingPercentile.tacklesWonPercentile,
-                            this.playerDefendingPercentile.blocksPercentile,
-                            this.playerDefendingPercentile.interceptionsPercentile,
-                            this.playerDefendingPercentile.pressuresPercentile,
-                            this.playerDefendingPercentile.headersWonPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerDefendingPercentile.tacklesWonPercentile,
+                                this.playerDefendingPercentile.blocksPercentile,
+                                this.playerDefendingPercentile.interceptionsPercentile,
+                                this.playerDefendingPercentile.pressuresPercentile,
+                                this.playerDefendingPercentile.headersWonPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setTotalPosition() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerDefendingPercentile.tacklesWonPerPositionPercentile,
-                            this.playerDefendingPercentile.blocksPerPositionPercentile,
-                            this.playerDefendingPercentile.interceptionsPerPositionPercentile,
-                            this.playerDefendingPercentile.pressuresPerPositionPercentile,
-                            this.playerDefendingPercentile.headersWonPerPositionPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerDefendingPercentile.tacklesWonPerPositionPercentile,
+                                this.playerDefendingPercentile.blocksPerPositionPercentile,
+                                this.playerDefendingPercentile.interceptionsPerPositionPercentile,
+                                this.playerDefendingPercentile.pressuresPerPositionPercentile,
+                                this.playerDefendingPercentile.headersWonPerPositionPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerDefendingPercentile.tacklesWonPer90Percentile,
-                            this.playerDefendingPercentile.blocksPer90Percentile,
-                            this.playerDefendingPercentile.interceptionsPer90Percentile,
-                            this.playerDefendingPercentile.pressuresPer90Percentile,
-                            this.playerDefendingPercentile.headersWonPer90Percentile,
-                        ]
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerDefendingPercentile.tacklesWonPer90Percentile,
+                                this.playerDefendingPercentile.blocksPer90Percentile,
+                                this.playerDefendingPercentile.interceptionsPer90Percentile,
+                                this.playerDefendingPercentile.pressuresPer90Percentile,
+                                this.playerDefendingPercentile.headersWonPer90Percentile,
+                            ]
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90Position() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerDefendingPercentile.tacklesWonPer90PerPositionPercentile,
-                            this.playerDefendingPercentile.blocksPer90PerPositionPercentile,
-                            this.playerDefendingPercentile.interceptionsPer90PerPositionPercentile,
-                            this.playerDefendingPercentile.pressuresPer90PerPositionPercentile,
-                            this.playerDefendingPercentile.headersWonPer90PerPositionPercentile,
-                        ]
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerDefendingPercentile.tacklesWonPer90PerPositionPercentile,
+                                this.playerDefendingPercentile.blocksPer90PerPositionPercentile,
+                                this.playerDefendingPercentile.interceptionsPer90PerPositionPercentile,
+                                this.playerDefendingPercentile.pressuresPer90PerPositionPercentile,
+                                this.playerDefendingPercentile.headersWonPer90PerPositionPercentile,
+                            ]
+                        },
+                    ],
+                    true
+                )
+            }
         },
         updateGraph(){
-            this.playerDefendingPercentile = null
-
             setTimeout(() => {
                 this.fetchPlayerDefendingPercentile(this.player.id)
             }, 400)

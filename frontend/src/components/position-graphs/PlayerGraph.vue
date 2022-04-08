@@ -93,67 +93,70 @@ export default {
         ...mapActions(['fetchPlayerPossessionPercentiles']),
         ...mapActions(['fetchPlayerAttackingPercentiles']),
         setTotal() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerAttackingPercentile.goalsPercentile,
-                            this.playerAttackingPercentile.expectedGoalsPercentile,
-                            this.playerAttackingPercentile.shotsPercentile,
-                            this.playerAttackingPercentile.shotsOnTargetPercentile,
-                            this.playerAttackingPercentile.penaltyGoalsPercentile,
-                            this.playerAttackingPercentile.freeKickShotsPercentile,
+            if(this.playerAttackingPercentiles && this.playerPossessionPercentiles && this.playerDefendingPercentiles && this.$refs.chart){
 
-                            this.playerPossessionPercentile.passesCompletedPercentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePercentile,
-                            this.playerPossessionPercentile.crossesPercentile,
-                            this.playerPossessionPercentile.assistsPercentile,
-                            this.playerPossessionPercentile.expectedAssistsPercentile,
-                            this.playerPossessionPercentile.passesControlledPercentile,
-                            this.playerPossessionPercentile.dribblesPercentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePercentile,
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerAttackingPercentile.goalsPercentile,
+                                this.playerAttackingPercentile.expectedGoalsPercentile,
+                                this.playerAttackingPercentile.shotsPercentile,
+                                this.playerAttackingPercentile.shotsOnTargetPercentile,
+                                this.playerAttackingPercentile.penaltyGoalsPercentile,
+                                this.playerAttackingPercentile.freeKickShotsPercentile,
 
-                            this.playerDefendingPercentile.tacklesWonPercentile,
-                            this.playerDefendingPercentile.blocksPercentile,
-                            this.playerDefendingPercentile.interceptionsPercentile,
-                            this.playerDefendingPercentile.pressuresPercentile,
-                            this.playerDefendingPercentile.headersWonPercentile
-                        ],
-                    },
-                ],
-                true
-            )
+                                this.playerPossessionPercentile.passesCompletedPercentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePercentile,
+                                this.playerPossessionPercentile.crossesPercentile,
+                                this.playerPossessionPercentile.assistsPercentile,
+                                this.playerPossessionPercentile.expectedAssistsPercentile,
+                                this.playerPossessionPercentile.passesControlledPercentile,
+                                this.playerPossessionPercentile.dribblesPercentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePercentile,
 
-            this.$refs.chart.appendSeries(
-                
-                    {
-                        name: this.player2.playerName,
-                        data: [ 
-                            this.player2AttackingPercentile.goalsPercentile,
-                            this.player2AttackingPercentile.expectedGoalsPercentile,
-                            this.player2AttackingPercentile.shotsPercentile,
-                            this.player2AttackingPercentile.shotsOnTargetPercentile,
-                            this.player2AttackingPercentile.penaltyGoalsPercentile,
-                            this.player2AttackingPercentile.freeKickShotsPercentile,
+                                this.playerDefendingPercentile.tacklesWonPercentile,
+                                this.playerDefendingPercentile.blocksPercentile,
+                                this.playerDefendingPercentile.interceptionsPercentile,
+                                this.playerDefendingPercentile.pressuresPercentile,
+                                this.playerDefendingPercentile.headersWonPercentile
+                            ],
+                        },
+                    ],
+                    true
+                )
 
-                            this.player2PossessionPercentile.passesCompletedPercentile,
-                            this.player2PossessionPercentile.progressivePassingDistancePercentile,
-                            this.player2PossessionPercentile.crossesPercentile,
-                            this.player2PossessionPercentile.assistsPercentile,
-                            this.player2PossessionPercentile.expectedAssistsPercentile,
-                            this.player2PossessionPercentile.passesControlledPercentile,
-                            this.player2PossessionPercentile.dribblesPercentile,
-                            this.player2PossessionPercentile.progressiveDribbleDistancePercentile,
+                this.$refs.chart.appendSeries(
+                    
+                        {
+                            name: this.player2.playerName,
+                            data: [ 
+                                this.player2AttackingPercentile.goalsPercentile,
+                                this.player2AttackingPercentile.expectedGoalsPercentile,
+                                this.player2AttackingPercentile.shotsPercentile,
+                                this.player2AttackingPercentile.shotsOnTargetPercentile,
+                                this.player2AttackingPercentile.penaltyGoalsPercentile,
+                                this.player2AttackingPercentile.freeKickShotsPercentile,
 
-                            this.player2DefendingPercentile.tacklesWonPercentile,
-                            this.player2DefendingPercentile.blocksPercentile,
-                            this.player2DefendingPercentile.interceptionsPercentile,
-                            this.player2DefendingPercentile.pressuresPercentile,
-                            this.player2DefendingPercentile.headersWonPercentile
-                        ],
-                    },               
-                true
-            )
+                                this.player2PossessionPercentile.passesCompletedPercentile,
+                                this.player2PossessionPercentile.progressivePassingDistancePercentile,
+                                this.player2PossessionPercentile.crossesPercentile,
+                                this.player2PossessionPercentile.assistsPercentile,
+                                this.player2PossessionPercentile.expectedAssistsPercentile,
+                                this.player2PossessionPercentile.passesControlledPercentile,
+                                this.player2PossessionPercentile.dribblesPercentile,
+                                this.player2PossessionPercentile.progressiveDribbleDistancePercentile,
+
+                                this.player2DefendingPercentile.tacklesWonPercentile,
+                                this.player2DefendingPercentile.blocksPercentile,
+                                this.player2DefendingPercentile.interceptionsPercentile,
+                                this.player2DefendingPercentile.pressuresPercentile,
+                                this.player2DefendingPercentile.headersWonPercentile
+                            ],
+                        },               
+                    true
+                )
+            }
         },
         setPer90() {
             this.$refs.chart.updateSeries(
@@ -219,10 +222,6 @@ export default {
             )
         },
         updateGraph(){
-            this.playerDefendingPercentile = null
-            this.playerPossessionPercentile = null
-            this.playerAttackingPercentile = null
-
             setTimeout(() => {
                 this.fetchPlayerDefendingPercentile(this.player1.id)
                 this.fetchPlayerPossessionPercentile(this.player1.id)
@@ -241,8 +240,6 @@ export default {
     created() {
 
         this.updateGraph()
-
-        console.log(this.player1)
 
         this.fetchPlayerDefendingPercentiles()
         this.fetchPlayerPossessionPercentiles()
@@ -266,8 +263,6 @@ export default {
             return this.playerAttackingPercentiles.filter( percentile => percentile.playerId == this.player2.id)[0]
         }
     },
-    mounted(){
-    }
 }
 </script>
 

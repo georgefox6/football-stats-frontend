@@ -87,76 +87,82 @@ export default {
     methods: {
         ...mapActions(['fetchPlayerAttackingPercentile']),
         setTotal() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerAttackingPercentile.goalsPercentile,
-                            this.playerAttackingPercentile.expectedGoalsPercentile,
-                            this.playerAttackingPercentile.shotsPercentile,
-                            this.playerAttackingPercentile.shotsOnTargetPercentile,
-                            this.playerAttackingPercentile.penaltyGoalsPercentile,
-                            this.playerAttackingPercentile.freeKickShotsPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerAttackingPercentile.goalsPercentile,
+                                this.playerAttackingPercentile.expectedGoalsPercentile,
+                                this.playerAttackingPercentile.shotsPercentile,
+                                this.playerAttackingPercentile.shotsOnTargetPercentile,
+                                this.playerAttackingPercentile.penaltyGoalsPercentile,
+                                this.playerAttackingPercentile.freeKickShotsPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setTotalPosition() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerAttackingPercentile.goalsPerPositionPercentile,
-                            this.playerAttackingPercentile.expectedGoalsPerPositionPercentile,
-                            this.playerAttackingPercentile.shotsPerPositionPercentile,
-                            this.playerAttackingPercentile.shotsOnTargetPerPositionPercentile,
-                            this.playerAttackingPercentile.penaltyGoalsPerPositionPercentile,
-                            this.playerAttackingPercentile.freeKickShotsPerPositionPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerAttackingPercentile.goalsPerPositionPercentile,
+                                this.playerAttackingPercentile.expectedGoalsPerPositionPercentile,
+                                this.playerAttackingPercentile.shotsPerPositionPercentile,
+                                this.playerAttackingPercentile.shotsOnTargetPerPositionPercentile,
+                                this.playerAttackingPercentile.penaltyGoalsPerPositionPercentile,
+                                this.playerAttackingPercentile.freeKickShotsPerPositionPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerAttackingPercentile.goalsPer90Percentile,
-                            this.playerAttackingPercentile.expectedGoalsPer90Percentile,
-                            this.playerAttackingPercentile.shotsPer90Percentile,
-                            this.playerAttackingPercentile.shotsOnTargetPer90Percentile,
-                            this.playerAttackingPercentile.penaltyGoalsPer90Percentile,
-                            this.playerAttackingPercentile.freeKickShotsPer90Percentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerAttackingPercentile.goalsPer90Percentile,
+                                this.playerAttackingPercentile.expectedGoalsPer90Percentile,
+                                this.playerAttackingPercentile.shotsPer90Percentile,
+                                this.playerAttackingPercentile.shotsOnTargetPer90Percentile,
+                                this.playerAttackingPercentile.penaltyGoalsPer90Percentile,
+                                this.playerAttackingPercentile.freeKickShotsPer90Percentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90Position() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerAttackingPercentile.goalsPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.expectedGoalsPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.shotsPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.shotsOnTargetPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.penaltyGoalsPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.freeKickShotsPer90PerPositionPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerAttackingPercentile.goalsPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.expectedGoalsPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.shotsPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.shotsOnTargetPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.penaltyGoalsPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.freeKickShotsPer90PerPositionPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         updateGraph(){
-            this.playerAttackingPercentile = null
-
             setTimeout(() => {
                 this.fetchPlayerAttackingPercentile(this.player.id)
             }, 400)
@@ -177,9 +183,6 @@ export default {
                 }
             }, 800)
         }
-    },
-    mounted() {
-        this.updateGraph()
     },
     created() {
         this.updateGraph()

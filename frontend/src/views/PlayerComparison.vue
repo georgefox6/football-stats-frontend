@@ -1003,7 +1003,7 @@ export default {
         }
 
         //If player has been selected but no player in params - add player to params
-        if(this.player1 && !this.$route.params.player1){
+        else if(this.player1 && !this.$route.params.player1){
             this.key = this.key + "h"
             this.$router.push({
                 name: 'PlayerComparison',
@@ -1021,9 +1021,31 @@ export default {
                 params: {
                 }
             })
+        } 
+
+        // else if((this.player1 && this.player1.id != this.$route.params.player1) || (this.player2 && this.player2.id != this.$route.params.player2)){
+        //     this.key = this.key + "h"
+        //     this.$router.push({
+        //         name: 'PlayerComparison',
+        //         params: {
+        //             player1: this.player1.id,
+        //             player2: this.player2.id
+        //         }
+        //     })
+        // }
+
+        //If the params and player1 are not in sync - update the params
+        else if(this.player1 && !this.player2 && this.player1.id != this.$route.params.player1){
+            this.key = this.key + "h"
+            this.$router.push({
+                name: 'PlayerComparison',
+                params: {
+                    player1: this.player1.id
+                }
+            })
         }
 
-        if(this.player1.id != this.$route.params.player1 || this.player2.id != this.$route.params.player2){
+        else if((this.player1 && this.player2 && this.player1.id != this.$route.params.player1) || (this.player1 && this.player2 && this.player2.id != this.$route.params.player2)){
             this.key = this.key + "h"
             this.$router.push({
                 name: 'PlayerComparison',

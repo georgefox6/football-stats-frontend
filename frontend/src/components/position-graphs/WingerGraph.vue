@@ -95,102 +95,106 @@ export default {
         ...mapActions(['fetchPlayerPossessionPercentile']),
         ...mapActions(['fetchPlayerAttackingPercentile']),
         setTotal() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerPossessionPercentile.dribblesPercentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePercentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePercentile,
-                            this.playerPossessionPercentile.passesCompletedPercentile,
-                            this.playerPossessionPercentile.crossesPercentile,
-                            this.playerPossessionPercentile.expectedAssistsPercentile,
-                            this.playerPossessionPercentile.assistsPercentile,
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerPossessionPercentile.dribblesPercentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePercentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePercentile,
+                                this.playerPossessionPercentile.passesCompletedPercentile,
+                                this.playerPossessionPercentile.crossesPercentile,
+                                this.playerPossessionPercentile.expectedAssistsPercentile,
+                                this.playerPossessionPercentile.assistsPercentile,
 
-                            this.playerAttackingPercentile.goalsPercentile,
-                            this.playerAttackingPercentile.expectedGoalsPercentile,
-                            this.playerAttackingPercentile.shotsPercentile,
-                            this.playerAttackingPercentile.shotsOnTargetPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+                                this.playerAttackingPercentile.goalsPercentile,
+                                this.playerAttackingPercentile.expectedGoalsPercentile,
+                                this.playerAttackingPercentile.shotsPercentile,
+                                this.playerAttackingPercentile.shotsOnTargetPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setTotalPosition() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerPossessionPercentile.dribblesPerPositionPercentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePerPositionPercentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePerPositionPercentile,
-                            this.playerPossessionPercentile.passesCompletedPerPositionPercentile,
-                            this.playerPossessionPercentile.crossesPerPositionPercentile,
-                            this.playerPossessionPercentile.expectedAssistsPerPositionPercentile,
-                            this.playerPossessionPercentile.assistsPerPositionPercentile,
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerPossessionPercentile.dribblesPerPositionPercentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePerPositionPercentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePerPositionPercentile,
+                                this.playerPossessionPercentile.passesCompletedPerPositionPercentile,
+                                this.playerPossessionPercentile.crossesPerPositionPercentile,
+                                this.playerPossessionPercentile.expectedAssistsPerPositionPercentile,
+                                this.playerPossessionPercentile.assistsPerPositionPercentile,
 
-                            this.playerAttackingPercentile.goalsPerPositionPercentile,
-                            this.playerAttackingPercentile.expectedGoalsPerPositionPercentile,
-                            this.playerAttackingPercentile.shotsPerPositionPercentile,
-                            this.playerAttackingPercentile.shotsOnTargetPerPositionPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+                                this.playerAttackingPercentile.goalsPerPositionPercentile,
+                                this.playerAttackingPercentile.expectedGoalsPerPositionPercentile,
+                                this.playerAttackingPercentile.shotsPerPositionPercentile,
+                                this.playerAttackingPercentile.shotsOnTargetPerPositionPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerPossessionPercentile.dribblesPer90Percentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePer90Percentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePer90Percentile,
-                            this.playerPossessionPercentile.passesCompletedPer90Percentile,
-                            this.playerPossessionPercentile.crossesPer90Percentile,
-                            this.playerPossessionPercentile.expectedAssistsPer90Percentile,
-                            this.playerPossessionPercentile.assistsPer90Percentile,
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerPossessionPercentile.dribblesPer90Percentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePer90Percentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePer90Percentile,
+                                this.playerPossessionPercentile.passesCompletedPer90Percentile,
+                                this.playerPossessionPercentile.crossesPer90Percentile,
+                                this.playerPossessionPercentile.expectedAssistsPer90Percentile,
+                                this.playerPossessionPercentile.assistsPer90Percentile,
 
-                            this.playerAttackingPercentile.goalsPer90Percentile,
-                            this.playerAttackingPercentile.expectedGoalsPer90Percentile,
-                            this.playerAttackingPercentile.shotsPer90Percentile,
-                            this.playerAttackingPercentile.shotsOnTargetPer90Percentile,
-                        ],
-                    },
-                ],
-                true
-            )
+                                this.playerAttackingPercentile.goalsPer90Percentile,
+                                this.playerAttackingPercentile.expectedGoalsPer90Percentile,
+                                this.playerAttackingPercentile.shotsPer90Percentile,
+                                this.playerAttackingPercentile.shotsOnTargetPer90Percentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90Position() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerPossessionPercentile.dribblesPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePer90PerPositionPercentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePer90PerPositionPercentile,
-                            this.playerPossessionPercentile.passesCompletedPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.crossesPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.expectedAssistsPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.assistsPer90PerPositionPercentile,
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerPossessionPercentile.dribblesPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePer90PerPositionPercentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePer90PerPositionPercentile,
+                                this.playerPossessionPercentile.passesCompletedPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.crossesPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.expectedAssistsPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.assistsPer90PerPositionPercentile,
 
-                            this.playerAttackingPercentile.goalsPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.expectedGoalsPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.shotsPer90PerPositionPercentile,
-                            this.playerAttackingPercentile.shotsOnTargetPer90PerPositionPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+                                this.playerAttackingPercentile.goalsPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.expectedGoalsPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.shotsPer90PerPositionPercentile,
+                                this.playerAttackingPercentile.shotsOnTargetPer90PerPositionPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         updateGraph(){
-            this.playerDefendingPercentile = null
-            this.playerPossessionPercentile = null
-            this.playerAttackingPercentile = null
-
             setTimeout(() => {
                 this.fetchPlayerDefendingPercentile(this.player.id)
                 this.fetchPlayerPossessionPercentile(this.player.id)

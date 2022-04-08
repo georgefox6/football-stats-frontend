@@ -88,84 +88,90 @@ export default {
     methods: {
         ...mapActions(['fetchPlayerPossessionPercentile']),
         setTotal() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerPossessionPercentile.passesCompletedPercentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePercentile,
-                            this.playerPossessionPercentile.crossesPercentile,
-                            this.playerPossessionPercentile.dribblesPercentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePercentile,
-                            this.playerPossessionPercentile.passesControlledPercentile,
-                            this.playerPossessionPercentile.assistsPercentile,
-                            this.playerPossessionPercentile.expectedAssistsPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerPossessionPercentile.passesCompletedPercentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePercentile,
+                                this.playerPossessionPercentile.crossesPercentile,
+                                this.playerPossessionPercentile.dribblesPercentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePercentile,
+                                this.playerPossessionPercentile.passesControlledPercentile,
+                                this.playerPossessionPercentile.assistsPercentile,
+                                this.playerPossessionPercentile.expectedAssistsPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setTotalPosition() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerPossessionPercentile.passesCompletedPerPositionPercentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePerPositionPercentile,
-                            this.playerPossessionPercentile.crossesPerPositionPercentile,
-                            this.playerPossessionPercentile.dribblesPerPositionPercentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePerPositionPercentile,
-                            this.playerPossessionPercentile.passesControlledPerPositionPercentile,
-                            this.playerPossessionPercentile.assistsPerPositionPercentile,
-                            this.playerPossessionPercentile.expectedAssistsPerPositionPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerPossessionPercentile.passesCompletedPerPositionPercentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePerPositionPercentile,
+                                this.playerPossessionPercentile.crossesPerPositionPercentile,
+                                this.playerPossessionPercentile.dribblesPerPositionPercentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePerPositionPercentile,
+                                this.playerPossessionPercentile.passesControlledPerPositionPercentile,
+                                this.playerPossessionPercentile.assistsPerPositionPercentile,
+                                this.playerPossessionPercentile.expectedAssistsPerPositionPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerPossessionPercentile.passesCompletedPer90Percentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePer90Percentile,
-                            this.playerPossessionPercentile.crossesPer90Percentile,
-                            this.playerPossessionPercentile.dribblesPer90Percentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePer90Percentile,
-                            this.playerPossessionPercentile.passesControlledPer90Percentile,
-                            this.playerPossessionPercentile.assistsPer90Percentile,
-                            this.playerPossessionPercentile.expectedAssistsPer90Percentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerPossessionPercentile.passesCompletedPer90Percentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePer90Percentile,
+                                this.playerPossessionPercentile.crossesPer90Percentile,
+                                this.playerPossessionPercentile.dribblesPer90Percentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePer90Percentile,
+                                this.playerPossessionPercentile.passesControlledPer90Percentile,
+                                this.playerPossessionPercentile.assistsPer90Percentile,
+                                this.playerPossessionPercentile.expectedAssistsPer90Percentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         setPer90Position() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [
-                            this.playerPossessionPercentile.passesCompletedPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePer90PerPositionPercentile,
-                            this.playerPossessionPercentile.crossesPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.dribblesPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePer90PerPositionPercentile,
-                            this.playerPossessionPercentile.passesControlledPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.assistsPer90PerPositionPercentile,
-                            this.playerPossessionPercentile.expectedAssistsPer90PerPositionPercentile,
-                        ],
-                    },
-                ],
-                true
-            )
+            if(this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [
+                                this.playerPossessionPercentile.passesCompletedPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePer90PerPositionPercentile,
+                                this.playerPossessionPercentile.crossesPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.dribblesPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePer90PerPositionPercentile,
+                                this.playerPossessionPercentile.passesControlledPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.assistsPer90PerPositionPercentile,
+                                this.playerPossessionPercentile.expectedAssistsPer90PerPositionPercentile,
+                            ],
+                        },
+                    ],
+                    true
+                )
+            }
         },
         updateGraph(){
-            this.playerPossessionPercentile = null
-
             setTimeout(() => {
                 this.fetchPlayerPossessionPercentile(this.player.id)
             }, 400)
@@ -186,9 +192,6 @@ export default {
                 }
             }, 800)
         }
-    },
-    mounted() {
-        this.updateGraph()
     },
     created() {
         this.updateGraph()
