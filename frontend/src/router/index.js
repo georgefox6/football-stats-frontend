@@ -82,21 +82,69 @@ const routes = [
                 name: 'PlayerDefaultView',
                 path: '',
                 component: PlayerDefaultView,
+                metaTags: [
+                    {
+                        name: 'description',
+                        content:
+                            'Detailed statistics and information on a specific player including graphs and percentile charts.',
+                    },
+                    {
+                        property: 'og:description',
+                        content:
+                            'Detailed statistics and information on a specific player including graphs and percentile charts.',
+                    },
+                ],
             },
             {
                 name: 'PlayerAttackingView',
                 path: 'attacking',
                 component: PlayerAttackingtView,
+                metaTags: [
+                    {
+                        name: 'description',
+                        content:
+                            'Detailed attacking statistics with percentile charts. Expected goals, shots, goals scored for players in the top 5 football leagues',
+                    },
+                    {
+                        property: 'og:description',
+                        content:
+                            'Detailed attacking statistics with percentile charts. Expected goals, shots, goals scored for players in the top 5 football leagues',
+                    },
+                ],
             },
             {
                 name: 'PlayerPossessionView',
                 path: 'possession',
                 component: PlayerPossessionView,
+                metaTags: [
+                    {
+                        name: 'description',
+                        content:
+                            'Detailed possession statistics with percentile charts. Passes complete, assists, expected assists for players in the top 5 football leagues',
+                    },
+                    {
+                        property: 'og:description',
+                        content:
+                            'Detailed possession statistics with percentile charts. Passes complete, assists, expected assists for players in the top 5 football leagues',
+                    },
+                ],
             },
             {
                 name: 'PlayerDefendingView',
                 path: 'defending',
                 component: PlayerDefendingView,
+                metaTags: [
+                    {
+                        name: 'description',
+                        content:
+                            'Detailed defending statistics with percentile charts. Tackles made, headers won, interceptions and blocks for players in the top 5 football leagues',
+                    },
+                    {
+                        property: 'og:description',
+                        content:
+                            'Detailed defending statistics with percentile charts. Tackles made, headers won, interceptions and blocks for players in the top 5 football leagues',
+                    },
+                ],
             },
         ],
         meta: {

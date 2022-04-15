@@ -63,8 +63,8 @@ export default {
 @media screen and (max-width: 450px){
     .nav-button {
         flex: 100%;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding-top: 25px;
+        padding-bottom: 25px;
     }
 }
 

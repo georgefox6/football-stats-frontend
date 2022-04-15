@@ -1,14 +1,5 @@
 <template>
     <div class="flex-container">
-        <!-- <div class="content">
-            <img id="player-image" :src="player.imageUrl" alt="Player image" />
-            <h1 id="player-name">{{ player.playerName }}</h1>
-            <br>
-            <div id="club">
-                <img id="club-image" src="https://resources.premierleague.com/premierleague/badges/50/t14.png" alt="player club" />
-                <h3 id="club-name">{{ player.playerTeam }}</h3>
-            </div>
-        </div> -->
         <div class="content">
             <img id="player-image" :src="player.imageUrl" alt="Player image" />
             <table id="player-table">

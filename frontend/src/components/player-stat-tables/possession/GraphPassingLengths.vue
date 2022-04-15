@@ -2,7 +2,6 @@
     <div class="passing-lengths">
         <VueApexCharts
             ref="chart"
-            width="800"
             type="donut"
             :options="options"
             :series="series"

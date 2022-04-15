@@ -1,4 +1,5 @@
 const SitemapPlugin = require('sitemap-webpack-plugin').default
+
 const paths = [
     {
         path: '/',
@@ -68,6 +69,18 @@ const paths = [
     },
     {
         path: '/player/comparison/40/45',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/comparison/20',
+        lastmod: new Date().toISOString().slice(0, 10),
+        priority: 0.8,
+        changefreq: 'hourly',
+    },
+    {
+        path: '/player/comparison',
         lastmod: new Date().toISOString().slice(0, 10),
         priority: 0.8,
         changefreq: 'hourly',
