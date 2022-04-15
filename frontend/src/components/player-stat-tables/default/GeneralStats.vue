@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td class="label">Team</td>
-                <td class="data">{{ player.playerTeam }}</td>
+                <td class="data">{{ player.playerTeam }} <ClubBadge class="club-image" :clubName="player.playerTeam" /></td>
             </tr>
             <tr>
                 <td class="label">Nationality</td>
@@ -35,12 +35,14 @@
 </template>
 
 <script>
+import ClubBadge from '@/components/ClubBadge.vue'
 import CountryFlag from 'vue-country-flag'
 
 export default {
     name: 'GeneralStats',
     components: {
         CountryFlag,
+        ClubBadge
     },
     props: ['player'],
     methods: {
@@ -71,6 +73,11 @@ export default {
 </script>
 
 <style scoped>
+.club-image {
+    display: inline-block;
+    width: 20px;
+}
+
 .general-stats {
     box-shadow: 0 0 20px #9e9e9e;
     padding: 20px;

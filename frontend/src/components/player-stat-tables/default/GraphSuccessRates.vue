@@ -137,8 +137,6 @@ export default {
             this.updateGraphData()
         }, 500)
     },
-    updated() {
-    }
 }
 </script>
 

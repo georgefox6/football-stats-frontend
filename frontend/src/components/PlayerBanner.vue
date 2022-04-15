@@ -1,17 +1,16 @@
 <template>
-    <div class="flex-container">
+    <div class="container">
         <div class="content">
             <img id="player-image" :src="player.imageUrl" alt="Player image" />
             <table id="player-table">
                 <tbody>
                     <tr>
-                        <td colspan="2"> <h1> {{ player.playerName }} </h1></td>
+                        <td colspan="2"> <h1 id="player-name"> {{ player.playerName }} </h1></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>
-                            <img id="club-image" src="https://resources.premierleague.com/premierleague/badges/50/t14.png" alt="player club" />
-                            
+                            <clubBadge id="club-image" :clubName="player.playerTeam" />
                         </td>
                         <td>
                             <h3 id="club-name">{{ player.playerTeam }}</h3>
@@ -37,10 +36,15 @@
 </template>
 
 <script>
+import ClubBadge from '@/components/ClubBadge.vue'
+
 export default {
     name: 'PlayerBanner',
     data() {
         return {}
+    },
+    components: {
+        ClubBadge,
     },
     props: ['player'],
     methods: {},
@@ -49,6 +53,11 @@ export default {
 </script>
 
 <style scoped>
+
+#player-image {
+    float: left;
+    width: 20%;
+}
 
 .comparison-button {
     text-align: left;
@@ -60,55 +69,24 @@ export default {
 
 #player-table {
     margin: 20px;
-    margin-left: 40px;
+    margin-left: 60px;
     float: left;
 }
 
-.content > h1 {
+#player-name {
     margin: 0;
-    margin-top: 10px;
+    margin-top: 30px;
+    font-size: 2.5em;
 }
 
-@media screen and (min-width: 550px){
-    .content > h1 {
-        margin-left: 50px;
-        float: left;
-    }  
-
-    .content > img {
-        float: left;
-        width: 20%;
-    }
-
-    .content > div {
-        margin-left: 50px;
-        float: left;
-    }
+#club-name {
+    font-size: 1.5em;
+    text-align: left;
 }
 
-@media screen and (min-width: 650px){
-    .content > h1 {
-        margin-right: 8%;
-    }    
+#club-image {
+    width: 40px;
 }
-
-@media screen and (min-width: 920px){
-    .content > h1 {
-        /* margin-left: 100px; */
-        margin-top: 50px;
-        margin-right: 33%;
-    }    
-}
-
-.content > div > img {
-    display: inline-block;
-    width: 2rem;
-}
-
-.content > div > h3 {
-    display: inline-block;
-}
-
 
 .content {
     background-color: var(--primary);
@@ -118,17 +96,80 @@ export default {
     padding: 20px;
 }
 
-.flex-container {
+.container {
     display: flex;
     flex-wrap: wrap;
 }
 
 @media screen and (min-width: 720px){
-    .flex-container {
+    .container {
         display: flex;
         flex-wrap: wrap;
         max-width: 75rem;
         margin: auto;
     }    
 }
+
+@media screen and (max-width: 1000px){
+    #player-table {
+        margin: 10px;
+        margin-left: 20px;
+    }
+
+    #player-name {
+        margin-top: 0;
+    }
+    
+    .comparison-button {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 800px){
+    #player-table {
+        margin: 0;
+        margin-left: 10px;
+    }
+
+    #player-name {
+        font-size: 2em;
+    }
+    
+    #club-name {
+        font-size: 1.3em;
+    }
+}
+
+@media screen and (max-width: 650px){
+    #player-name {
+        font-size: 1.5em;
+    }
+    
+    #club-name {
+        font-size: 1em;
+    }
+
+    #club-image {
+        width: 30px;
+    }
+
+    .comparison-button {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 515px){
+    #player-image {
+        width: 50%;
+        margin: auto;
+        margin-bottom: 10px;
+        float: none;
+    }
+
+    #player-table {
+        float: none;
+        margin: auto;
+    }
+}
+
 </style>

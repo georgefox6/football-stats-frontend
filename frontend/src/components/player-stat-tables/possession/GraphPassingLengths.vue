@@ -48,9 +48,6 @@ export default {
         }
     },
     props: ['player'],
-    methods: {},
-    created() {},
-    updated() {},
 }
 </script>
 

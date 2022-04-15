@@ -3,7 +3,7 @@
         <div class="wrapper">
             <div class="comparison">
                 
-                <h1 v-if="player1 && player2">Comparison between {{player1.playerName}} and {{player2.playerName}}</h1>
+                <h1 v-if="player1 && player2">Comparison between <span class="player-link" @click="playerLink(player1.id)">{{player1.playerName}}</span> and <span class="player-link" @click="playerLink(player2.id)">{{player2.playerName}}</span></h1>
                 
                 <PlayerGraph class="player-graph" v-if="player1 && player2" :player1="player1" :player2="player2" :per90="per90" :key="key"></PlayerGraph>
 
@@ -19,15 +19,15 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><img :src="player1.imageUrl" alt="Player image" /></td>
-                            <td><img :src="player2.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player1.id)" :src="player1.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player2.id)" :src="player2.imageUrl" alt="Player image" /></td>
                         </tr>
                         <tr>
                             <th v-if="generalCollapse" class="table-header" @click="collapseGeneral()" colspan="3">
@@ -50,8 +50,8 @@
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Team</th>
-                            <td>{{player1.playerTeam}}</td>
-                            <td>{{player2.playerTeam}}</td>
+                            <td>{{player1.playerTeam}} <clubBadge class="club-image" :clubName="player1.playerTeam" /></td>
+                            <td>{{player2.playerTeam}} <clubBadge class="club-image" :clubName="player2.playerTeam" /></td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Nationality</th>
@@ -306,15 +306,15 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><img :src="player1.imageUrl" alt="Player image" /></td>
-                            <td><img :src="player2.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player1.id)" :src="player1.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player2.id)" :src="player2.imageUrl" alt="Player image" /></td>
                         </tr>
                         <tr>
                             <th v-if="generalCollapse" class="table-header" @click="collapseGeneral()" colspan="3">
@@ -337,8 +337,8 @@
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Team</th>
-                            <td>{{player1.playerTeam}}</td>
-                            <td>{{player2.playerTeam}}</td>
+                            <td>{{player1.playerTeam}} <clubBadge class="club-image" :clubName="player1.playerTeam" /></td>
+                            <td>{{player2.playerTeam}} <clubBadge class="club-image" :clubName="player2.playerTeam" /></td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Nationality</th>
@@ -594,14 +594,14 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><img :src="player1.imageUrl" alt="Player image" /></td>
+                            <td><img class="player-link" @click="playerLink(player1.id)" :src="player1.imageUrl" alt="Player image" /></td>
                             <td><img class="player-image" src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg" alt=""></td>
                         </tr>
                         <tr>
@@ -625,7 +625,7 @@
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
                             <th class="side-header">Team</th>
-                            <td>{{player1.playerTeam}}</td>
+                            <td>{{player1.playerTeam}} <clubBadge class="club-image" :clubName="player1.playerTeam" /></td>
                             <td></td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
@@ -880,8 +880,8 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -901,6 +901,7 @@
 
 <script>
 import PlayerGraph from '@/components/position-graphs/PlayerGraph.vue'
+import ClubBadge from '@/components/ClubBadge.vue'
 import vSelect from 'vue-select'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -908,7 +909,8 @@ export default {
     name: 'PlayerComparisonTest',
     components: {
         PlayerGraph,
-        vSelect
+        vSelect,
+        ClubBadge
     },
     data() {
         return {
@@ -928,6 +930,12 @@ export default {
     },
     methods: {
         ...mapActions(['fetchPlayers']),
+        playerLink(id) {
+            this.$router.push({
+                name: 'PlayerDefaultView',
+                params: { playerId: id },
+            })
+        },
         collapseGeneral(){
             this.generalCollapse = !this.generalCollapse
         },
@@ -997,7 +1005,7 @@ export default {
         }
 
         //If player has been selected but no player in params - add player to params
-        if(this.player1 && !this.$route.params.player1){
+        else if(this.player1 && !this.$route.params.player1){
             this.key = this.key + "h"
             this.$router.push({
                 name: 'PlayerComparison',
@@ -1017,7 +1025,18 @@ export default {
             })
         }
 
-        if(this.player1.id != this.$route.params.player1 || this.player2.id != this.$route.params.player2){
+        //If the params and player1 are not in sync - update the params
+        else if(this.player1 && !this.player2 && this.player1.id != this.$route.params.player1){
+            this.key = this.key + "h"
+            this.$router.push({
+                name: 'PlayerComparison',
+                params: {
+                    player1: this.player1.id
+                }
+            })
+        }
+
+        else if((this.player1 && this.player2 && this.player1.id != this.$route.params.player1) || (this.player1 && this.player2 && this.player2.id != this.$route.params.player2)){
             this.key = this.key + "h"
             this.$router.push({
                 name: 'PlayerComparison',
@@ -1081,7 +1100,37 @@ export default {
 }
 </script>
 
+<style>
+.player-selector .vs__search::placeholder,
+.player-selector .vs__dropdown-toggle,
+.player-selector .vs__dropdown-menu {
+    background: #f5f5f5;
+    border: none;
+    color: #394066;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    z-index: 11;
+}
+</style>
+
 <style scoped>
+
+.club-image {
+    width: 30px;
+    display: inline-block;
+}
+
+.player-link {
+    cursor: pointer;
+    transition: transform .2s; 
+    transition: color .2s; 
+}
+
+.player-link:hover {
+    transform: scale(1.2);
+    color: var(--primary);
+    transition: color 0.2s; 
+}
 
 .player-image {
     width: 100px;
@@ -1157,17 +1206,15 @@ th {
     padding: 15px;
     color: #fff;
     background-color: var(--secondary);
-
     position: sticky;
-    top: 50px;
-    z-index: 10;    
-    
+    top: 65px;
+    z-index: 10;
 }
 
 .name-header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 11;
 }
 
 .comparison tbody tr {
