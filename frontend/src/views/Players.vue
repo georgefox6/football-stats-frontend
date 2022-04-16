@@ -37,7 +37,7 @@
                             </th>
                             <th @click="sortByPlayerValue()">
                                 Value
-                                <VueCustomTooltip
+                                <VueCustomTooltip :multiline="true"
                                     label="This value is based on the ability of the player, the league he plays in and the contract length.">&#9432;
                                 </VueCustomTooltip>
                                 <i v-bind:class="this.valueSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
