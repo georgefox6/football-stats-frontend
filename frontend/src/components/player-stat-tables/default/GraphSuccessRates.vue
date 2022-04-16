@@ -19,6 +19,16 @@ export default {
         return {
             series: [0, 0, 0, 0, 0, 0, 0, 0],
             options: {
+                responsive: [
+                    {
+                        breakpoint: 500,
+                        options: {
+                            legend: {
+                                show: false,
+                            }
+                        },
+                    },
+                ],
                 chart: {
                     width: 380,
                     type: 'polarArea',

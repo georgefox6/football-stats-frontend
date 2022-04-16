@@ -40,6 +40,48 @@ export default {
             per90: true,
             position: true,
             options: {
+                responsive: [
+                    {
+                        breakpoint: 950,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 200
+                                }
+                            }
+                        },
+                    },
+                    {
+                        breakpoint: 820,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 150
+                                }
+                            }
+                        },
+                    },
+                    {
+                        breakpoint: 650,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 100
+                                }
+                            }
+                        },
+                    },
+                    {
+                        breakpoint: 500,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 50
+                                }
+                            }
+                        },
+                    },
+                ],
                 plotOptions: {
                     radar: {
                         polygons: {
@@ -48,7 +90,7 @@ export default {
                                 colors: ['#f8f8f8', '#fff'],
                             },
                         },
-                        size: '240',
+                        size: '250',
                     },
                 },
                 title: {
@@ -267,7 +309,6 @@ export default {
     created() {        
         if (this.mini) {
             this.options.title.text = ''
-            this.options.plotOptions.radar.size = '160'
         }
 
         this.updateGraph()

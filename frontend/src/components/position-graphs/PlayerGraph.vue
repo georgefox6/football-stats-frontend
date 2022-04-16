@@ -23,6 +23,48 @@ export default {
     data: function () {
         return {
             options: {
+                responsive: [
+                    {
+                        breakpoint: 950,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 150
+                                }
+                            }
+                        },
+                    },
+                    {
+                        breakpoint: 820,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 100
+                                }
+                            }
+                        },
+                    },
+                    {
+                        breakpoint: 650,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 60
+                                }
+                            }
+                        },
+                    },
+                    {
+                        breakpoint: 500,
+                        options: {
+                            plotOptions: {
+                                radar: {
+                                    size: 40
+                                }
+                            }
+                        },
+                    },
+                ],
                 plotOptions: {
                     radar: {
                         polygons: {
@@ -31,7 +73,7 @@ export default {
                                 colors: ['#f8f8f8', '#fff'],
                             },
                         },
-                        size: '240',
+                        size: '180',
                     },
                 },
                 title: {

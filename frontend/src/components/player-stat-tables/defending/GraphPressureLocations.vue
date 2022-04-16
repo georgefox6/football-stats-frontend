@@ -19,6 +19,16 @@ export default {
     data: function () {
         return {
             options: {
+                responsive: [
+                    {
+                        breakpoint: 500,
+                        options: {
+                            legend: {
+                                show: false,
+                            }
+                        },
+                    },
+                ],
                 title: {
                     text: this.player.playerName + ' Pressure Locations',
                 },
