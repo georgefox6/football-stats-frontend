@@ -135,10 +135,15 @@ export default {
         ...mapActions(['fetchPlayerPossessionPercentiles']),
         ...mapActions(['fetchPlayerAttackingPercentiles']),
         setTotal() {
-            if(this.playerAttackingPercentiles && this.playerPossessionPercentiles && this.playerDefendingPercentiles && this.player2AttackingPercentiles && this.player2PossessionPercentiles && this.player2DefendingPercentiles && this.$refs.chart){
+            var player1Loaded = this.playerAttackingPercentile != null && this.playerPossessionPercentile != null && this.playerDefendingPercentile != null
+            var player2Loaded = this.player2AttackingPercentile != null && this.player2PossessionPercentile != null && this.player2DefendingPercentile != null
+            
+            if(player1Loaded && player2Loaded && this.$refs.chart){
+                
                 this.$refs.chart.updateSeries(
                     [
                         {
+                            name: this.player1.playerName,
                             data: [ 
                                 this.playerAttackingPercentile.goalsPercentile,
                                 this.playerAttackingPercentile.expectedGoalsPercentile,
@@ -163,12 +168,6 @@ export default {
                                 this.playerDefendingPercentile.headersWonPercentile
                             ],
                         },
-                    ],
-                    true
-                )
-
-                this.$refs.chart.appendSeries(
-                    
                         {
                             name: this.player2.playerName,
                             data: [ 
@@ -194,16 +193,21 @@ export default {
                                 this.player2DefendingPercentile.pressuresPercentile,
                                 this.player2DefendingPercentile.headersWonPercentile
                             ],
-                        },               
+                        },
+                    ],
                     true
                 )
             }
         },
         setPer90() {
-            if(this.playerAttackingPercentiles && this.playerPossessionPercentiles && this.playerDefendingPercentiles && this.player2AttackingPercentiles && this.player2PossessionPercentiles && this.player2DefendingPercentiles && this.$refs.chart){
+            var player1Loaded = this.playerAttackingPercentile != null && this.playerPossessionPercentile != null && this.playerDefendingPercentile != null
+            var player2Loaded = this.player2AttackingPercentile != null && this.player2PossessionPercentile != null && this.player2DefendingPercentile != null
+            
+            if(player1Loaded && player2Loaded && this.$refs.chart){
                 this.$refs.chart.updateSeries(
                     [
                         {
+                            name: this.player1.playerName,
                             data: [ 
                                 this.playerAttackingPercentile.goalsPer90Percentile,
                                 this.playerAttackingPercentile.expectedGoalsPer90Percentile,
@@ -228,12 +232,6 @@ export default {
                                 this.playerDefendingPercentile.headersWonPercentile
                             ],
                         },
-                    ],
-                    true
-                )
-
-                this.$refs.chart.appendSeries(
-                    
                         {
                             name: this.player2.playerName,
                             data: [ 
@@ -259,7 +257,8 @@ export default {
                                 this.player2DefendingPercentile.pressuresPer90Percentile,
                                 this.player2DefendingPercentile.headersWonPercentile
                             ],
-                        },               
+                        },
+                    ],
                     true
                 )
             }
@@ -282,17 +281,21 @@ export default {
     },
     created() {
 
-        this.updateGraph()
+        
 
         this.fetchPlayerDefendingPercentiles()
         this.fetchPlayerPossessionPercentiles()
         this.fetchPlayerAttackingPercentiles()
+
+        this.updateGraph()
     },
     updated() {
-        this.updateGraph()
+        
         this.fetchPlayerDefendingPercentile(this.player1.id)
         this.fetchPlayerPossessionPercentile(this.player1.id)
         this.fetchPlayerAttackingPercentile(this.player1.id)
+
+        this.updateGraph()
     },
     computed:  {
         ...mapGetters(['playerDefendingPercentile', 'playerPossessionPercentile', 'playerAttackingPercentile', 'playerDefendingPercentiles', 'playerPossessionPercentiles', 'playerAttackingPercentiles']),
