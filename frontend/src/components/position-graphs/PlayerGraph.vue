@@ -135,8 +135,7 @@ export default {
         ...mapActions(['fetchPlayerPossessionPercentiles']),
         ...mapActions(['fetchPlayerAttackingPercentiles']),
         setTotal() {
-            if(this.playerAttackingPercentiles && this.playerPossessionPercentiles && this.playerDefendingPercentiles && this.$refs.chart){
-
+            if(this.playerAttackingPercentiles && this.playerPossessionPercentiles && this.playerDefendingPercentiles && this.player2AttackingPercentiles && this.player2PossessionPercentiles && this.player2DefendingPercentiles && this.$refs.chart){
                 this.$refs.chart.updateSeries(
                     [
                         {
@@ -201,67 +200,69 @@ export default {
             }
         },
         setPer90() {
-            this.$refs.chart.updateSeries(
-                [
-                    {
-                        data: [ 
-                            this.playerAttackingPercentile.goalsPer90Percentile,
-                            this.playerAttackingPercentile.expectedGoalsPer90Percentile,
-                            this.playerAttackingPercentile.shotsPer90Percentile,
-                            this.playerAttackingPercentile.shotsOnTargetPer90Percentile,
-                            this.playerAttackingPercentile.penaltyGoalsPer90Percentile,
-                            this.playerAttackingPercentile.freeKickShotsPer90Percentile,
+            if(this.playerAttackingPercentiles && this.playerPossessionPercentiles && this.playerDefendingPercentiles && this.player2AttackingPercentiles && this.player2PossessionPercentiles && this.player2DefendingPercentiles && this.$refs.chart){
+                this.$refs.chart.updateSeries(
+                    [
+                        {
+                            data: [ 
+                                this.playerAttackingPercentile.goalsPer90Percentile,
+                                this.playerAttackingPercentile.expectedGoalsPer90Percentile,
+                                this.playerAttackingPercentile.shotsPer90Percentile,
+                                this.playerAttackingPercentile.shotsOnTargetPer90Percentile,
+                                this.playerAttackingPercentile.penaltyGoalsPer90Percentile,
+                                this.playerAttackingPercentile.freeKickShotsPer90Percentile,
 
-                            this.playerPossessionPercentile.passesCompletedPer90Percentile,
-                            this.playerPossessionPercentile.progressivePassingDistancePer90Percentile,
-                            this.playerPossessionPercentile.crossesPer90Percentile,
-                            this.playerPossessionPercentile.assistsPer90Percentile,
-                            this.playerPossessionPercentile.expectedAssistsPer90Percentile,
-                            this.playerPossessionPercentile.passesControlledPer90Percentile,
-                            this.playerPossessionPercentile.dribblesPer90Percentile,
-                            this.playerPossessionPercentile.progressiveDribbleDistancePer90Percentile,
+                                this.playerPossessionPercentile.passesCompletedPer90Percentile,
+                                this.playerPossessionPercentile.progressivePassingDistancePer90Percentile,
+                                this.playerPossessionPercentile.crossesPer90Percentile,
+                                this.playerPossessionPercentile.assistsPer90Percentile,
+                                this.playerPossessionPercentile.expectedAssistsPer90Percentile,
+                                this.playerPossessionPercentile.passesControlledPer90Percentile,
+                                this.playerPossessionPercentile.dribblesPer90Percentile,
+                                this.playerPossessionPercentile.progressiveDribbleDistancePer90Percentile,
 
-                            this.playerDefendingPercentile.tacklesWonPer90Percentile,
-                            this.playerDefendingPercentile.blocksPer90Percentile,
-                            this.playerDefendingPercentile.interceptionsPer90Percentile,
-                            this.playerDefendingPercentile.pressuresPer90Percentile,
-                            this.playerDefendingPercentile.headersWonPercentile
-                        ],
-                    },
-                ],
-                true
-            )
+                                this.playerDefendingPercentile.tacklesWonPer90Percentile,
+                                this.playerDefendingPercentile.blocksPer90Percentile,
+                                this.playerDefendingPercentile.interceptionsPer90Percentile,
+                                this.playerDefendingPercentile.pressuresPer90Percentile,
+                                this.playerDefendingPercentile.headersWonPercentile
+                            ],
+                        },
+                    ],
+                    true
+                )
 
-            this.$refs.chart.appendSeries(
-                
-                    {
-                        name: this.player2.playerName,
-                        data: [ 
-                            this.player2AttackingPercentile.goalsPer90Percentile,
-                            this.player2AttackingPercentile.expectedGoalsPer90Percentile,
-                            this.player2AttackingPercentile.shotsPer90Percentile,
-                            this.player2AttackingPercentile.shotsOnTargetPer90Percentile,
-                            this.player2AttackingPercentile.penaltyGoalsPer90Percentile,
-                            this.player2AttackingPercentile.freeKickShotsPer90Percentile,
+                this.$refs.chart.appendSeries(
+                    
+                        {
+                            name: this.player2.playerName,
+                            data: [ 
+                                this.player2AttackingPercentile.goalsPer90Percentile,
+                                this.player2AttackingPercentile.expectedGoalsPer90Percentile,
+                                this.player2AttackingPercentile.shotsPer90Percentile,
+                                this.player2AttackingPercentile.shotsOnTargetPer90Percentile,
+                                this.player2AttackingPercentile.penaltyGoalsPer90Percentile,
+                                this.player2AttackingPercentile.freeKickShotsPer90Percentile,
 
-                            this.player2PossessionPercentile.passesCompletedPer90Percentile,
-                            this.player2PossessionPercentile.progressivePassingDistancePer90Percentile,
-                            this.player2PossessionPercentile.crossesPer90Percentile,
-                            this.player2PossessionPercentile.assistsPer90Percentile,
-                            this.player2PossessionPercentile.expectedAssistsPer90Percentile,
-                            this.player2PossessionPercentile.passesControlledPer90Percentile,
-                            this.player2PossessionPercentile.dribblesPer90Percentile,
-                            this.player2PossessionPercentile.progressiveDribbleDistancePer90Percentile,
+                                this.player2PossessionPercentile.passesCompletedPer90Percentile,
+                                this.player2PossessionPercentile.progressivePassingDistancePer90Percentile,
+                                this.player2PossessionPercentile.crossesPer90Percentile,
+                                this.player2PossessionPercentile.assistsPer90Percentile,
+                                this.player2PossessionPercentile.expectedAssistsPer90Percentile,
+                                this.player2PossessionPercentile.passesControlledPer90Percentile,
+                                this.player2PossessionPercentile.dribblesPer90Percentile,
+                                this.player2PossessionPercentile.progressiveDribbleDistancePer90Percentile,
 
-                            this.player2DefendingPercentile.tacklesWonPer90Percentile,
-                            this.player2DefendingPercentile.blocksPer90Percentile,
-                            this.player2DefendingPercentile.interceptionsPer90Percentile,
-                            this.player2DefendingPercentile.pressuresPer90Percentile,
-                            this.player2DefendingPercentile.headersWonPercentile
-                        ],
-                    },               
-                true
-            )
+                                this.player2DefendingPercentile.tacklesWonPer90Percentile,
+                                this.player2DefendingPercentile.blocksPer90Percentile,
+                                this.player2DefendingPercentile.interceptionsPer90Percentile,
+                                this.player2DefendingPercentile.pressuresPer90Percentile,
+                                this.player2DefendingPercentile.headersWonPercentile
+                            ],
+                        },               
+                    true
+                )
+            }
         },
         updateGraph(){
             setTimeout(() => {
