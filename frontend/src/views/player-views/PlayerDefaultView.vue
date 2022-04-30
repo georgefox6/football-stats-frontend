@@ -3,6 +3,7 @@
         <TransferStats class="stat-box" v-bind:player="player" ></TransferStats>
         <PlayingStats class="stat-box" v-bind:player="player"></PlayingStats>
         <GeneralStats class="stat-box" v-bind:player="player"></GeneralStats>
+        <PlayerTraits class="stat-box"></PlayerTraits>
 
         <StrikerGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Centre-Forward' || this.player.playerPosition == 'Second Striker'"></StrikerGraph>
         <MidfieldGraph class="graph" v-bind:player="player" v-if="this.player.playerPosition == 'Central Midfield' || this.player.playerPosition == 'Defensive Midfield'"></MidfieldGraph>
@@ -27,6 +28,7 @@ import FullBackGraph from '@/components/position-graphs/FullBackGraph.vue'
 import CentreBackGraph from '@/components/position-graphs/CentreBackGraph.vue'
 import WingerGraph from '@/components/position-graphs/WingerGraph.vue'
 import AttackingMidfieldGraph from '@/components/position-graphs/AttackingMidfieldGraph.vue'
+import PlayerTraits from '@/components/player-stat-tables/default/PlayerTraits.vue'
 
 export default {
     name: 'PlayerDefaultView',
@@ -41,6 +43,7 @@ export default {
         CentreBackGraph,
         WingerGraph,
         AttackingMidfieldGraph,
+        PlayerTraits,
     },
     methods: {
         ...mapActions(['fetchPlayer']),

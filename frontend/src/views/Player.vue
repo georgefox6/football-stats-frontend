@@ -7,6 +7,8 @@
 
         <router-view id="player-stats"></router-view>
 
+        
+
     </div>
 </template>
 
