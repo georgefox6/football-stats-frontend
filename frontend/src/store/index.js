@@ -5,6 +5,7 @@ import playerAttacking from './modules/playerAttackingPercentile'
 import playerPossession from './modules/playerPossessionPercentile'
 import playerDefending from './modules/playerDefendingPercentile'
 import playerTrait from './modules/playerTraits'
+import similarPlayers from './modules/similarPlayers'
 
 Vue.use(Vuex)
 
@@ -15,5 +16,6 @@ export default new Vuex.Store({
         playerPossession,
         playerDefending,
         playerTrait,
+        similarPlayers
     },
 })
