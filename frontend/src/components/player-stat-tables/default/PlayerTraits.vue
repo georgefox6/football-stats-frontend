@@ -1,6 +1,6 @@
 <template>
     <div class="player-traits">
-        <h3>Player Traits:</h3>
+        <h1>Player Traits:</h1>
         <img v-if="playerTrait.longShotTaker" src="../../../assets/player-trait-shields/LongShotTaker.png" alt="">
         <img v-if="playerTrait.sneakyFouler" src="../../../assets/player-trait-shields/SneakyFouler.png" alt="">
         <img v-if="playerTrait.pressingForward" src="../../../assets/player-trait-shields/PressingForward.png" alt="">
