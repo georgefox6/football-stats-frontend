@@ -25,17 +25,17 @@
                                 <i v-bind:class="this.clubSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
                                 <i v-bind:class="this.clubSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
                             </th>
-                            <th @click="sortByPlayerPosition()">
+                            <th class="hide-column" @click="sortByPlayerPosition()">
                                 Position
                                 <i v-bind:class="this.positionSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
                                 <i v-bind:class="this.positionSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
                             </th>
-                            <th @click="sortByPlayerAge()">
+                            <th class="hide-column" @click="sortByPlayerAge()">
                                 Age
                                 <i v-bind:class="this.ageSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
                                 <i v-bind:class="this.ageSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
                             </th>
-                            <th @click="sortByPlayerValue()">
+                            <th class="hide-column" @click="sortByPlayerValue()">
                                 Value
                                 <VueCustomTooltip :multiline="true"
                                     label="This value is based on the ability of the player, the league he plays in and the contract length.">&#9432;
@@ -46,7 +46,7 @@
                         </tr>
                     </thead>
                     
-                    <tbody v-show="this.loaded">
+                    <tbody class="table-body" v-show="this.loaded">
                         <tr v-for="player in filteredPlayers" :key="player.id">
                             <td class="player-link" @click="playerLink(player.id)">
                                 {{ player.playerName }}
@@ -56,9 +56,9 @@
                                 <country-flag :country="player.playerNation.split(' ')[0]" size="normal"/>
                             </td>
                             <td>{{ player.playerTeam }} <ClubBadge class="club-image" :clubName="player.playerTeam" /></td>
-                            <td>{{ player.playerPosition }}</td>
-                            <td>{{ player.playerAge }}</td>
-                            <td>£{{ player.marketValue.toLocaleString('en-GB') }}</td>
+                            <td class="hide-column">{{ player.playerPosition }}</td>
+                            <td class="hide-column">{{ player.playerAge }}</td>
+                            <td class="hide-column">£{{ player.marketValue.toLocaleString('en-GB') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -585,15 +585,12 @@ export default {
 }
 
 .player {
-    /* background: #363636; */
     background: #f5f5f5;
     font-family: sans-serif;
     font-weight: 100;
     margin-left: 30px;
     margin-right: 30px;
-    /* padding: 30px; */
     padding: 10px;
-    
 }
 
 td {
@@ -716,4 +713,51 @@ input:focus::placeholder {
     border-top: solid 7px rgb(114, 114, 114);
     border-bottom-width: 0;
 }
+
+@media screen and (max-width: 1000px){
+    .table-body > tr > td {
+        font-size: 15px;
+    }
+
+    td {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .player {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 0px;
+    }   
+
+    .table-body > tr > td {
+        font-size: 15px;
+    }
+
+    td {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .player {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 0px;
+    }   
+
+    .table-body > tr > td {
+        font-size: 15px;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    .hide-column {
+        display: none;
+    } 
+}
+
 </style>
