@@ -5,16 +5,15 @@
             <tr>
                 <th>Name</th>
                 <th>Position</th>
-                <th>Age</th>
-                <th>Value</th>
+                <th class="hide-column">Age</th>
+                <th class="hide-column">Value</th>
                 <th>Compare</th>
             </tr>
             <tr v-for="player in similarPlayers" :key="player.id">
-                <!-- <td>{{player.playerName}}</td> -->
                 <td><span class="player-link" @click="playerLink(player.id)">{{player.playerName}}</span></td>
                 <td>{{player.playerPosition}}</td>
-                <td>{{player.playerAge}}</td>
-                <td>{{'£' + player.marketValue.toLocaleString('en-GB')}}</td>
+                <td class="hide-column">{{player.playerAge}}</td>
+                <td class="hide-column">{{'£' + player.marketValue.toLocaleString('en-GB')}}</td>
                 <td><button @click="comparePlayer(player.id)">Compare</button></td>
             </tr>
         </table>
@@ -73,7 +72,7 @@ export default {
     transition: color 0.2s; 
 }
 
-.table{
+.table {
     width: 80%;
     margin: auto;
 }
@@ -81,5 +80,11 @@ export default {
 .table > tr > td {
     padding: 10px;
     padding-top: 20px;
+}
+
+@media screen and (max-width: 500px){
+    .hide-column {
+        display: none;
+    }    
 }
 </style>
