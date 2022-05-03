@@ -10,10 +10,21 @@
                     </tr>
                     <tr>
                         <td>
-                            <clubBadge id="club-image" :clubName="player.playerTeam" />
+                            <clubBadge class="club-image" :clubName="player.playerTeam" />
                         </td>
                         <td>
-                            <h3 id="club-name">{{ player.playerTeam }}</h3>
+                            <h3 class="club-name">{{ player.playerTeam }}</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="flag">
+                            <country-flag :country="this.playerNationFirst" size="medium" />
+                            
+                        </td>
+                        <td>
+                            <h3 class="club-name">
+                                {{ playerNationSecond }}
+                            </h3>
                         </td>
                     </tr>
                     <tr>
@@ -46,6 +57,20 @@ export default {
     components: {
         ClubBadge,
     },
+    computed: {
+        playerNationFirst() {
+            if(!this.player.playerNation){
+                return ''
+            }
+            return this.player.playerNation.split(' ')[0]
+        },
+        playerNationSecond() {
+            if(!this.player.playerNation){
+                return ''
+            }
+            return this.player.playerNation.split(' ')[1]
+        },
+    },
     props: ['player'],
     methods: {},
     created() {},
@@ -53,6 +78,16 @@ export default {
 </script>
 
 <style scoped>
+
+.flag {
+    margin: 0px;
+    margin-left: 5px;
+    float: left;
+}
+
+#nation {
+    margin: 0px;
+}
 
 #player-image {
     float: left;
@@ -71,6 +106,7 @@ export default {
     margin: 20px;
     margin-left: 60px;
     float: left;
+    padding: 0px;
 }
 
 #player-name {
@@ -79,13 +115,16 @@ export default {
     font-size: 2.5em;
 }
 
-#club-name {
+.club-name {
     font-size: 1.5em;
     text-align: left;
+    margin: 0px;
 }
 
-#club-image {
+.club-image {
     width: 40px;
+    margin: 0px;
+    float: left;
 }
 
 .content {
@@ -135,7 +174,7 @@ export default {
         font-size: 2em;
     }
     
-    #club-name {
+    .club-name {
         font-size: 1.3em;
     }
 }
@@ -145,7 +184,7 @@ export default {
         font-size: 1.5em;
     }
     
-    #club-name {
+    .club-name {
         font-size: 1em;
     }
 
