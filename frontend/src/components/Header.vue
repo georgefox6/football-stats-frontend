@@ -6,12 +6,48 @@
         <router-link class="nav-button" to="/players">Players</router-link>
         <router-link class="nav-button" to="/home">Insights</router-link>
         <router-link class="nav-button" to="/home">Games</router-link>
+        <vSelect class="nav-button" v-model="selectedPlayer" label="playerName" :options="allPlayers"/>
     </nav>
 </template>
 
 <script>
+import vSelect from 'vue-select'
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
     name: 'Header',
+    components: {
+        vSelect
+    },
+    data() {
+        return {
+            selectedPlayer: ''
+        }
+    },
+    computed: {
+        ...mapGetters(['allPlayers']),
+    },
+    methods: {
+        ...mapActions(['fetchPlayers']),
+    },
+    created(){
+        this.fetchPlayers()
+    },
+    
+    updated(){
+        if(this.selectedPlayer != ''){
+            console.log(this.selectedPlayer)
+            this.$router.push({
+                name: 'PlayerDefaultView',
+                params: { playerId: this.selectedPlayer.id },
+            })
+            this.$router.go()
+            setTimeout(() => {
+                this.selectedPlayer = ''
+            }, 500)
+            
+        }
+    }
 }
 </script>
 
