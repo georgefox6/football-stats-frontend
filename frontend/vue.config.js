@@ -8,7 +8,7 @@ const paths = [
         changefreq: 'hourly',
     },
     {
-        path: '/players',
+        path: '/player',
         lastmod: new Date().toISOString().slice(0, 10),
         priority: 0.8,
         changefreq: 'hourly',

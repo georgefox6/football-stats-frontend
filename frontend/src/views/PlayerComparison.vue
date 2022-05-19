@@ -1153,6 +1153,7 @@ export default {
 
 .table-header {
     cursor: pointer;
+    z-index: 10000;
 }
 
 .side-header {
@@ -1189,12 +1190,6 @@ td {
     background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
     min-width: 10px;
-}
-
-.comparison {
-    margin-left: 30px;
-    margin-right: 30px;
-
 }
 
 #expand-all {
@@ -1319,6 +1314,28 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+    .name-header {
+        top: 6rem;
+    }
+
+    th {
+        top: 13rem;
+    }
+
+    .comparison {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .side-header {
+        width: 50px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }
 
 </style>

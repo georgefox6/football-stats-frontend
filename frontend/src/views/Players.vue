@@ -9,7 +9,7 @@
             <div v-show="this.loaded" class="table-wrapper">
                 <table id="player-table">
                     <thead>
-                        <tr>
+                        <tr class="table-header">
                             <th @click="sortByPlayerName()">
                                 Player Name
                                 <i v-bind:class="this.nameSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
@@ -580,16 +580,17 @@ export default {
     cursor: pointer;
 }
 
-.table-wrapper {
+/* .table-wrapper {
     overflow-x: auto;
-}
+} */
 
 .player {
     background: #f5f5f5;
     font-family: sans-serif;
     font-weight: 100;
-    margin-left: 30px;
-    margin-right: 30px;
+    /* margin-left: 30px; */
+    /* margin-right: 30px; */
+    margin: auto;
     padding: 10px;
 }
 
@@ -612,9 +613,8 @@ th {
     padding: 15px;
     color: #fff;
     background-color: var(--primary);
-
     position: sticky;
-    top: 0;
+    top: 2.5rem;
     z-index: 10;
 }
 
@@ -646,6 +646,27 @@ tr:hover > td {
     margin: auto;
     margin-top: 40px;
     margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 11;
+    background-color: white;
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+    .search-wrapper {
+        position: sticky;
+        top: 6rem;
+        z-index: 11;
+        background-color: white;
+    }
+
+    .table-header {
+        position: sticky;
+        top: 8.5rem;
+        /* top: 0; */
+        z-index: 12;
+    }
 }
 
 input:focus::placeholder {
