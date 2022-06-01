@@ -135,13 +135,13 @@
                         </g>
                     </svg>
                     <span class="link-text-small-screen">Search</span>
-                    <vSelect v-if="this.allPlayers" class="large-screen-search" placeholder="Search" clearSearchOnSelect="true" v-model="selectedPlayer" label="playerName" :options="allPlayers"/>
+                    <vSelect v-if="this.allPlayers" class="large-screen-search" placeholder="Search" clearSearchOnSelect v-model="selectedPlayer" label="playerName" :options="allPlayers"/>
                 </a>
             </li>
             
         </ul>
 
-        <vSelect v-if="this.isSearching" class="small-screen" placeholder="Search" clearSearchOnSelect="true" v-model="selectedPlayer" label="playerName" :options="allPlayers"/>
+        <vSelect v-if="this.isSearching" class="small-screen" placeholder="Search" clearSearchOnSelect v-model="selectedPlayer" label="playerName" :options="allPlayers"/>
     </nav>
 
     

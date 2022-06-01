@@ -1,564 +1,222 @@
 <template>
-    <div class="wrapper">
+    <div>
+    
+        <button class="filter" @click="showFilterMethod()">Filter</button>
+        
+        <div class="wrapper">
         <div class="player">
-            <h1 class="header">Players</h1>
-            <div v-show="this.loaded" class="search-wrapper">
-                <input type="text" v-model="search" placeholder="Search player or team.." class="input"/>
-            </div>
+            <h1>Players</h1>
+            <filters :showFilter="showFilter" @filter="filterResults" />
+            <div class="search-wrapper">
+                <input type="text" v-model="request.SearchTerm" @change="search()" placeholder="Search player or team.." class="input"/>
+            </div>           
 
-            <div v-show="this.loaded" class="table-wrapper">
-                <table id="player-table">
-                    <thead>
-                        <tr class="table-header">
-                            <th @click="sortByPlayerName()">
-                                Player Name
-                                <i v-bind:class="this.nameSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                                <i v-bind:class="this.nameSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                            </th>
-                            <th @click="sortByPlayerNation()">
-                                Nationality
-                                <i v-bind:class="this.nationSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                                <i v-bind:class="this.nationSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                            </th>
-                            <th @click="sortByPlayerClub()">
-                                Club
-                                <i v-bind:class="this.clubSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                                <i v-bind:class="this.clubSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                            </th>
-                            <th class="hide-column" @click="sortByPlayerPosition()">
-                                Position
-                                <i v-bind:class="this.positionSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                                <i v-bind:class="this.positionSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                            </th>
-                            <th class="hide-column" @click="sortByPlayerAge()">
-                                Age
-                                <i v-bind:class="this.ageSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                                <i v-bind:class="this.ageSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                            </th>
-                            <th class="hide-column" @click="sortByPlayerValue()">
-                                Value
-                                <VueCustomTooltip :multiline="true"
-                                    label="This value is based on the ability of the player, the league he plays in and the contract length.">&#9432;
-                                </VueCustomTooltip>
-                                <i v-bind:class="this.valueSort == 'desc' ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
-                                <i v-bind:class="this.valueSort == 'asc' ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
-                            </th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody class="table-body" v-show="this.loaded">
-                        <tr v-for="player in filteredPlayers" :key="player.id">
-                            <td class="player-link" @click="playerLink(player.id)">
-                                {{ player.playerName }}
-                            </td>
-                            <td>
-                                {{ player.playerNation.split(' ')[1] }}
-                                <country-flag :country="player.playerNation.split(' ')[0]" size="normal"/>
-                            </td>
-                            <td>{{ player.playerTeam }} <ClubBadge class="club-image" :clubName="player.playerTeam" /></td>
-                            <td class="hide-column">{{ player.playerPosition }}</td>
-                            <td class="hide-column">{{ player.playerAge }}</td>
-                            <td class="hide-column">£{{ player.marketValue.toLocaleString('en-GB') }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table id="player-table">
+                <thead>
+                    <tr class="table-header">
+                        <th @click="sort('PlayerName')">
+                            Player Name
+                            <i v-bind:class="this.request.Sort == 'PlayerName' && this.request.SortDesc ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                            <i v-bind:class="this.request.Sort == 'PlayerName' && !this.request.SortDesc ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                        </th>
+                        <th @click="sort('Nationality')">
+                            Nationality
+                            <i v-bind:class="this.request.Sort == 'Nationality' && this.request.SortDesc ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                            <i v-bind:class="this.request.Sort == 'Nationality' && !this.request.SortDesc ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                        </th>
+                        <th @click="sort('Club')">
+                            Club
+                            <i v-bind:class="this.request.Sort == 'Club' && this.request.SortDesc ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                            <i v-bind:class="this.request.Sort == 'Club' && !this.request.SortDesc ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                        </th>
+                        <th class="hide-column" @click="sort('Position')">
+                            Position
+                            <i v-bind:class="this.request.Sort == 'Position' && this.request.SortDesc ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                            <i v-bind:class="this.request.Sort == 'Position' && !this.request.SortDesc ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                        </th>
+                        <th class="hide-column" @click="sort('Age')">
+                            Age
+                            <i v-bind:class="this.request.Sort == 'Age' && this.request.SortDesc ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                            <i v-bind:class="this.request.Sort == 'Age' && !this.request.SortDesc ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                        </th>
+                        <th class="hide-column" @click="sort('Value')">
+                            Value
+                            <i v-bind:class="this.request.Sort == 'Value' && this.request.SortDesc ? 'sort-by-desc' : 'sort-by-desc-deselected'"></i>
+                            <i v-bind:class="this.request.Sort == 'Value' && !this.request.SortDesc ? 'sort-by-asc' : 'sort-by-asc-deselected'"></i>
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody class="table-body">
+                    <tr v-for="player in allPaginatedPlayers.items" :key="player.id">
+                        <td class="player-link" @click="playerLink(player.id)">
+                            {{ player.playerName }}
+                        </td>
+                        <td>
+                            {{ player.playerNation.split(' ')[1] }}
+                            <country-flag :country="player.playerNation.split(' ')[0]" size="normal"/>
+                        </td>
+                        <td>{{ player.playerTeam }} <ClubBadge class="club-image" :clubName="player.playerTeam" /></td>
+                        <td class="hide-column">{{ player.playerPosition }}</td>
+                        <td class="hide-column">{{ player.playerAge }}</td>
+                        <td class="hide-column">£{{ player.marketValue.toLocaleString('en-GB') }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
             <breeding-rhombus-spinner
                 id="loading-spinner"
-                v-if="!this.loaded"
+                v-if="!this.allPaginatedPlayers"
                 :animation-duration="3000"
                 :size="65"
                 color="var(--primary)"
             />
+            
         </div>
     </div>
+    <pagination
+      :totalPages="allPaginatedPlayers.totalPages"
+      :perPage="request.PageSize"
+      :currentPage="request.Page"
+      @pagechanged="onPageChange"
+    /> 
+
+    <p class="page-size">Page {{allPaginatedPlayers.page}} of {{allPaginatedPlayers.totalPages}}</p>
+    <select class="page-size" v-model="request.PageSize" @change="search()" name="page-size">
+        <option :value=10>10</option>
+        <option :value=25>25</option>
+        <option :value=50>50</option>
+        <option :value=100>100</option>
+    </select>
     
+  </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
+import Pagination from "@/components/Pagination.vue"
 import ClubBadge from '@/components/ClubBadge.vue'
-import { BreedingRhombusSpinner } from 'epic-spinners'
-import { mapGetters, mapActions } from 'vuex'
-import CountryFlag from 'vue-country-flag'
-import VueCustomTooltip from '@adamdehaven/vue-custom-tooltip'
+import Filters from '@/components/Filters.vue'
 
 export default {
-    name: 'Players',
-    components: {
-        CountryFlag,
-        VueCustomTooltip,
-        BreedingRhombusSpinner,
-        ClubBadge
+  name: "Players",
+
+  data() {
+      return {
+          showFilter: false,
+          request: {
+              Page: 1,
+              PageSize: 25,
+              ClubFilter: [],
+              PositionFilter: [],
+              NationFilter: [],
+              ContractEndDateFilter: [],
+              MinMarketValueFilter: 0,
+              MaxMarketValueFilter: 200,
+              MinWageFilter: 0,
+              MaxWageFilter: 500,
+              SearchTerm: null,
+              Sort: null,
+              SortDesc: true,
+          },
+      };
+  },
+  components: {
+      Pagination,
+      ClubBadge,
+      Filters
+  },
+  methods: {
+    ...mapActions(["fetchPaginatedPlayers"]),
+    onPageChange(page) {
+        this.request.Page = page;
+        this.fetchPaginatedPlayers(this.request);
     },
-    data() {
-        return {
-            loaded: false,
-            search: '',
-            nameSort: 'none',
-            nationSort: 'none',
-            clubSort: 'none',
-            positionSort: 'none',
-            ageSort: 'none',
-            valueSort: 'none',
+    playerLink(id) {
+        this.$router.push({
+            name: 'PlayerDefaultView',
+            params: { playerId: id },
+        })
+    },
+    sort(sortBy){
+        if(this.request.Sort == sortBy && this.request.SortDesc == false) {
+            this.request.SortDesc = true
+        } else if(this.request.Sort == sortBy && this.request.SortDesc == true){
+            this.request.Sort = null
+            this.request.SortDesc = null
         }
-    },
-    methods: {
-        ...mapActions(['fetchPlayers']),
-        playerLink(id) {
-            this.$router.push({
-                name: 'PlayerDefaultView',
-                params: { playerId: id },
-            })
-        },
-        sortByPlayerName() {
-            switch (this.nameSort) {
-                case 'none':
-                    this.nameSort = 'desc'
-                    break
-                case 'desc':
-                    this.nameSort = 'asc'
-                    break
-                case 'asc':
-                    this.nameSort = 'none'
-                    break
-            }
-            this.nationSort = 'none'
-            this.clubSort = 'none'
-            this.positionSort = 'none'
-            this.ageSort = 'none'
-            this.valueSort = 'none'
-        },
-        sortByPlayerNation() {
-            switch (this.nationSort) {
-                case 'none':
-                    this.nationSort = 'desc'
-                    break
-                case 'desc':
-                    this.nationSort = 'asc'
-                    break
-                case 'asc':
-                    this.nationSort = 'none'
-                    break
-            }
-
-            this.nameSort = 'none'
-            this.clubSort = 'none'
-            this.positionSort = 'none'
-            this.ageSort = 'none'
-            this.valueSort = 'none'
-        },
-        sortByPlayerClub() {
-            switch (this.clubSort) {
-                case 'none':
-                    this.clubSort = 'desc'
-                    break
-                case 'desc':
-                    this.clubSort = 'asc'
-                    break
-                case 'asc':
-                    this.clubSort = 'none'
-                    break
-            }
-
-            this.nationSort = 'none'
-            this.nameSort = 'none'
-            this.positionSort = 'none'
-            this.ageSort = 'none'
-            this.valueSort = 'none'
-        },
-        sortByPlayerPosition() {
-            switch (this.positionSort) {
-                case 'none':
-                    this.positionSort = 'desc'
-                    break
-                case 'desc':
-                    this.positionSort = 'asc'
-                    break
-                case 'asc':
-                    this.positionSort = 'none'
-                    break
-            }
-
-            this.nationSort = 'none'
-            this.nameSort = 'none'
-            this.clubSort = 'none'
-            this.ageSort = 'none'
-            this.valueSort = 'none'
-        },
-        sortByPlayerAge() {
-            switch (this.ageSort) {
-                case 'none':
-                    this.ageSort = 'desc'
-                    break
-                case 'desc':
-                    this.ageSort = 'asc'
-                    break
-                case 'asc':
-                    this.ageSort = 'none'
-                    break
-            }
-
-            this.positionSort = 'none'
-            this.nationSort = 'none'
-            this.nameSort = 'none'
-            this.clubSort = 'none'
-            this.valueSort = 'none'
-        },
-        sortByPlayerValue() {
-            switch (this.valueSort) {
-                case 'none':
-                    this.valueSort = 'desc'
-                    break
-                case 'desc':
-                    this.valueSort = 'asc'
-                    break
-                case 'asc':
-                    this.valueSort = 'none'
-                    break
-            }
-
-            this.nameSort = 'none'
-            this.nationSort = 'none'
-            this.clubSort = 'none'
-            this.positionSort = 'none'
-            this.ageSort = 'none'
-        },
-        returnSortedPlayersByNameAsc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => a.playerName.localeCompare(b.playerName))
-        },
-        returnSortedPlayersByNameDesc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => b.playerName.localeCompare(a.playerName))
-        },
-        returnSortedPlayersByValueDesc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => b.marketValue - a.marketValue)
-        },
-        returnSortedPlayersByValueAsc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => a.marketValue - b.marketValue)
-        },
-        returnSortedPlayersByNationDesc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => b.playerNation.localeCompare(a.playerNation))
-        },
-        returnSortedPlayersByNationAsc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => a.playerNation.localeCompare(b.playerNation))
-        },
-        returnSortedPlayersByClubDesc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => b.playerTeam.localeCompare(a.playerTeam))
-        },
-        returnSortedPlayersByClubAsc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => a.playerTeam.localeCompare(b.playerTeam))
-        },
-        returnSortedPlayersByPositionAsc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) =>{
-                    var first = 0;
-                    var second = 0;
-                    switch(a.playerPosition){
-                        case "Goalkeeper": first = 0; break;
-                        case "Centre-Back": first = 1; break;
-                        case "Right-Back": first = 2; break;
-                        case "Left-Back": first = 3; break;
-                        case "Defensive Midfield": first = 4; break;
-                        case "Central Midfield": first = 5; break;
-                        case "Right Midfield": first = 6; break;
-                        case "Left Midfield": first = 7; break;
-                        case "Attacking Midfield": first = 8; break;
-                        case "Right Winger": first = 9; break;
-                        case "Left Winger": first = 10; break;
-                        case "Second Striker": first = 11; break;
-                        case "Centre-Forward": first = 12; break;
-                    }
-
-                    switch(b.playerPosition){
-                        case "Goalkeeper": second = 0; break;
-                        case "Centre-Back": second = 1; break;
-                        case "Right-Back": second = 2; break;
-                        case "Left-Back": second = 3; break;
-                        case "Defensive Midfield": second = 4; break;
-                        case "Central Midfield": second = 5; break;
-                        case "Right Midfield": second = 6; break;
-                        case "Left Midfield": second = 7; break;
-                        case "Attacking Midfield": second = 8; break;
-                        case "Right Winger": second = 9; break;
-                        case "Left Winger": second = 10; break;
-                        case "Second Striker": second = 11; break;
-                        case "Centre-Forward": second = 12; break;
-                    }
-
-                    return first - second;
-                }
-            )
-        },
-        returnSortedPlayersByPositionDesc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) =>{
-                    var first = 0;
-                    var second = 0;
-                    switch(a.playerPosition){
-                        case "Goalkeeper": first = 0; break;
-                        case "Centre-Back": first = 1; break;
-                        case "Right-Back": first = 2; break;
-                        case "Left-Back": first = 3; break;
-                        case "Defensive Midfield": first = 4; break;
-                        case "Central Midfield": first = 5; break;
-                        case "Right Midfield": first = 6; break;
-                        case "Left Midfield": first = 7; break;
-                        case "Attacking Midfield": first = 8; break;
-                        case "Right Winger": first = 9; break;
-                        case "Left Winger": first = 10; break;
-                        case "Second Striker": first = 11; break;
-                        case "Centre-Forward": first = 12; break;
-                    }
-
-                    switch(b.playerPosition){
-                        case "Goalkeeper": second = 0; break;
-                        case "Centre-Back": second = 1; break;
-                        case "Right-Back": second = 2; break;
-                        case "Left-Back": second = 3; break;
-                        case "Defensive Midfield": second = 4; break;
-                        case "Central Midfield": second = 5; break;
-                        case "Right Midfield": second = 6; break;
-                        case "Left Midfield": second = 7; break;
-                        case "Attacking Midfield": second = 8; break;
-                        case "Right Winger": second = 9; break;
-                        case "Left Winger": second = 10; break;
-                        case "Second Striker": second = 11; break;
-                        case "Centre-Forward": second = 12; break;
-                    }
-                    return second - first;
-                }
-            )
-        },
-        returnSortedPlayersByAgeDesc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => b.playerAge.localeCompare(a.playerAge))
-        },
-        returnSortedPlayersByAgeAsc() {
-            return this.allPlayers
-                .filter(
-                    (player) =>
-                        player.playerName
-                            .normalize('NFD')
-                            .replace(/[\u0300-\u036f]/g, '')
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase()) ||
-                        player.playerTeam
-                            .toLowerCase()
-                            .includes(this.search.toLowerCase())
-                )
-                .slice()
-                .sort((a, b) => a.playerAge.localeCompare(b.playerAge))
-        },
-    },
-    computed: {
-        ...mapGetters(['allPlayers']),
-
-        filteredPlayers() {
-            if (this.nameSort == 'asc') {
-                return this.returnSortedPlayersByNameAsc()
-            } else if (this.nameSort == 'desc') {
-                return this.returnSortedPlayersByNameDesc()
-            }
-
-            if (this.valueSort == 'asc') {
-                return this.returnSortedPlayersByValueAsc()
-            } else if (this.valueSort == 'desc') {
-                return this.returnSortedPlayersByValueDesc()
-            }
-
-            if (this.nationSort == 'asc') {
-                return this.returnSortedPlayersByNationAsc()
-            } else if (this.nationSort == 'desc') {
-                return this.returnSortedPlayersByNationDesc()
-            }
-
-            if (this.clubSort == 'asc') {
-                return this.returnSortedPlayersByClubAsc()
-            } else if (this.clubSort == 'desc') {
-                return this.returnSortedPlayersByClubDesc()
-            }
-
-            if (this.positionSort == 'asc') {
-                return this.returnSortedPlayersByPositionAsc()
-            } else if (this.positionSort == 'desc') {
-                return this.returnSortedPlayersByPositionDesc()
-            }
-
-            if (this.ageSort == 'asc') {
-                return this.returnSortedPlayersByAgeAsc()
-            } else if (this.ageSort == 'desc') {
-                return this.returnSortedPlayersByAgeDesc()
-            }
-
-            return this.allPlayers.filter(
-                (player) =>
-                    player.playerName
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '')
-                        .toLowerCase()
-                        .includes(this.search.toLowerCase()) ||
-                    player.playerTeam
-                        .toLowerCase()
-                        .includes(this.search.toLowerCase())
-            )
-        },
-    },
-    created() {
-        this.fetchPlayers()
-    },
-    updated(){
-        if(this.filteredPlayers != null){
-            this.loaded = true
+        else {
+            this.request.Sort = sortBy 
+            this.request.SortDesc = false
         }
+        this.request.Page = 1
+        console.log(this.request)
+        this.fetchPaginatedPlayers(this.request)
+    },
+    search(){
+        this.request.Page = 1
+        this.fetchPaginatedPlayers(this.request)
+    },
+    filterResults(filters){
+        console.log(filters.checkedClubs)
+        this.request.PositionFilter = filters.checkedPositions
+        this.request.ClubFilter = filters.checkedClubs
+        this.request.NationFilter = this.convertNations(filters.checkedNations)
+        this.request.ContractEndDateFilter = filters.checkedContracts
+        this.request.MinMarketValueFilter = filters.minValue
+        this.request.MaxMarketValueFilter = filters.maxValue
+        this.request.MinWageFilter = filters.minWage
+        this.request.MaxWageFilter = filters.maxWage
+        this.request.Page = 1
+        this.showFilter = false
+        this.fetchPaginatedPlayers(this.request)
+    },
+    convertNations(nations){
+        var output = []
+        for (var i = 0; i < nations.length; i++){
+            switch (nations[i]) {
+                case "England":
+                    output.push("gb-eng ENG")
+                    break;
+                case "Spain":
+                    output.push("es ESP")
+                    break;
+                case "France":
+                    output.push("fr FRA")
+                    break;
+                case "Germany":
+                    output.push("de GER")
+                    break;
+                case "Netherlands":
+                    output.push("nl NED")
+                    break;
+                case "Brazil":
+                    output.push("br BRA")
+                    break;
+                case "Argentina":
+                    output.push("ar ARG")
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        return output
+    },
+    showFilterMethod(){
+        this.showFilter = !this.showFilter
     }
+  },
+  computed: {
+      ...mapGetters(["allPaginatedPlayers"]),
+  },
+  created() {
+      this.fetchPaginatedPlayers(this.request)
+  },
 }
 </script>
 
 <style scoped>
-
-.club-image {
-    display: inline-block;
-    width: 20px;
-}
 
 .wrapper {
     max-width: 75rem;
@@ -566,39 +224,12 @@ export default {
     margin: auto;
 }
 
-.header {
-    color: var(--primary);
-}
-
-#loading-spinner {
-    position: fixed;
-    left: 45%;
-    top: 50%;
-}
-
-.player-link {
-    cursor: pointer;
-}
-
-/* .table-wrapper {
-    overflow-x: auto;
-} */
-
 .player {
     background: #f5f5f5;
     font-family: sans-serif;
     font-weight: 100;
-    /* margin-left: 30px; */
-    /* margin-right: 30px; */
     margin: auto;
     padding: 10px;
-}
-
-td {
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    min-width: 10px;
 }
 
 #player-table {
@@ -616,6 +247,23 @@ th {
     position: sticky;
     top: 2.5rem;
     z-index: 10;
+    cursor: pointer;
+}
+
+td {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    min-width: 10px;
+}
+
+.club-image {
+    display: inline-block;
+    width: 25px;
+}
+
+.player-link {
+    cursor: pointer;
 }
 
 #player-table tbody tr {
@@ -638,6 +286,18 @@ tr:hover > td {
     color: black;
 }
 
+.filter {
+    padding: 10px;
+    float: left;
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.page-size {
+    display: inline-block;
+    margin: 10px;
+}
+
 /* Styling for search box */
 .search-wrapper {
     width: 100%;
@@ -652,28 +312,6 @@ tr:hover > td {
     background-color: white;
 }
 
-/* Small screens */
-@media only screen and (max-width: 600px) {
-    .search-wrapper {
-        position: sticky;
-        top: 6rem;
-        z-index: 11;
-        background-color: white;
-    }
-
-    .table-header {
-        position: sticky;
-        top: 8.5rem;
-        /* top: 0; */
-        z-index: 12;
-    }
-}
-
-input:focus::placeholder {
-    color: transparent;
-    transition: color 0.5s;
-}
-
 .input {
     font-family: inherit;
     width: 100%;
@@ -685,6 +323,11 @@ input:focus::placeholder {
     padding: 7px 0;
     background: transparent;
     transition: border-color 0.2s;
+}
+
+input:focus::placeholder {
+    color: transparent;
+    transition: color 0.5s;
 }
 
 .sort-by-asc {
@@ -735,6 +378,13 @@ input:focus::placeholder {
     border-bottom-width: 0;
 }
 
+#loading-spinner {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 @media screen and (max-width: 1000px){
     .table-body > tr > td {
         font-size: 15px;
@@ -751,27 +401,24 @@ input:focus::placeholder {
         margin-right: 0px;
         padding: 0px;
     }   
+}
 
-    .table-body > tr > td {
-        font-size: 15px;
+@media only screen and (max-width: 600px) {
+    .search-wrapper {
+        position: sticky;
+        top: 6rem;
+        z-index: 11;
+        background-color: white;
     }
 
-    td {
-        padding: 10px;
+    .table-header {
+        position: sticky;
+        top: 8.5rem;
+        z-index: 12;
     }
 }
 
 @media screen and (max-width: 500px){
-    .player {
-        margin-left: 0px;
-        margin-right: 0px;
-        padding: 0px;
-    }   
-
-    .table-body > tr > td {
-        font-size: 15px;
-    }
-
     td {
         padding: 5px;
     }

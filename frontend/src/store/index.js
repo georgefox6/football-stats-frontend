@@ -6,6 +6,7 @@ import playerPossession from './modules/playerPossessionPercentile'
 import playerDefending from './modules/playerDefendingPercentile'
 import playerTrait from './modules/playerTraits'
 import similarPlayers from './modules/similarPlayers'
+import paginatedPlayers from './modules/paginatedPlayers'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         playerPossession,
         playerDefending,
         playerTrait,
-        similarPlayers
+        similarPlayers,
+        paginatedPlayers
     },
 })
