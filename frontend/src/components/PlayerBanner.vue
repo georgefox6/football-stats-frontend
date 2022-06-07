@@ -18,7 +18,7 @@
                     </tr>
                     <tr>
                         <td class="flag">
-                            <country-flag :country="this.playerNationFirst" size="medium" />
+                            <country-flag :country="this.playerNationFirst" size="normal" />
                             
                         </td>
                         <td>

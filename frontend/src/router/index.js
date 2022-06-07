@@ -1,14 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Player from '../views/Player.vue'
-import PlayerDefaultView from '../views/player-views/PlayerDefaultView.vue'
-import PlayerAttackingtView from '../views/player-views/PlayerAttackingView.vue'
-import PlayerPossessionView from '../views/player-views/PlayerPossessionView.vue'
-import PlayerDefendingView from '../views/player-views/PlayerDefendingView.vue'
+// import Player from '../views/Player.vue'
+
+// import PlayerDefaultView from '../views/player-views/PlayerDefaultView.vue'
+// import PlayerAttackingtView from '../views/player-views/PlayerAttackingView.vue'
+// import PlayerPossessionView from '../views/player-views/PlayerPossessionView.vue'
+// import PlayerDefendingView from '../views/player-views/PlayerDefendingView.vue'
 import PageNotFound from '../views/PageNotFound.vue'
-import Players from '../views/Players.vue'
-import PlayerComparison from '../views/PlayerComparison.vue'
+// import Players from '../views/Players.vue'
+// import PlayerComparison from '../views/PlayerComparison.vue'
 import 'vue-select/dist/vue-select.css';
+
+// const Player = () => import('../views/Player.vue')
 
 Vue.use(VueRouter)
 
@@ -16,7 +19,8 @@ const routes = [
     {
         path: '/',
         name: 'Players',
-        component: Players,
+        // component: Players,
+        component: () => import('../views/Players.vue'),
         meta: {
             title: 'Football Stats - Players',
             
@@ -37,7 +41,8 @@ const routes = [
     {
         path: '/player',
         name: 'Players',
-        component: Players,
+        // component: Players,
+        component: () => import('../views/Players.vue'),
         meta: {
             title: 'Football Stats - Players',
             metaTags: [
@@ -57,7 +62,8 @@ const routes = [
     {
         path: '/player/comparison/:player1?/:player2?',
         name: 'PlayerComparison',
-        component: PlayerComparison,
+        // component: PlayerComparison,
+        component: () => import('../views/PlayerComparison.vue'),
         meta: {
             title: 'Football Stats - Comparison',
             metaTags: [
@@ -76,12 +82,14 @@ const routes = [
     },
     {
         path: '/player/:playerId',
-        component: Player,
+        // component: Player,
+        component: () => import('../views/Player.vue'),
         children: [
             {
                 name: 'PlayerDefaultView',
                 path: '',
-                component: PlayerDefaultView,
+                // component: PlayerDefaultView,
+                component: () => import('../views/player-views/PlayerDefaultView.vue'),
                 metaTags: [
                     {
                         name: 'description',
@@ -98,7 +106,8 @@ const routes = [
             {
                 name: 'PlayerAttackingView',
                 path: 'attacking',
-                component: PlayerAttackingtView,
+                // component: PlayerAttackingtView,
+                component: () => import('../views/player-views/PlayerAttackingView.vue'),
                 metaTags: [
                     {
                         name: 'description',
@@ -115,7 +124,8 @@ const routes = [
             {
                 name: 'PlayerPossessionView',
                 path: 'possession',
-                component: PlayerPossessionView,
+                // component: PlayerPossessionView,
+                component: () => import('../views/player-views/PlayerPossessionView.vue'),
                 metaTags: [
                     {
                         name: 'description',
@@ -132,7 +142,8 @@ const routes = [
             {
                 name: 'PlayerDefendingView',
                 path: 'defending',
-                component: PlayerDefendingView,
+                // component: PlayerDefendingView,
+                component: () => import('../views/player-views/PlayerDefendingView.vue'),
                 metaTags: [
                     {
                         name: 'description',

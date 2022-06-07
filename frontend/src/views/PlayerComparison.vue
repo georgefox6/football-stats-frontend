@@ -57,11 +57,11 @@
                             <th class="side-header">Nationality</th>
                             <td>
                                 {{ player1.playerNation.split(' ')[1] }}
-                                <country-flag :country="player1.playerNation.split(' ')[0]" size="normal"/>
+                                <country-flag class="country-flag" :country="player1.playerNation.split(' ')[0]" size="normal"/>
                             </td>
                             <td>
                                 {{ player2.playerNation.split(' ')[1] }}
-                                <country-flag :country="player2.playerNation.split(' ')[0]" size="normal"/>
+                                <country-flag class="country-flag" :country="player2.playerNation.split(' ')[0]" size="normal"/>
                             </td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
@@ -344,11 +344,11 @@
                             <th class="side-header">Nationality</th>
                             <td>
                                 {{ player1.playerNation.split(' ')[1] }}
-                                <country-flag :country="player1.playerNation.split(' ')[0]" size="normal"/>
+                                <country-flag class="country-flag" :country="player1.playerNation.split(' ')[0]" size="normal"/>
                             </td>
                             <td>
                                 {{ player2.playerNation.split(' ')[1] }}
-                                <country-flag :country="player2.playerNation.split(' ')[0]" size="normal"/>
+                                <country-flag class="country-flag" :country="player2.playerNation.split(' ')[0]" size="normal"/>
                             </td>
                         </tr>
                         <tr :class="{ collapse: generalCollapse }">
@@ -632,7 +632,7 @@
                             <th class="side-header">Nationality</th>
                             <td>
                                 {{ player1.playerNation.split(' ')[1] }}
-                                <country-flag :country="player1.playerNation.split(' ')[0]" size="normal"/>
+                                <country-flag class="country-flag" :country="player1.playerNation.split(' ')[0]" size="normal"/>
                             </td>
                             <td>
                             </td>
@@ -921,7 +921,7 @@ export default {
             passingCollapse: false,
             dribblingCollapse: false,
             defendingCollapse: false,
-            per90: false,
+            per90: true,
             key: "hello",
             selectedPlayerName1: '',
             selectedPlayerName2: '',
@@ -1109,31 +1109,32 @@ export default {
     color: #394066;
     text-transform: lowercase;
     font-variant: small-caps;
-    z-index: 11;
 }
+
 </style>
 
 <style scoped>
 
-.club-image {
-    width: 30px;
-    display: inline-block;
+.wrapper {
+    width: 100%;
+    max-width: 75rem;
+    margin-top: 0;
+    margin: auto;
+}
+
+.comparison {
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .player-link {
     cursor: pointer;
-    transition: transform .2s; 
     transition: color .2s; 
 }
 
 .player-link:hover {
-    transform: scale(1.2);
     color: var(--primary);
     transition: color 0.2s; 
-}
-
-.player-image {
-    width: 100px;
 }
 
 .player-graph {
@@ -1143,17 +1144,39 @@ export default {
     margin-bottom: 30px;
 }
 
+/* Comparison table styling */
+.table-header {
+    cursor: pointer;
+}
+
+th {
+    user-select: none;
+    padding: 15px;
+    color: #fff;
+    background-color: var(--secondary);
+    z-index: 2;
+}
+
+.player-image {
+    width: 100px;
+}
+
+.country-flag {
+    z-index: 0;
+    position: relative;
+}
+
+.club-image {
+    width: 30px;
+    display: inline-block;
+}
+
 .best {
     color: #93ff61;
 }
 
 .worst {
     color: #ff5252;
-}
-
-.table-header {
-    cursor: pointer;
-    z-index: 10000;
 }
 
 .side-header {
@@ -1173,18 +1196,6 @@ table {
     background-color: var(--primary);
 }
 
-.wrapper {
-    width: 100%;
-    max-width: 75rem;
-    margin-top: 0;
-    margin: auto;
-}
-
-.comparison {
-    margin-left: 30px;
-    margin-right: 30px;
-}
-
 td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
@@ -1196,20 +1207,9 @@ td {
     cursor: pointer;
 }
 
-th {
-    user-select: none;
-    padding: 15px;
-    color: #fff;
-    background-color: var(--secondary);
-    position: sticky;
-    top: 65px;
-    z-index: 10;
-}
-
 .name-header {
     position: sticky;
     top: 0;
-    z-index: 11;
 }
 
 .comparison tbody tr {
@@ -1244,7 +1244,6 @@ tr:hover > td {
 .option > p {
     display: inline-block;
     padding: 5px;
-    /* vertical-align: -8px; */
     vertical-align: 2px;
     font-size: 10px;
 }
