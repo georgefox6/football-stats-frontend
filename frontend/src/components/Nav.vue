@@ -135,13 +135,13 @@
                         </g>
                     </svg>
                     <span class="link-text-small-screen">Search</span>
-                    <vSelect v-if="this.allPlayers" class="large-screen-search" placeholder="Search" clearSearchOnSelect v-model="selectedPlayer" label="playerName" :options="allPlayers"/>
+                    <vSelect v-if="this.playerSummaries" class="large-screen-search" placeholder="Search" clearSearchOnSelect v-model="selectedPlayer" label="name" :options="playerSummaries" :loading="!playerSummaries" />
                 </a>
             </li>
             
         </ul>
 
-        <vSelect v-if="this.isSearching" class="small-screen" placeholder="Search" clearSearchOnSelect v-model="selectedPlayer" label="playerName" :options="allPlayers"/>
+        <vSelect v-if="this.isSearching" class="small-screen" placeholder="Search" clearSearchOnSelect v-model="selectedPlayer" label="name" :options="playerSummaries" :loading="!playerSummaries"/>
     </nav>
 
     
@@ -163,23 +163,17 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['allPlayers']),
+        ...mapGetters(['playerSummaries']),
     },
     methods: {
-        ...mapActions(['fetchPlayers']),
-        formatName(name){
-            if(name.contains(' ')){
-                var splitName = name.split(' ', 1)
-                return splitName[0][0] + splitName[1]
-            }
-        },
+        ...mapActions(['fetchPlayerSummaries']),
         toggleSearching(){
             this.isSearching = !this.isSearching
             this.$emit('isSearching')
         }
     },
     created(){
-        this.fetchPlayers()
+        this.fetchPlayerSummaries()
     },
     emits: ['isSearching'],    
     updated(){
@@ -189,7 +183,6 @@ export default {
                 name: 'PlayerDefaultView',
                 params: { playerId: this.selectedPlayer.id },
             })
-            this.$router.go()
             setTimeout(() => {
                 this.selectedPlayer = ''
             }, 500)

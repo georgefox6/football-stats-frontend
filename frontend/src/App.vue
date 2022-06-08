@@ -2,7 +2,7 @@
     <div id="app">
         <Nav @isSearching="searching()" class="nav"></Nav>
         <div class="menu-left-margin">
-            <router-view :class=" isSearching ? 'searching' : 'not-searching' " id="view" />
+            <router-view :key="$route.path" :class=" isSearching ? 'searching' : 'not-searching' " id="view" />
         </div>
         
     </div>
@@ -12,7 +12,6 @@
 import Nav from '@/components/Nav.vue'
 export default {
     components: {
-        // Header,
         Nav
     },
     data() {

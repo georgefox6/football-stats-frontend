@@ -19,8 +19,8 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -306,8 +306,8 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -594,8 +594,8 @@
                     <thead>
                         <tr>
                             <th class="side-header" id="expand-all" @click="expandAll()">Expand all +</th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -880,8 +880,8 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
-                            <th class="top-table-header name-header"><vSelect class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName1" :options="playerNames"/></th>
+                            <th class="top-table-header name-header"><vSelect :loading="!this.playerNames" class="player-selector" v-model="selectedPlayerName2" :options="playerNames"/></th>
                         </tr>
                     </thead>
                     <tbody>
