@@ -41,20 +41,21 @@
     />
     <player-carousel
       class="player-carousel"
-      :Name="'Players out of contract in 2022'"
-      :Sort="'Value'"
-      :ContractEndDateFilter="['Jun 30, 2022']"
-    />
-    <player-carousel
-      class="player-carousel"
       :Name="'Players out of contract in 2023'"
       :Sort="'Value'"
       :ContractEndDateFilter="['Jun 30, 2023']"
     />
     <player-carousel
       class="player-carousel"
-      :Name="'Top scorers'"
+      :Name="'Top scorers U21'"
       :Sort="'Goals'"
+      :MaxAgeFilter="21"
+    />
+    <player-carousel
+      class="player-carousel"
+      :Name="'Most Valuable players U21'"
+      :Sort="'Value'"
+      :MaxAgeFilter="21"
     />
   </div>
 </template>

@@ -50,6 +50,12 @@ export default {
                 return []
             }
         },
+        MinAgeFilter: {
+            default: 16
+        },
+        MaxAgeFilter: {
+            default: 45
+        },
         Name: {
             default: "Some players"
         }            
@@ -77,6 +83,8 @@ export default {
             MaxMarketValueFilter: 200,
             MinWageFilter: 0,
             MaxWageFilter: 500,
+            MinAgeFilter: this.MinAgeFilter,
+            MaxAgeFilter: this.MaxAgeFilter,
             SearchTerm: null,
             Sort: this.Sort,
             SortDesc: true,

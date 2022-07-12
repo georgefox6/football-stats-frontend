@@ -52,10 +52,11 @@
                         <td class="player-link" @click="playerLink(player.id)">
                             {{ player.playerName }}
                         </td>
-                        <td>
+                        <td v-if="player.playerNation">
                             {{ player.playerNation.split(' ')[1] }}
                             <country-flag :country="player.playerNation.split(' ')[0]" size="normal"/>
                         </td>
+                        <td v-if="!player.playerNation"></td>
                         <td>{{ player.playerTeam }} <ClubBadge class="club-image" :clubName="player.playerTeam" /></td>
                         <td class="hide-column">{{ player.playerPosition }}</td>
                         <td class="hide-column">{{ player.playerAge }}</td>
@@ -115,6 +116,8 @@ export default {
               MaxMarketValueFilter: 200,
               MinWageFilter: 0,
               MaxWageFilter: 500,
+              MinAgeFilter: 1,
+              MaxAgeFilter: 45,
               SearchTerm: null,
               Sort: null,
               SortDesc: true,
@@ -167,6 +170,8 @@ export default {
         this.request.MaxMarketValueFilter = filters.maxValue
         this.request.MinWageFilter = filters.minWage
         this.request.MaxWageFilter = filters.maxWage
+        this.request.MinAgeFilter = parseInt(filters.minAge)
+        this.request.MaxAgeFilter = parseInt(filters.maxAge)
         this.request.Page = 1
         this.showFilter = false
         this.fetchPaginatedPlayers(this.request)

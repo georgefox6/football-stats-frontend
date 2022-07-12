@@ -53,11 +53,13 @@ function generateQuery( request ) {
     request.MaxMarketValueFilter ? output += ("MaxMarketValueFilter=" + (request.MaxMarketValueFilter * 1000000) + "&") : output
     request.MinWageFilter ? output += ("MinWageFilter=" + (request.MinWageFilter * 1000) + "&") : output
     request.MaxWageFilter ? output += ("MaxWageFilter=" + (request.MaxWageFilter * 1000) + "&") : output
+    request.MinAgeFilter ? output += ("MinAgeFilter=" + (request.MinAgeFilter) + "&") : output
+    request.MaxAgeFilter ? output += ("MaxAgeFilter=" + (request.MaxAgeFilter) + "&") : output
+    request.SearchTerm ? output += ("SearchTerm=" + request.SearchTerm + "&") : output
     request.SearchTerm ? output += ("SearchTerm=" + request.SearchTerm + "&") : output
     request.Page ? output += ("Page=" + request.Page + "&") : output
     request.PageSize ? output += ("PageSize=" + request.PageSize + "&") : output
     request.Sort ? output += ("Sort=" + request.Sort + "&") : output
     request.SortDesc ? output += ("SortDesc=" + request.SortDesc + "&") : output
-
     return output
 }

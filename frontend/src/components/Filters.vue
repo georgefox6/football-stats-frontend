@@ -29,6 +29,18 @@
             £{{filters.maxWage}} K p/w
         </div>
 
+        <div class="filter" id="min-age">
+            <h3 class="header">Min Age</h3>
+            <input type="range" min="16" max="45" step="1" v-model="filters.minAge"> 
+            {{filters.minAge}}
+        </div>
+
+        <div class="filter" id="max-age">
+            <h3 class="header">Max Age</h3>
+            <input type="range" min="16" max="45" step="1" v-model="filters.maxAge"> 
+            {{filters.maxAge}}
+        </div>
+
         
         <vSelect class="filter" placeholder="Positions" multiple v-model="filters.checkedPositions" :options="positions"/>
         <vSelect class="filter" placeholder="Contract End Date" multiple v-model="filters.checkedContracts" :options="contracts"/>
@@ -71,7 +83,9 @@ export default {
                 minValue: 0,
                 maxValue: 200,
                 minWage: 0,
-                maxWage: 1000
+                maxWage: 1000,
+                minAge: 16,
+                maxAge: 45
             },
             positions: [
                 "Centre-Forward",
@@ -166,7 +180,9 @@ export default {
             this.filters.minValue = 0
             this.filters.maxValue = 200
             this.filters.minWage = 0
-            this.filters.maxWage - 1000
+            this.filters.maxWage = 1000
+            this.filters.minAge = 1
+            this.filters.maxAge = 45
         }
     },
     emits: ['filter'],
