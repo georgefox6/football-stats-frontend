@@ -3,7 +3,7 @@
         <ul class="navbar-nav">
 
             <li class="logo">
-                <router-link to="/home" class="nav-link">
+                <router-link to="/" class="nav-link">
                     <span class="link-text logo-text">Football <br> Stats</span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

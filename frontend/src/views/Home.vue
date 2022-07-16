@@ -3,7 +3,7 @@
 
     <h1 class="main-header">Home</h1>
 
-    <section class="section">
+    <section @click="navigate('Players')" class="section">
         <h2 class="section-header">Players</h2>
         <p>Here at football stats we have all of the most important stats for each of the top 5 leagues. You have the ability to see in depth player analysis, compare players and find players based on market value, traits or other statistics.</p>
     </section>
@@ -273,6 +273,13 @@ import PlayerCarousel from '../components/Home/PlayerCarousel.vue';
                 }
             }
         },
+        methods: {
+            navigate(route) {
+            this.$router.push({
+                name: route,
+            })
+        },
+        },
     }
 </script>
 
@@ -298,7 +305,6 @@ import PlayerCarousel from '../components/Home/PlayerCarousel.vue';
 }
 
 .main-header {
-    /* color: var(--primary); */
     color: black;
     text-transform: uppercase;
     letter-spacing: 5px;
@@ -315,6 +321,7 @@ import PlayerCarousel from '../components/Home/PlayerCarousel.vue';
 .section {
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 800px) {
